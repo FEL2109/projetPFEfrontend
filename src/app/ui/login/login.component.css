@@ -1,0 +1,163 @@
+.login-container {
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.login-container button.sign-in-button {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-card-wrapper {
+  width: 100%;
+  max-width: 500px; /* Augmentez la largeur maximale */
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 3rem; /* Augmentez le padding pour plus d'espace */
+}
+
+.login-decoration {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 15px;
+  background: linear-gradient(to right, #3f51b5, #5c6bc0, rgba(92, 107, 192, 0));
+  z-index: 1;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field.mat-form-field {
+  border-radius: 8px;
+}
+
+mat-form-field .mat-form-field-wrapper {
+  padding: 0;
+}
+
+mat-form-field .mat-input-element {
+  font-size: 0.8rem;
+  height: 30px;
+  padding: 2px 6px;
+  line-height: 1.2;
+}
+
+.nz-form-item {
+  margin-bottom: 1.5rem; /* Augmentez l'espacement entre les champs */
+}
+
+button {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.remember-forgot-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem; /* Ajoutez plus d'espace avant le bouton */
+}
+
+.forgot-password {
+  color: #1e88e5;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+button.mat-raised-button {
+  background-color: white;
+  color: #4caf50;
+  font-weight: bold;
+  border: 1px solid #4caf50;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  box-shadow: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button.mat-raised-button:hover {
+  background-color: #326e34;
+  color: white;
+}
+
+button.sign-in-button {
+  background-color: #326e34; /* Couleur verte */
+  color: white; /* Texte en blanc */
+  font-weight: bold;
+  font-size: 1.2rem; /* Taille de police plus grande */
+  border: none;
+  border-radius: 8px; /* Coins arrondis */
+  padding: 1rem 1.5rem; /* Plus de hauteur et largeur */
+  width: 100%; /* Prend toute la largeur */
+  text-align: center;
+  cursor: pointer; /* Curseur pointeur */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animation fluide */
+  margin-top: 1rem; /* Ajoutez un espacement au-dessus */
+  margin-bottom: 1rem; /* Ajoutez un espacement en dessous */
+}
+
+button.sign-in-button:hover {
+  background-color: #388e3c; /* Couleur plus foncée au survol */
+  transform: scale(1.02); /* Légère mise en avant au survol */
+}
+
+button.sign-in-button:active {
+  background-color: #2e7d32; /* Couleur encore plus foncée lors du clic */
+  transform: scale(0.98); /* Légère réduction lors du clic */
+}
