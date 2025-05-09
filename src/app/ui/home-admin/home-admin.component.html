@@ -1,1 +1,34 @@
-<p>home-admin works!</p>
+<nz-layout>
+  <nz-sider [nzWidth]="300" [nzTheme]="'dark'" class="sider">
+    <div class="logo-container">
+      <img src="assets/images/logoingecys.png" alt="Logo Ingecys" class="logo" />
+    </div>
+    <ul nz-menu nzMode="inline" [nzTheme]="'dark'" class="menu">
+      <li nz-menu-item [nzSelected]="true">
+        <i nz-icon nzType="dashboard" nzTheme="outline"></i>
+        <span>Tableau de bord</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+        <span>Profil</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="team" nzTheme="outline"></i>
+        <span>Employés</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="file-text" nzTheme="outline"></i>
+        <span>Demandes congés</span>
+      </li>
+      <li nz-menu-item>
+        <i nz-icon nzType="logout" nzTheme="outline"></i>
+        <span>Se déconnecter</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-content>
+      <!-- Contenu principal (vide pour l'instant) -->
+    </nz-content>
+  </nz-layout>
+</nz-layout>

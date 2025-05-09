@@ -1,0 +1,56 @@
+.header {
+  background-color: #622a58;
+  padding: 0;
+}
+
+.sider {
+  background-color: #7a3a6e; /* Couleur de fond par défaut du menu */
+  height: 100vh; /* Prend toute la hauteur de la page */
+  width: 300px; /* Augmentez la largeur pour que le texte apparaisse en entier */
+}
+
+.logo-container {
+  height: 80px; /* Augmentez la hauteur pour agrandir le logo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Fond blanc pour le logo */
+  padding: 10px;
+}
+
+.logo {
+  max-height: 70px; /* Augmentez la hauteur maximale */
+  max-width: 140px; /* Augmentez la largeur maximale */
+}
+
+.menu {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.menu li {
+  color: #ffffff; /* Texte blanc */
+  background-color: #7a3a6e; /* Couleur de fond par défaut */
+}
+
+.menu li:hover {
+  background-color: #6b2952; /* Couleur au survol */
+}
+
+.menu li.ant-menu-item-selected {
+  background-color: #6b2952 !important; /* Couleur de l'élément actif */
+  color: #ffffff !important; /* Texte blanc pour l'élément actif */
+}
+
+.content-container {
+  padding: 24px;
+  background: #ffffff;
+  min-height: 280px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  color: #6b2952;
+  font-size: 24px;
+  font-weight: bold;
+}

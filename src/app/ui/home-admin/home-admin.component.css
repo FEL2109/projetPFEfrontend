@@ -1,0 +1,38 @@
+.sider {
+  background-color: #7a3a6e; /* Couleur de fond par défaut du menu */
+  height: 100vh; /* Prend toute la hauteur de la page */
+  width: 300px; /* Largeur du menu */
+}
+
+.logo-container {
+  height: 80px; /* Hauteur pour agrandir le logo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Fond blanc pour le logo */
+  padding: 10px;
+}
+
+.logo {
+  max-height: 70px; /* Hauteur maximale du logo */
+  max-width: 140px; /* Largeur maximale du logo */
+}
+
+.menu {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.menu li {
+  color: #ffffff; /* Texte blanc */
+  background-color: #7a3a6e; /* Couleur de fond par défaut */
+}
+
+.menu li:hover {
+  background-color: #6b2952; /* Couleur au survol */
+}
+
+.menu li.ant-menu-item-selected {
+  background-color: #6b2952 !important; /* Couleur de l'élément actif */
+  color: #ffffff !important; /* Texte blanc pour l'élément actif */
+}
