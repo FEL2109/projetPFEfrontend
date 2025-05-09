@@ -1,0 +1,26 @@
+<div class="form-container">
+  <h2>Soumettre une demande de congé</h2>
+  <form>
+    <div class="form-group">
+      <label for="type">Type de congé :</label>
+      <select id="type" name="type" class="form-control">
+        <option value="vacances">Vacances</option>
+        <option value="maladie">Maladie</option>
+        <option value="autre">Autre</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="startDate">Date de début :</label>
+      <input type="date" id="startDate" name="startDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="endDate">Date de fin :</label>
+      <input type="date" id="endDate" name="endDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="reason">Raison :</label>
+      <textarea id="reason" name="reason" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Soumettre</button>
+  </form>
+</div>

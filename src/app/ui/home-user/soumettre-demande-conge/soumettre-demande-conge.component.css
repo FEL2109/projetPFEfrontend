@@ -1,0 +1,32 @@
+.form-container {
+  padding: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  color: #6b2952;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-primary {
+  background-color: #6b2952;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #7a3a6e;
+}

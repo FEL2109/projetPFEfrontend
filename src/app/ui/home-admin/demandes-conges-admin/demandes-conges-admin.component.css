@@ -1,0 +1,17 @@
+.demandes-container {
+  padding: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+h2 {
+  color: #6b2952;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin: 5px 0;
+}

@@ -4,19 +4,19 @@
       <img src="assets/images/logoingecys.png" alt="Logo Ingecys" class="logo" />
     </div>
     <ul nz-menu nzMode="inline" [nzTheme]="'dark'" class="menu">
-      <li nz-menu-item [nzSelected]="true">
+      <li nz-menu-item [routerLink]="'/home-user/tableau-de-bord'" routerLinkActive="ant-menu-item-selected">
         <i nz-icon nzType="dashboard" nzTheme="outline"></i>
         <span>Tableau de bord</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item [routerLink]="'/home-user/profil'" routerLinkActive="ant-menu-item-selected">
         <i nz-icon nzType="user" nzTheme="outline"></i>
         <span>Profil</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item [routerLink]="'/home-user/soumettre-demande-conge'" routerLinkActive="ant-menu-item-selected">
         <i nz-icon nzType="file-add" nzTheme="outline"></i>
         <span>Soumettre une demande congé</span>
       </li>
-      <li nz-menu-item>
+      <li nz-menu-item (click)="logout()">
         <i nz-icon nzType="logout" nzTheme="outline"></i>
         <span>Se déconnecter</span>
       </li>
@@ -24,13 +24,7 @@
   </nz-sider>
   <nz-layout>
     <nz-content>
-      <!-- Supprimez ce bloc -->
-      <!--
-      <div class="content-container">
-        <h1>Bienvenue sur votre espace utilisateur</h1>
-        <p>Utilisez le menu pour naviguer entre les sections.</p>
-      </div>
-      -->
+      <router-outlet></router-outlet>
     </nz-content>
   </nz-layout>
 </nz-layout>
