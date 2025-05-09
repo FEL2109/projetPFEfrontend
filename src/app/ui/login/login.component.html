@@ -3,23 +3,25 @@
     <div class="login-decoration"></div>
     <div class="login-card">
       <div class="text-center">
-        <img src="assets/images/logoinjecys.png" alt="Logo" class="logo mb-4">
-        <h1 class="title">Connexion sécurisé à votre espace INGECYS</h1>
-        <p class="subtitle">Sign in to continue</p>
+        <img src="assets/images/logoingecys.png" alt="Logo" class="logo mb-4">
+        <h1 class="title">
+          Connexion sécurisée à votre espace <span class="brand-name">INGECYS</span>
+        </h1>
+        <p class="subtitle">Connectez-vous pour continuer</p>
       </div>
 
       <form nz-form [nzLayout]="'vertical'" (ngSubmit)="onSubmit()">
         <nz-form-item>
           <nz-form-label [nzFor]="'username'" nzRequired>Email</nz-form-label>
           <nz-form-control>
-            <input nz-input id="username" [(ngModel)]="username" name="username" type="email" required placeholder="Email address" />
+            <input nz-input id="username" [(ngModel)]="username" name="username" type="email" required placeholder="Adresse e-mail" />
           </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-          <nz-form-label [nzFor]="'password'" nzRequired>Password</nz-form-label>
+          <nz-form-label [nzFor]="'password'" nzRequired>Mot de passe</nz-form-label>
           <nz-form-control>
-            <input nz-input id="password" [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'" required placeholder="Password" />
+            <input nz-input id="password" [(ngModel)]="password" name="password" [type]="hide ? 'password' : 'text'" required placeholder="Mot de passe" />
             <button nz-button nzType="link" (click)="hide = !hide" class="password-toggle">
               <i nz-icon [nzType]="hide ? 'eye-invisible' : 'eye'" nzTheme="outline"></i>
             </button>
@@ -27,11 +29,11 @@
         </nz-form-item>
 
         <div class="remember-forgot-container">
-          <nz-checkbox [(ngModel)]="rememberMe" name="rememberMe">Remember me</nz-checkbox>
-          <a class="forgot-password" href="#">Forgot password?</a>
+          <nz-checkbox [(ngModel)]="rememberMe" name="rememberMe">Se souvenir de moi</nz-checkbox>
+          <a class="forgot-password" href="#">Mot de passe oublié?</a>
         </div>
 
-        <button nz-button nzType="primary" class="sign-in-button" [disabled]="!username || !password">Sign In</button>
+        <button nz-button nzType="primary" class="sign-in-button" [disabled]="!username || !password">Se connecter</button>
       </form>
     </div>
   </div>
