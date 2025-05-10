@@ -1,32 +1,147 @@
 .form-container {
-  padding: 20px;
-  font-family: Helvetica, Arial, sans-serif;
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 70%; /* Ajuste la largeur du formulaire */
+  height: auto; /* Ajuste automatiquement la hauteur */
+  margin: 0; /* Supprime les marges automatiques */
+  position: absolute; /* Permet un positionnement précis */
+  top: 50%; /* Place le formulaire au milieu verticalement */
+  left: 25%; /* Décale le formulaire vers la droite */
+  transform: translate(0, -50%); /* Centre verticalement en ajustant la position */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+  background-color: #661a4c;
+  padding: 20px; /* Ajuste l'espace interne */
+  border-radius: 8px; /* Ajoute des coins arrondis */
+  text-align: center;
+  color: #fff;
+  font-size: 1.5em; /* Ajuste la taille du texte */
+  font-weight: bold; /* Texte en gras */
+  width: 100%; /* S'assure que le rectangle occupe toute la largeur */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet de profondeur */
+}
+
+.form-header h2 {
+  color: #fff;
+  margin: 0;
+  font-size: 1.5em;
 }
 
 h2 {
-  color: #6b2952;
+  color: #661a4c;
+  text-align: center;
+  margin-bottom: 30px; /* Ajoute de l'espace entre le titre et le formulaire */
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.form-control {
+.form-group:first-of-type {
+  margin-top: 20px; /* Ajoute un espace avant "Type de congé" */
+}
+
+label {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.note {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.char-counter {
+  display: block;
+  text-align: right;
+  font-size: 0.8em;
+  color: #666;
+}
+
+.commentaire-input {
   width: 100%;
-  padding: 8px;
-  margin-top: 5px;
+  height: 120px; /* Augmente la hauteur pour un meilleur affichage */
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  font-size: 1em;
+  resize: none;
 }
 
-.btn-primary {
-  background-color: #6b2952;
-  color: white;
-  border: none;
-  padding: 10px 15px;
+.upload-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.file-input {
+  display: none;
+}
+
+.upload-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   cursor: pointer;
+  color: #661a4c;
+  font-weight: bold;
 }
 
-.btn-primary:hover {
-  background-color: #7a3a6e;
+.upload-label:hover {
+  text-decoration: underline;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center; /* Centre les boutons horizontalement */
+  gap: 20px; /* Ajoute de l'espace entre les boutons */
+}
+
+button[nz-button][nzType="primary"].btn-submit,
+button[nz-button][nzType="default"].btn-cancel {
+  background-color: #661a4c;
+  border-color: #661a4c;
+  padding: 15px 40px; /* Agrandit les boutons */
+  font-size: 1.2em; /* Augmente la taille du texte */
+  font-weight: bold; /* Texte en gras */
+  text-align: center;
+  color: #fff;
+  border-radius: 6px; /* Ajoute un léger arrondi */
+  display: flex;
+  justify-content: center; /* Centre le texte horizontalement */
+  align-items: center; /* Centre le texte verticalement */
+}
+
+button[nz-button][nzType="primary"].btn-submit:hover {
+  background-color: #4d1138;
+  border-color: #4d1138;
+}
+
+button[nz-button][nzType="default"].btn-cancel {
+  background-color: #f9f9f9;
+  border-color: #ccc;
+  color: #333;
+}
+
+button[nz-button][nzType="default"].btn-cancel:hover {
+  background-color: #f0f0f0;
+  border-color: #bbb;
+}
+
+/* Supprime le bleu par défaut dans les champs actifs */
+.nz-select-focused,
+.nz-date-picker-focused,
+textarea:focus,
+button:focus {
+  border-color: #661a4c !important;
+  box-shadow: 0 0 0 2px rgba(102, 26, 76, 0.2) !important;
 }

@@ -1,26 +1,66 @@
 <div class="form-container">
-  <h2>Soumettre une demande de congé</h2>
-  <form>
+  <div class="form-header">
+    <h2>Soumettre une demande de congé</h2>
+  </div>
+  <form nz-form>
+    <!-- Type de congé -->
     <div class="form-group">
       <label for="type">Type de congé :</label>
-      <select id="type" name="type" class="form-control">
-        <option value="vacances">Vacances</option>
-        <option value="maladie">Maladie</option>
-        <option value="autre">Autre</option>
-      </select>
+      <nz-select id="type" name="type" class="form-control" nzPlaceHolder="Sélectionnez un type de congé">
+        <nz-option nzValue="conge-paye" nzLabel="Congé payé"></nz-option>
+        <nz-option nzValue="conge-sans-solde" nzLabel="Congé sans solde"></nz-option>
+        <nz-option nzValue="formation" nzLabel="Absence pour formation"></nz-option>
+        <nz-option nzValue="maternite-paternite" nzLabel="Congé maternité/paternité"></nz-option>
+        <nz-option nzValue="arret-maladie" nzLabel="Arrêt maladie"></nz-option>
+      </nz-select>
     </div>
+
+    <!-- Jours -->
     <div class="form-group">
-      <label for="startDate">Date de début :</label>
-      <input type="date" id="startDate" name="startDate" class="form-control" />
+      <label for="jours">Jours :</label>
+      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours">
+        <nz-option *ngFor="let jour of jours" [nzValue]="jour" [nzLabel]="jour"></nz-option>
+      </nz-select>
     </div>
+
+    <!-- Date de début -->
     <div class="form-group">
-      <label for="endDate">Date de fin :</label>
-      <input type="date" id="endDate" name="endDate" class="form-control" />
+      <label for="startDate">Date de début <span class="note">*inclus</span> :</label>
+      <nz-date-picker id="startDate" name="startDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
     </div>
+
+    <!-- Date de fin -->
     <div class="form-group">
-      <label for="reason">Raison :</label>
-      <textarea id="reason" name="reason" class="form-control"></textarea>
+      <label for="endDate">Date de fin <span class="note">*inclus</span> :</label>
+      <nz-date-picker id="endDate" name="endDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
     </div>
-    <button type="submit" class="btn btn-primary">Soumettre</button>
+
+    <!-- Commentaire -->
+    <div class="form-group">
+      <label for="commentaire">Commentaire :</label>
+      <textarea id="commentaire" name="commentaire" class="form-control commentaire-input" maxlength="300"
+        placeholder="Ajoutez un commentaire (max. 300 caractères)"
+        (input)="updateCharCount($event)"></textarea>
+      <small class="char-counter">{{ comment.length }}/300</small>
+    </div>
+
+    <!-- Justificatif -->
+    <div class="form-group">
+      <label for="justificatif">Justificatif :</label>
+      <div class="upload-container">
+        <input type="file" id="justificatif" name="justificatif" class="file-input" accept=".jpg,.jpeg,.png,.pdf" (change)="onFileSelected($event)" />
+        <label for="justificatif" class="upload-label">
+          <i nz-icon nzType="upload" nzTheme="outline"></i>
+          <span>{{ selectedFileName || 'Importer un fichier' }}</span>
+        </label>
+      </div>
+      <small class="note">Formats acceptés : JPG, PNG, PDF</small>
+    </div>
+
+    <!-- Boutons -->
+    <div class="form-actions">
+      <button nz-button nzType="primary" type="submit" class="btn-submit">Soumettre</button>
+      <button nz-button nzType="default" type="button" class="btn-cancel">Annuler</button>
+    </div>
   </form>
 </div>

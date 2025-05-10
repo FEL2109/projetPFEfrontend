@@ -28,6 +28,8 @@ import { TableauDeBordAdminComponent } from './ui/home-admin/tableau-de-bord-adm
 import { ProfilAdminComponent } from './ui/home-admin/profil-admin/profil-admin.component';
 import { EmployesAdminComponent } from './ui/home-admin/employes-admin/employes-admin.component';
 import { DemandesCongesAdminComponent } from './ui/home-admin/demandes-conges-admin/demandes-conges-admin.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 registerLocaleData(fr);
 
@@ -60,7 +62,9 @@ registerLocaleData(fr);
     IconsProviderModule,
     NzLayoutModule,
     NzMenuModule,
-    NzIconModule
+    NzIconModule,
+    NzSelectModule,
+    NzDatePickerModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: fr_FR }
