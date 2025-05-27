@@ -11,6 +11,7 @@ import { TableauDeBordAdminComponent } from './ui/home-admin/tableau-de-bord-adm
 import { ProfilAdminComponent } from './ui/home-admin/profil-admin/profil-admin.component';
 import { EmployesAdminComponent } from './ui/home-admin/employes-admin/employes-admin.component';
 import { DemandesCongesAdminComponent } from './ui/home-admin/demandes-conges-admin/demandes-conges-admin.component';
+import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels/calendrier-jours-officiels.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent }, // Route par défaut pour afficher le login
@@ -23,6 +24,8 @@ const routes: Routes = [
       { path: 'tableau-de-bord', component: TableauDeBordUserComponent },
       { path: 'profil', component: ProfilUserComponent },
       { path: 'soumettre-demande-conge', component: SoumettreDemandeCongeComponent }, // Route pour Profil utilisateur
+      { path: 'calendrier-jours-officiels', component: CalendrierJoursOfficielsComponent },
+      
     ]
   }, // Route pour home-user
   { path: 'home-rh', component: HomeRhComponent }, // Route pour home-rh

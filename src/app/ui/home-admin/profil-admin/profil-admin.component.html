@@ -1,6 +1,37 @@
-<div class="profil-container">
-  <h2>Profil Administrateur</h2>
-  <p><strong>Nom :</strong> Admin</p>
-  <p><strong>Email :</strong> admin@example.com</p>
-  <p><strong>Rôle :</strong> Administrateur</p>
+<div class="profil-wrapper">
+  <nz-card class="profil-card">
+    <div class="profil-header">
+      <nz-avatar
+        [nzSrc]="photoUrl"
+        nzIcon="user"
+        nzSize="large"
+        class="profil-avatar"
+      ></nz-avatar>
+      <div class="profil-name">
+        <span>{{ prenom }} {{ nom }}</span>
+        <span class="profil-id">ID: {{ id }}</span>
+      </div>
+    </div>
+    <nz-divider></nz-divider>
+    <nz-descriptions
+      nzTitle="Informations personnelles"
+      [nzColumn]="1"
+      nzBordered
+      nzSize="middle"
+      class="profil-descriptions"
+    >
+      <nz-descriptions-item nzTitle="Nom">
+        <div class="desc-value">{{ nom }}</div>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Prénom">
+        <div class="desc-value">{{ prenom }}</div>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Email">
+        <div class="desc-value">{{ email }}</div>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Téléphone">
+        <div class="desc-value">{{ telephone }}</div>
+      </nz-descriptions-item>
+    </nz-descriptions>
+  </nz-card>
 </div>

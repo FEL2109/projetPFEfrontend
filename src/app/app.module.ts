@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +32,17 @@ import { EmployesAdminComponent } from './ui/home-admin/employes-admin/employes-
 import { DemandesCongesAdminComponent } from './ui/home-admin/demandes-conges-admin/demandes-conges-admin.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzCalendarModule } from 'ng-zorro-antd/calendar';
+import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels/calendrier-jours-officiels.component';
 
 registerLocaleData(fr);
 
@@ -47,7 +60,10 @@ registerLocaleData(fr);
     TableauDeBordAdminComponent,
     ProfilAdminComponent,
     EmployesAdminComponent,
-    DemandesCongesAdminComponent
+    DemandesCongesAdminComponent,
+    CalendrierJoursOfficielsComponent,
+   
+
   ],
   imports: [
     BrowserModule,
@@ -64,8 +80,21 @@ registerLocaleData(fr);
     NzMenuModule,
     NzIconModule,
     NzSelectModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzCardModule,
+    NzCalendarModule,
+    NzToolTipModule,
+    NzDescriptionsModule,
+    NzAvatarModule,
+    NzTagModule,
+    NzTableModule,
+    NzPopoverModule,
+    NzModalModule,
+    NzCheckboxModule,
+    ReactiveFormsModule,
+
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: NZ_I18N, useValue: fr_FR }
   ],

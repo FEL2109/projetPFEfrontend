@@ -1,9 +1,81 @@
-<div class="demandes-container">
-  <h2>Gestion des Demandes de Congés</h2>
-  <p>Liste des demandes :</p>
-  <ul>
-    <li>Demande 1 : Congé du 01/06/2025 au 10/06/2025</li>
-    <li>Demande 2 : Congé du 15/06/2025 au 20/06/2025</li>
-    <li>Demande 3 : Congé du 01/07/2025 au 05/07/2025</li>
-  </ul>
+<div class="dashboard-container">
+  <div class="manager-header">
+    <img class="avatar" src="https://api.dicebear.com/7.x/avataaars/svg?seed=manager" alt="Manager">
+    <span class="manager-title">Manager</span>
+  </div>
+
+  <h2 class="page-title" style="white-space:nowrap;">Demandes congés</h2>
+  
+  <div class="stats-container">
+    <div *ngFor="let stat of stats" class="stat-card">
+      <span class="stat-value">{{ stat.value }}</span>
+      <span class="stat-label">{{ stat.label }}</span>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <button nz-button nzType="default" nzShape="circle" nz-tooltip="Filtrer" class="table-filter-btn">
+      <i nz-icon nzType="filter" nzTheme="outline"></i>
+    </button>
+    <nz-table #basicTable [nzData]="leaveRequests" [nzPageSize]="6" [nzShowPagination]="false">
+      <thead>
+        <tr>
+          <th>Type congés</th>
+          <th>Date début</th>
+          <th>Date fin</th>
+          <th>Jours</th>
+          <th>Status</th>
+          <th>Commentaire</th>
+          <th>Approbateur</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let req of basicTable.data">
+          <td>{{ req.type }}</td>
+          <td>{{ req.startDate }}</td>
+          <td>{{ req.endDate }}</td>
+          <td>{{ req.days }}</td>
+          <td>
+            <nz-tag [ngClass]="'ant-tag-' + getStatusType(req.status)">
+              {{ req.status }}
+            </nz-tag>
+          </td>
+          <td>{{ req.comment }}</td>
+          <td>{{ req.approver }}</td>
+          <td class="action-btns">
+            <button
+              nz-button
+              nzType="link"
+              nzShape="circle"
+              nz-popover
+              [nzPopoverTrigger]="'click'"
+              [nzPopoverContent]="actionTpl"
+              (click)="selectedRequest = req"
+            >
+              <i nz-icon nzType="edit"></i>
+            </button>
+            <button nz-button nzType="link" nzShape="circle"><i nz-icon nzType="delete"></i></button>
+
+            <ng-template #actionTpl>
+              <div class="popover-actions">
+                <button nz-button nzType="primary" nzSize="small" class="btn-accept" (click)="accepter(selectedRequest)">
+                  <i nz-icon nzType="check"></i> Accepter
+                </button>
+                <button nz-button nzType="default" nzDanger nzSize="small" class="btn-refuse" (click)="refuser(selectedRequest)">
+                  <i nz-icon nzType="close"></i> Refuser
+                </button>
+              </div>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    <!-- Pagination custom placée en bas à droite -->
+    <div class="custom-pagination">
+      <button class="page-btn">&lt;</button>
+      <span class="page-num">1</span>
+      <button class="page-btn">&gt;</button>
+    </div>
+  </div>
 </div>

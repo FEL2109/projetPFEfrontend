@@ -8,6 +8,10 @@ interface DecodedToken {
   realm_access: {
     roles: string[];
   };
+
+  email: string;
+  given_name: string;
+  family_name: string;
 }
 
 
@@ -45,4 +49,11 @@ interface DecodedToken {
         this.router.navigate(['/unauthorized']);
       }
     }
+  getCurrentUser(): DecodedToken | null {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      return jwtDecode<DecodedToken>(token);
+    }
+    return null;
+  }
   }

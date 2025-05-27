@@ -1,8 +1,170 @@
-.dashboard-container {
-  padding: 20px;
-  font-family: Helvetica, Arial, sans-serif;
+/* Fond général */
+.main-content {
+  padding: 40px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  font-family: Helvetica, sans-serif;
+  background-color: transparent;
 }
 
-h2 {
-  color: #6b2952;
+/* Wrapper global */
+.dashboard-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  padding-left: 40px;
+  position: relative;
 }
+
+/* Contenu principal à gauche */
+.content-left {
+  flex: 1 1 60%;
+  min-width: 300px;
+}
+
+/* Calendrier à gauche */
+.calendar-wrapper {
+  left: 20;
+  top: 160px;
+  width: 440px; /* Agrandi */
+  max-width: 100%;
+  min-width: 380px;
+  margin-left: 0;
+  margin-top: 0;
+}
+
+/* Carte calendrier */
+.calendar-card {
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  padding: 24px;
+  max-width: 100%;
+}
+
+/* Titre du calendrier */
+.calendar-title {
+  font-size: 25px; /* Taille du texte ajustée ici */
+  font-weight: bold;
+  color: #232a88;
+  margin-bottom: 10px; /* Espacement ajusté ici */
+  text-align: center;
+  font-family: Copperplate, Fantasy;
+}
+
+/* Ajout des cellules de vacances */
+.holiday-cell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #2e6396; /* Couleur des jours fériés/fêtes */
+  font-weight: bold;
+}
+
+/* Ajout des points pour les vacances */
+.holiday-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #52c41a; /* Couleur du point indiquant un jour férié/fête */
+  border-radius: 50%;
+}
+/* Survol fluide */
+.calendar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Dropdown Mois/Année */
+::ng-deep .ant-picker-calendar-header .ant-select {
+  margin-right: 8px;
+}
+
+/* En-tête calendrier */
+::ng-deep .ant-picker-calendar-header {
+  font-size: 16px;
+  font-weight: bold;
+  color: #575e99;
+  font-family: Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Cellules du calendrier */
+::ng-deep .ant-picker-cell-inner {
+  font-family: Helvetica, sans-serif;
+  color: #575e99;
+  font-weight: 500;
+}
+
+/* Boîte date */
+::ng-deep .ant-picker-calendar-date {
+  height: 44px;
+  line-height: 44px;
+  font-size: 15px;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+/* Date en survol ou sélectionnée */
+::ng-deep .ant-picker-cell:hover .ant-picker-calendar-date,
+::ng-deep .ant-picker-cell-selected .ant-picker-calendar-date {
+  background-color: #e3e7f7;
+  color: #2f365f;
+}
+
+/* Affichage mois/année */
+::ng-deep .ant-picker-header-view {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
+  font-family: Helvetica, sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .calendar-wrapper {
+    position: static;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.welcome-message {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px 40px;
+  font-family: Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  color: #2f365f;
+  gap: 12px;
+  white-space: nowrap; /* ← empêche le retour à la ligne */
+}
+
+.welcome-icon {
+  height: 80px;
+}
+
+/* rangée agenda + stats */
+.stats-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 40px;
+  margin-left: 0;
+  flex-wrap: wrap;
+}
+
