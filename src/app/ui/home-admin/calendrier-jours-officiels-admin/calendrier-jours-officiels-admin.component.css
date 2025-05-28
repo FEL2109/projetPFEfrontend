@@ -1,0 +1,197 @@
+.official-calendar-container {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0 0 0;
+  background: #f6f8fc;
+  min-height: 100vh;
+}
+
+.holidays-list {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 32px 28px;
+  min-width: 340px;
+  max-width: 400px;
+}
+
+.holidays-list h2 {
+  font-size: 1.25rem;
+  color: #232a88;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nz-list-item-meta-title {
+  font-weight: 600;
+  color: #232a88;
+}
+
+.nz-list-item-meta-description {
+  color: #888;
+}
+
+.calendar-zone {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 32px 24px;
+  min-width: 420px;
+  max-width: 520px;
+}
+
+.calendar-title {
+  font-size: 1.25rem;
+  color: #232a88;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.holiday-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #faad14 60%, #52c41a 100%);
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: 2px;
+}
+
+.annual-calendar-layout {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: flex-start;
+  background: #f6f8fc;
+  min-height: 100vh;
+  width: 900px;
+  max-width: 100vw;
+  margin: 40px auto 0 auto;
+  box-shadow: 0 4px 32px #00000010;
+  border-radius: 18px;
+  padding: 32px 24px;
+  margin-left: 300px; /* ← Ajoute un espace après le menu */
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* ← 3 colonnes */
+  gap: 24px;
+}
+
+.month-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 12px 12px 18px 12px;
+  min-width: 260px;
+  max-width: 320px;
+}
+
+.month-title {
+  background: #e9eafc;
+  color: #232a88;
+  font-weight: bold;
+  font-size: 1.15rem;
+  border-radius: 8px 8px 0 0;
+  padding: 8px 0;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.month-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 1rem;
+}
+
+.month-table th {
+  color: #232a88;
+  font-weight: 600;
+  text-align: center;
+  padding: 2px 0;
+}
+
+.month-table td {
+  text-align: center;
+  padding: 0;
+  height: 32px;
+  width: 32px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.month-table td.empty {
+  background: none;
+  pointer-events: none;
+}
+
+.month-table td.holiday {
+  background: #43b97f;
+  color: #fff;
+  font-weight: bold;
+}
+
+.holidays-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 420px;   /* ← élargir la largeur minimale */
+  max-width: 520px;   /* ← élargir la largeur maximale */
+}
+
+.holidays-section {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(44, 62, 80, 0.08);
+  padding: 18px 24px; /* ← un peu plus de padding horizontal */
+}
+
+.holidays-title {
+  font-size: 1.2rem;
+  color: #232a88;
+  font-weight: bold;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.holidays-section td:first-child {
+  font-weight: bold;
+}
+
+.holidays-section th {
+  font-weight: bold;
+}
+
+@media (max-width: 1000px) {
+  .official-calendar-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .calendar-zone, .holidays-list {
+    min-width: 90vw;
+    max-width: 98vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .annual-calendar-layout {
+    flex-direction: column;
+    align-items: center;
+  }
+  .calendar-grid {
+    grid-template-columns: 1fr;
+  }
+  .holidays-tables {
+    min-width: 90vw;
+    max-width: 98vw;
+  }
+}

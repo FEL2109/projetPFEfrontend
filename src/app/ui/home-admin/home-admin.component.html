@@ -20,6 +20,10 @@
         <i nz-icon nzType="file-text" nzTheme="outline"></i>
         <span>Demandes de congés</span>
       </li>
+      <li nz-menu-item [routerLink]="'/home-admin/calendrier-jours-officiels'" routerLinkActive="ant-menu-item-selected">
+        <i nz-icon nzType="calendar" nzTheme="outline"></i>
+        <span>Calendrier des Jours Officiels</span>
+      </li>
       <li nz-menu-item (click)="logout()">
         <i nz-icon nzType="logout" nzTheme="outline"></i>
         <span>Se déconnecter</span>

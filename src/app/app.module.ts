@@ -42,7 +42,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels/calendrier-jours-officiels.component';
+import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels-user/calendrier-jours-officiels.component';
+import { CalendrierJoursOfficielsAdminComponent } from './ui/home-admin/calendrier-jours-officiels-admin/calendrier-jours-officiels-admin.component';
 
 registerLocaleData(fr);
 
@@ -62,6 +63,7 @@ registerLocaleData(fr);
     EmployesAdminComponent,
     DemandesCongesAdminComponent,
     CalendrierJoursOfficielsComponent,
+    CalendrierJoursOfficielsAdminComponent
    
 
   ],

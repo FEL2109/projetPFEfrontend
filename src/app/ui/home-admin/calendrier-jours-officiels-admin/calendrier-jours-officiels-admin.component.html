@@ -1,0 +1,64 @@
+<div class="annual-calendar-layout">
+  <div class="calendar-grid">
+    <ng-container *ngFor="let month of months; let i = index">
+      <div class="month-card">
+        <div class="month-title">{{ monthNames[i] }}</div>
+        <table class="month-table">
+          <thead>
+            <tr>
+              <th *ngFor="let d of dayShorts">{{ d }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let week of getMonthWeeks(i)">
+              <td *ngFor="let day of week"
+                  [class.holiday]="isHoliday(getDate(currentYear, i, day))"
+                  [class.empty]="!day">
+                <span *ngIf="day">{{ day }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+  </div>
+  <div class="holidays-tables">
+    <div class="holidays-section">
+      <div class="holidays-title">FÊTES RELIGIEUSES</div>
+      <nz-table #religiousTable [nzData]="religiousHolidays" [nzBordered]="false">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Fête</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of religiousHolidays">
+            <td>{{ h.date | date:'d MMMM':'':'fr-FR' }}</td>
+            <td>{{ h.name }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <div class="holidays-section">
+      <div class="holidays-title">FÊTES NATIONALES</div>
+      <nz-table #nationalTable [nzData]="nationalHolidays" [nzBordered]="false">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Fête</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of nationalHolidays">
+            <td>{{ h.date | date:'d MMMM':'':'fr-FR' }}</td>
+            <td>{{ h.name }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+  <div style="font-size: 0.95em; color: #888; margin-top: 8px;">
+    * Les dates de l’Aïd al-Fitr et de l’Aïd al-Adha sont déterminées selon l’annonce religieuse officielle.
+  </div>
+</div>
