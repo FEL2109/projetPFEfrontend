@@ -42,6 +42,7 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels-user/calendrier-jours-officiels.component';
 import { CalendrierJoursOfficielsAdminComponent } from './ui/home-admin/calendrier-jours-officiels-admin/calendrier-jours-officiels-admin.component';
 
@@ -94,6 +95,7 @@ registerLocaleData(fr);
     NzModalModule,
     NzCheckboxModule,
     ReactiveFormsModule,
+    NgxChartsModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

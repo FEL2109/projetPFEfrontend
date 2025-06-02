@@ -1,25 +1,58 @@
 <nz-layout>
-  <nz-layout>
-    <nz-content class="main-content">
-      <div class="dashboard-wrapper">
-        <!-- Contenu principal à gauche -->
-        <div class="content-left">
-          <!-- Laisse vide ou ajoute ce que tu veux -->
+  <nz-content class="main-content">
+    <div class="dashboard-wrapper-pro">
+      <div class="dashboard-main-row">
+        <!-- Colonne gauche : Bienvenue + Statistiques -->
+        <div class="dashboard-col-gauche">
+          <div class="welcome-block-pro">
+            <span class="dashboard-title">Bienvenue dans votre espace personnel employé</span>
+            <div class="dashboard-subtitle">Gérez vos congés et suivez vos indicateurs RH</div>
+          </div>
+          <div class="dashboard-stats-row-pro">
+            <nz-card class="stat-card-pro green">
+              <i nz-icon nzType="wallet" nzTheme="outline" class="stat-icon"></i>
+              <div class="stat-value">{{ soldeConges }}</div>
+              <div class="stat-label">Solde de congé</div>
+            </nz-card>
+            <nz-card class="stat-card-pro yellow">
+              <i nz-icon nzType="calendar" nzTheme="outline" class="stat-icon"></i>
+              <div class="stat-value">{{ joursPris }}</div>
+              <div class="stat-label">Jours pris</div>
+            </nz-card>
+          </div>
+          <!-- Ajoute ceci juste après la section statistiques dans dashboard-col-gauche -->
+          <div class="notifications-section">
+            <div class="notifications-title">
+              <i nz-icon nzType="bell" nzTheme="twotone" class="notif-icon"></i>
+              Notifications
+            </div>
+            <ul class="notifications-list">
+              <li *ngFor="let notif of notifications">
+                <span class="notif-icon"><i nz-icon nzType="exclamation-circle" nzTheme="outline"></i></span>
+                <span class="notif-message">{{ notif.text }}</span>
+                <span class="notif-date">{{ notif.time | date:'short' }}</span>
+              </li>
+              <li *ngIf="!notifications?.length" class="notif-empty">Aucune notification</li>
+            </ul>
+          </div>
         </div>
-
-         <!-- ✅ Bandeau de bienvenue en haut -->
-        <div class="welcome-message">
-        <span>Bienvenue dans votre espace personnel employé</span>
-        <img src="assets/images/welcome.png" alt="Welcome" class="welcome-icon" />
-         </div>
-
-        <!-- Calendrier aligné à gauche avec titre -->
-        <div class="stats-row"> 
-        <div class="calendar-wrapper">
-          <nz-card class="calendar-card" nzBordered="false">
-            <!-- Titre ajouté ici -->
+        <!-- Colonne droite : Fériés au-dessus, Agenda en dessous -->
+        <div class="dashboard-col-droite">
+          <div class="ferie-card-holiday-pro">
+            <div class="ferie-header">
+              <span class="ferie-arrow" (click)="prevHoliday()">&lt;</span>
+              <span class="ferie-title">Prochains jours fériés</span>
+              <span class="ferie-arrow" (click)="nextHoliday()">&gt;</span>
+            </div>
+            <div class="ferie-content" *ngIf="nextHolidays.length">
+              <div class="ferie-label">{{ nextHolidays[holidayIndex]?.label }}</div>
+              <div class="ferie-date">
+                {{ nextHolidays[holidayIndex]?.date | date:'EEEE d MMMM y' : 'fr' }}
+              </div>
+            </div>
+          </div>
+          <nz-card class="calendar-card-pro" nzBordered="false">
             <div class="calendar-title">Mon Agenda</div>
-            <!-- Calendrier -->
             <nz-calendar
               [nzFullscreen]="false"
               [(ngModel)]="date"
@@ -27,11 +60,14 @@
             </nz-calendar>
           </nz-card>
         </div>
-
-    
       </div>
-     </div>
-      
-    </nz-content>
-  </nz-layout>
+    </div>
+  </nz-content>
 </nz-layout>
+
+<script>
+  notifications = [
+  { text: "Votre demande de congé a été approuvée.", time: '2025-06-02' },
+  { text: "Nouveau jour férié ajouté au calendrier.", time: '2025-06-01' }
+];
+</script>
