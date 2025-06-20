@@ -11,30 +11,15 @@ export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('access_token'); // même clé partout !
+    const token = localStorage.getItem('access_token'); 
     return new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': token ? `Bearer ${token}` : ''
     });
   }
 
-  addEmployee(user: any): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.post(`${this.apiUrl}/add`, JSON.stringify(user), { headers });
-  }
-
   getAllEmployees(): Observable<any[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<any[]>(`${this.apiUrl}/getAll`, { headers });
-  }
-
-  deleteEmployee(id: number): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.delete(`${this.apiUrl}/delete/${id}`, { headers });
-  }
-
-  updateEmployee(id: number, user: any): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.put(`${this.apiUrl}/update/${id}`, JSON.stringify(user), { headers });
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
 }

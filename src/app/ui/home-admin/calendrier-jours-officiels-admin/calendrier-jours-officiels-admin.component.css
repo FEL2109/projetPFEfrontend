@@ -76,7 +76,7 @@
   box-shadow: 0 4px 32px #00000010;
   border-radius: 18px;
   padding: 32px 24px;
-  margin-left: 300px; /* ← Ajoute un espace après le menu */
+  margin-left: 340px; /* ← augmente la valeur (ex : 340px ou 360px) */
 }
 
 .calendar-grid {
@@ -136,6 +136,12 @@
 .month-table td.holiday {
   background: #43b97f;
   color: #fff;
+  font-weight: bold;
+}
+
+.month-table td.weekend {
+  background: #ffe5b4 !important;   /* Orange clair */
+  color: #b26a00 !important;
   font-weight: bold;
 }
 

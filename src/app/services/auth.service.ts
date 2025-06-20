@@ -34,7 +34,11 @@ interface DecodedToken {
     }
   
     handleLoginSuccess(token: string) {
-      localStorage.setItem('access_token', token);
+  localStorage.setItem('access_token', token); // Stocke le token
+  console.log('Token enregistré:', token);
+
+
+     
   
       const decodedToken = jwtDecode<DecodedToken>(token);
       const roles = decodedToken.realm_access.roles;

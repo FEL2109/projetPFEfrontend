@@ -48,6 +48,12 @@ export class CalendrierJoursOfficielsComponent {
                  h.date.getFullYear() === date.getFullYear());
   }
 
+  isSunday(year: number, month: number, day: number | null): boolean {
+    if (!day) return false;
+    const date = new Date(year, month, day);
+    return date.getDay() === 0; // 0 = dimanche
+  }
+
   getMonthWeeks(month: number): (number | null)[][] {
     const year = this.currentYear;
     const firstDay = new Date(year, month, 1);

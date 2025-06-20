@@ -13,6 +13,7 @@ import { EmployesAdminComponent } from './ui/home-admin/employes-admin/employes-
 import { DemandesCongesAdminComponent } from './ui/home-admin/demandes-conges-admin/demandes-conges-admin.component';
 import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels-user/calendrier-jours-officiels.component';
 import { CalendrierJoursOfficielsAdminComponent } from './ui/home-admin/calendrier-jours-officiels-admin/calendrier-jours-officiels-admin.component';
+import { MesDemandesCongesComponent } from './ui/home-user/mes-demandes-conges/mes-demandes-conges.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent }, // Route par défaut pour afficher le login
@@ -26,7 +27,7 @@ const routes: Routes = [
       { path: 'profil', component: ProfilUserComponent },
       { path: 'soumettre-demande-conge', component: SoumettreDemandeCongeComponent }, // Route pour Profil utilisateur
       { path: 'calendrier-jours-officiels', component: CalendrierJoursOfficielsComponent },
-      
+      { path: 'mes-demandes-conges', component: MesDemandesCongesComponent },
     ]
   }, // Route pour home-user
   { path: 'home-rh', component: HomeRhComponent }, // Route pour home-rh

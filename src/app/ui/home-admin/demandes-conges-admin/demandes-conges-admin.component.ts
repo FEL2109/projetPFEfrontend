@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 interface LeaveRequest {
   type: string;
@@ -15,14 +15,21 @@ interface LeaveRequest {
   templateUrl: './demandes-conges-admin.component.html',
   styleUrls: ['./demandes-conges-admin.component.css']
 })
-export class DemandesCongesAdminComponent {
- stats = [
+export class DemandesCongesAdminComponent implements OnInit {
+  stats = [
     { value: 10, label: 'Demandes congés disponibles', color: '#E6F4EA' },
     { value: 2, label: 'Solde compensatoire', color: '#F1F9F6' },
     { value: 3, label: 'Demandes congés refusées', color: '#F8E7E8' },
     { value: 2, label: 'Demandes congés en attente', color: '#FFF8E1' }
   ];
 
+  filter = {
+    type: '',
+    status: '',
+    startDate: null as Date | null
+  };
+
+  originalLeaveRequests: LeaveRequest[] = []; // à remplir avec tes données originales
   leaveRequests: LeaveRequest[] = [
     {
       type: 'Congé annuel',
@@ -82,6 +89,11 @@ export class DemandesCongesAdminComponent {
 
   selectedRequest: any = null;
 
+  ngOnInit() {
+    // Quand tu charges les données, garde une copie originale
+    this.originalLeaveRequests = [...this.leaveRequests];
+  }
+
   accepter(req: any) {
     // Votre logique d’acceptation ici
     req.status = 'Approuvée';
@@ -92,6 +104,20 @@ export class DemandesCongesAdminComponent {
     req.status = 'Refusée';
   }
 
+  applyFilter() {
+    this.leaveRequests = this.originalLeaveRequests.filter(req => {
+      const matchType = !this.filter.type || req.type === this.filter.type;
+      const matchStatus = !this.filter.status || req.status === this.filter.status;
+      const matchDate = !this.filter.startDate || new Date(req.startDate).toDateString() === new Date(this.filter.startDate).toDateString();
+      return matchType && matchStatus && matchDate;
+    });
+  }
+
+  resetFilter() {
+    this.filter = { type: '', status: '', startDate: null };
+    this.leaveRequests = [...this.originalLeaveRequests];
+  }
+
   getStatusType(status: string): string {
     switch (status) {
       case 'En attente': return 'warning';
@@ -100,6 +126,4 @@ export class DemandesCongesAdminComponent {
       default: return '';
     }
   }
-
-
 }

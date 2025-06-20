@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  loginForm = new FormGroup({
+    rememberMe: new FormControl(false) // Valeur par défaut
+  });
   username: string = ''; // Propriété pour le nom d'utilisateur
   password: string = ''; // Propriété pour le mot de passe
   hide: boolean = true; // Propriété pour basculer la visibilité du mot de passe

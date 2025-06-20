@@ -3,6 +3,12 @@
   margin: 80px auto;
   padding: 0 24px;
   font-family: Helvetica, sans-serif;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 60px 0 0 0;
+  min-height: 100vh;
+  background: #f7fafd;
 }
 
 .profil-title {
@@ -15,18 +21,66 @@
 }
 
 .profil-card {
-  border-radius: 16px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-  padding: 0px;
+  margin-left: 60px; /* Espace après le menu */
+  width: 480px;      /* Plus large */
+  border-radius: 18px;
+  box-shadow: 0 6px 32px rgba(44,62,80,0.10);
+  background: #fff;
+  padding: 32px 28px;
 }
 
-.profil-content {
+.profil-header {
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: flex-start;
-  border-top: 1px solid #f0f0f0;
-  padding-top: 24px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.profil-avatar {
+  width: 110px !important;
+  height: 110px !important;
+  margin-bottom: 12px;
+  border: 3px solid #eaeaea;
+  background: #f6f8fa;
+}
+
+.profil-name {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #232a88;
+}
+
+.profil-id {
+  display: block;
+  font-size: 0.95rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.profil-descriptions {
+  margin-top: 10px;
+}
+
+::ng-deep .profil-descriptions .ant-descriptions-item-label {
+  font-size: 1.08rem;
+  font-weight: 500;
+  width: 160px !important; /* Largeur de la colonne label */
+  min-width: 160px !important;
+  padding: 16px 18px !important;
+}
+
+::ng-deep .profil-descriptions .ant-descriptions-item-content {
+  font-size: 1.08rem;
+  color: #2d427a;
+  padding: 16px 18px !important;
+  min-width: 220px !important; /* Largeur de la colonne valeur */
+}
+
+.desc-value {
+  font-weight: 500;
+  color: #2d427a;
+  word-break: break-word;
 }
 
 .avatar-section {

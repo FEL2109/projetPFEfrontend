@@ -162,32 +162,45 @@ nz-table .action-btns button[nz-button]:hover {
   padding: 4px 2px;
 }
 
-.btn-accept {
-  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
+.action-btns .btn-accept {
+  background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%) !important;
   color: #fff !important;
-  border: none;
+  border: none !important;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(67, 233, 123, 0.10);
   transition: transform 0.15s;
 }
-.btn-accept:hover, .btn-accept:focus {
-  background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%);
-  color: #fff !important;
-  transform: translateY(-2px) scale(1.04);
-}
 
-.btn-refuse {
-  background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
+.action-btns .btn-refuse {
+  background: linear-gradient(90deg, #ff5858 0%, #f09819 100%) !important;
   color: #fff !important;
-  border: none;
+  border: none !important;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(255, 88, 88, 0.10);
   transition: transform 0.15s;
 }
-.btn-refuse:hover, .btn-refuse:focus {
-  background: linear-gradient(90deg, #f09819 0%, #ff5858 100%);
+
+.action-btns .btn-accept:hover,
+.action-btns .btn-accept:focus {
+  background: linear-gradient(90deg, #38f9d7 0%, #43e97b 100%) !important;
   color: #fff !important;
   transform: translateY(-2px) scale(1.04);
+}
+
+.action-btns .btn-refuse:hover,
+.action-btns .btn-refuse:focus {
+  background: linear-gradient(90deg, #f09819 0%, #ff5858 100%) !important;
+  color: #fff !important;
+  transform: translateY(-2px) scale(1.04);
+}
+
+/* Filter form styles */
+.filter-form label {
+  font-weight: 500;
+  margin-right: 8px;
+}
+.filter-form {
+  min-width: 220px;
 }
 
 /* Responsive */

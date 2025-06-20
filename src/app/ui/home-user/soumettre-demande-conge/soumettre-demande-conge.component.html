@@ -1,17 +1,89 @@
 <div class="form-container">
-  <div class="form-header">
-    <h2>Soumettre une demande de congé</h2>
+  <div class="switch-buttons">
+    <button 
+      [class.active]="selectedForm === 'conge'" 
+      (click)="selectedForm = 'conge'">
+      Congé
+    </button>
+    <button 
+      [class.active]="selectedForm === 'absence'" 
+      (click)="selectedForm = 'absence'">
+      Absence
+    </button>
   </div>
-  <form nz-form>
+
+  <!-- Formulaire Congé -->
+  <form nz-form *ngIf="selectedForm === 'conge'">
     <!-- Type de congé -->
     <div class="form-group">
       <label for="type">Type de congé :</label>
       <nz-select id="type" name="type" class="form-control" nzPlaceHolder="Sélectionnez un type de congé">
         <nz-option nzValue="conge-paye" nzLabel="Congé payé"></nz-option>
         <nz-option nzValue="conge-sans-solde" nzLabel="Congé sans solde"></nz-option>
-        <nz-option nzValue="formation" nzLabel="Absence pour formation"></nz-option>
         <nz-option nzValue="maternite-paternite" nzLabel="Congé maternité/paternité"></nz-option>
+      </nz-select>
+    </div>
+
+    <!-- Jours -->
+    <div class="form-group">
+      <label for="jours">Jours :</label>
+      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours">
+        <nz-option *ngFor="let jour of jours" [nzValue]="jour" [nzLabel]="jour"></nz-option>
+      </nz-select>
+    </div>
+
+    <!-- Date de début -->
+    <div class="form-group">
+      <label for="startDate">Date de début <span class="note">*inclus</span> :</label>
+      <nz-date-picker id="startDate" name="startDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
+    </div>
+
+    <!-- Date de fin -->
+    <div class="form-group">
+      <label for="endDate">Date de fin <span class="note">*inclus</span> :</label>
+      <nz-date-picker id="endDate" name="endDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
+    </div>
+
+    <!-- Commentaire -->
+    <div class="form-group">
+      <label for="commentaire">Commentaire :</label>
+      <textarea id="commentaire" name="commentaire" class="form-control commentaire-input" maxlength="300"
+        placeholder="Ajoutez un commentaire (max. 300 caractères)"
+        (input)="updateCharCount($event)"></textarea>
+      <small class="char-counter">{{ comment.length }}/300</small>
+    </div>
+
+    <!-- Justificatif -->
+    <div class="form-group">
+      <label for="justificatif">Justificatif :</label>
+      <div class="upload-container">
+        <input type="file" id="justificatif" name="justificatif" class="file-input" accept=".jpg,.jpeg,.png,.pdf" (change)="onFileSelected($event)" />
+        <label for="justificatif" class="upload-label">
+          <i nz-icon nzType="upload" nzTheme="outline"></i>
+          <span>{{ selectedFileName || 'Importer un fichier' }}</span>
+        </label>
+      </div>
+      <small class="note">Formats acceptés : JPG, PNG, PDF</small>
+    </div>
+
+    <!-- Boutons -->
+    <div class="form-actions">
+      <button nz-button nzType="primary" type="submit" class="btn-submit">Soumettre</button>
+      <button nz-button nzType="default" type="button" class="btn-cancel">Annuler</button>
+    </div>
+  </form>
+
+  <!-- Formulaire Absence (identique à congé pour l’instant) -->
+  <form nz-form *ngIf="selectedForm === 'absence'">
+    <!-- Type d'absence -->
+    <div class="form-group">
+      <label for="type">Type d'absence :</label>
+      <nz-select id="type" name="type" class="form-control" nzPlaceHolder="Sélectionnez un type d'absence">
+        <nz-option nzValue="absence-justifiee" nzLabel="Absence justifiée"></nz-option>
+        <nz-option nzValue="absence-non-justifiee" nzLabel="Absence non justifiée"></nz-option>
+        <nz-option nzValue="absence-formation" nzLabel="Absence pour formation"></nz-option>
         <nz-option nzValue="arret-maladie" nzLabel="Arrêt maladie"></nz-option>
+        <nz-option nzValue="renouvellement-arret-maladie" nzLabel="Renouvellement arrêt maladie"></nz-option>
       </nz-select>
     </div>
 

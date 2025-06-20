@@ -9,6 +9,7 @@ export class SoumettreDemandeCongeComponent {
   comment: string = '';
   selectedFileName: string | null = null;
   jours: number[] = Array.from({ length: 30 }, (_, i) => i + 1); // Génère un tableau de 1 à 30
+  selectedForm: 'conge' | 'absence' = 'conge';
 
   updateCharCount(event: Event): void {
     const input = event.target as HTMLTextAreaElement;

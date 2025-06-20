@@ -14,9 +14,47 @@
   </div>
 
   <div class="table-wrapper">
-    <button nz-button nzType="default" nzShape="circle" nz-tooltip="Filtrer" class="table-filter-btn">
+    <button
+      nz-button
+      nzType="default"
+      nzShape="circle"
+      nz-popover
+      [nzPopoverContent]="filterTpl"
+      [nzPopoverTrigger]="'click'"
+      class="table-filter-btn"
+    >
       <i nz-icon nzType="filter" nzTheme="outline"></i>
     </button>
+    <ng-template #filterTpl>
+      <form class="filter-form" (ngSubmit)="applyFilter()">
+        <div style="margin-bottom: 12px;">
+          <label>Type congé :</label>
+          <nz-select [(ngModel)]="filter.type" name="type" nzPlaceHolder="Tous">
+            <nz-option nzValue="" nzLabel="Tous"></nz-option>
+            <nz-option nzValue="Congé annuel" nzLabel="Congé annuel"></nz-option>
+            <nz-option nzValue="Congé maladie" nzLabel="Congé maladie"></nz-option>
+            <!-- Ajoute d'autres types si besoin -->
+          </nz-select>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <label>Statut :</label>
+          <nz-select [(ngModel)]="filter.status" name="status" nzPlaceHolder="Tous">
+            <nz-option nzValue="" nzLabel="Tous"></nz-option>
+            <nz-option nzValue="En attente" nzLabel="En attente"></nz-option>
+            <nz-option nzValue="Refusée" nzLabel="Refusée"></nz-option>
+            <nz-option nzValue="Approuvée" nzLabel="Approuvée"></nz-option>
+          </nz-select>
+        </div>
+        <div style="margin-bottom: 12px;">
+          <label>Date début :</label>
+          <nz-date-picker [(ngModel)]="filter.startDate" name="startDate" nzPlaceHolder="Toutes"></nz-date-picker>
+        </div>
+        <div style="text-align:right;">
+          <button nz-button nzType="primary" nzSize="small" type="submit">Filtrer</button>
+          <button nz-button nzSize="small" type="button" (click)="resetFilter()" style="margin-left:8px;">Réinitialiser</button>
+        </div>
+      </form>
+    </ng-template>
     <nz-table #basicTable [nzData]="leaveRequests" [nzPageSize]="6" [nzShowPagination]="false">
       <thead>
         <tr>
@@ -44,28 +82,35 @@
           <td>{{ req.comment }}</td>
           <td>{{ req.approver }}</td>
           <td class="action-btns">
-            <button
-              nz-button
-              nzType="link"
-              nzShape="circle"
-              nz-popover
-              [nzPopoverTrigger]="'click'"
-              [nzPopoverContent]="actionTpl"
-              (click)="selectedRequest = req"
-            >
-              <i nz-icon nzType="edit"></i>
-            </button>
-            <button nz-button nzType="link" nzShape="circle"><i nz-icon nzType="delete"></i></button>
-
-            <ng-template #actionTpl>
-              <div class="popover-actions">
-                <button nz-button nzType="primary" nzSize="small" class="btn-accept" (click)="accepter(selectedRequest)">
-                  <i nz-icon nzType="check"></i> Accepter
+            <ng-container *ngIf="req.status === 'En attente'; else noAction">
+              <div class="action-flex">
+                <button
+                  nz-button
+                  nzType="primary"
+                  nzSize="default"
+                  nzTooltip="Accepter"
+                  class="btn-accept"
+                  (click)="accepter(req)"
+                >
+                  <i nz-icon nzType="check" nzTheme="outline"></i>
+                  <span>Accepter</span>
                 </button>
-                <button nz-button nzType="default" nzDanger nzSize="small" class="btn-refuse" (click)="refuser(selectedRequest)">
-                  <i nz-icon nzType="close"></i> Refuser
+                <button
+                  nz-button
+                  nzType="default"
+                  nzDanger
+                  nzSize="default"
+                  nzTooltip="Refuser"
+                  class="btn-refuse"
+                  (click)="refuser(req)"
+                >
+                  <i nz-icon nzType="close" nzTheme="outline"></i>
+                  <span>Refuser</span>
                 </button>
               </div>
+            </ng-container>
+            <ng-template #noAction>
+              <span style="color:#ccc; font-size: 1.2em;">—</span>
             </ng-template>
           </td>
         </tr>

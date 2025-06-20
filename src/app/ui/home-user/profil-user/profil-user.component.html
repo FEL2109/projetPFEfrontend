@@ -1,50 +1,37 @@
-<h2 mat-dialog-title>Profil</h2>
-
-<div class="profile-photo-container">
-  <img [src]="user.photo || 'assets/images/perso.jpg'" alt="Photo de profil" class="profile-photo">
-</div>
-
-<mat-dialog-content>
-  <form #profileForm="ngForm" class="profile-form">
-    <div class="form-row">
-      <div class="form-field">
-        <label for="family_name">lastName</label>
-        <mat-form-field appearance="outline" class="full-width">
-          <input matInput [(ngModel)]="user.family_name" name="family_name" id="family_name" required>
-        </mat-form-field>
-      </div>
-
-      <div class="form-field">
-        <label for="given_name">firstName</label>
-        <mat-form-field appearance="outline" class="full-width">
-          <input matInput [(ngModel)]="user.given_name" name="given_name" id="given_name" required>
-        </mat-form-field>
+<div class="profil-wrapper">
+  <nz-card class="profil-card">
+    <div class="profil-header">
+      <nz-avatar
+        [nzSrc]="user.photoUrl"
+        nzIcon="user"
+        nzSize="large"
+        class="profil-avatar"
+      ></nz-avatar>
+      <div class="profil-name">
+        <span>{{ user.prenom }} {{ user.nom }}</span>
+        <span class="profil-id">ID: {{ user.id }}</span>
       </div>
     </div>
-
-     <div class="form-field">
-        <label for="department">Departement</label>
-        <mat-form-field appearance="outline" class="full-width">
-          <input matInput [(ngModel)]="user.department" name="department" id="department" required>
-        </mat-form-field>
-      </div>
-    
-
-   <div class="form-field">
-  <label for="role">Rôle</label>
-  <mat-form-field appearance="outline" class="full-width">
-    <input matInput [value]="user.role" name="role" id="role" readonly>
-  </mat-form-field>
+    <nz-divider></nz-divider>
+    <nz-descriptions
+      nzTitle="Informations personnelles"
+      [nzColumn]="1"
+      nzBordered
+      nzSize="middle"
+      class="profil-descriptions"
+    >
+      <nz-descriptions-item nzTitle="Nom">
+        <div class="desc-value">{{ user.nom }}</div>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Prénom">
+        <div class="desc-value">{{ user.prenom }}</div>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Email">
+        <div class="desc-value">{{ user.email }}</div>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Téléphone">
+        <div class="desc-value">{{ user.telephone }}</div>
+      </nz-descriptions-item>
+    </nz-descriptions>
+  </nz-card>
 </div>
-
-    <div class="form-row">
-      <div class="form-field full-width">
-        <label for="email">Email</label>
-        <mat-form-field appearance="outline" class="full-width">
-          <input matInput [(ngModel)]="user.email" name="email" id="email" required>
-        </mat-form-field>
-      </div>
-    </div>
-  </form>
-</mat-dialog-content>
-

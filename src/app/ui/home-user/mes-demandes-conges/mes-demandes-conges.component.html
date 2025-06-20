@@ -1,0 +1,29 @@
+<div class="mes-demandes-wrapper">
+  <h2>Mes demandes de congés / absences</h2>
+  <nz-table #table [nzData]="demandes" nzBordered [nzSize]="'middle'" class="modern-table">
+    <thead>
+      <tr>
+        <th>Date de la demande</th>
+        <th>Période</th>
+        <th>Type de congé</th>
+        <th>Type d'absence</th>
+        <th>Nombre de jours</th>
+        <th>Statut</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let d of table.data">
+        <td>{{ d.dateDemande | date:'shortDate' }}</td>
+        <td>{{ d.dateDebut | date:'shortDate' }} - {{ d.dateFin | date:'shortDate' }}</td>
+        <td>{{ d.typeConge ? d.typeConge : '-' }}</td>
+        <td>{{ d.typeAbsence ? d.typeAbsence : '-' }}</td>
+        <td>{{ d.jours }}</td>
+        <td>
+          <nz-tag [nzColor]="getStatusColor(d.statut)">
+            {{ d.statut }}
+          </nz-tag>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

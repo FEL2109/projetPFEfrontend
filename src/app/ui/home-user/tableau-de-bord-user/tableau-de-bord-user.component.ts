@@ -148,4 +148,3 @@ export class TableauDeBordUserComponent implements OnInit {
     }
   }
 }
-

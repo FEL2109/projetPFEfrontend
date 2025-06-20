@@ -13,6 +13,7 @@
             <tr *ngFor="let week of getMonthWeeks(i)">
               <td *ngFor="let day of week"
                   [class.holiday]="isHoliday(getDate(currentYear, i, day))"
+                  [class.weekend]="isSunday(currentYear, i, day) && !isHoliday(getDate(currentYear, i, day))"
                   [class.empty]="!day">
                 <span *ngIf="day">{{ day }}</span>
               </td>
@@ -60,5 +61,12 @@
   </div>
   <div style="font-size: 0.95em; color: #888; margin-top: 8px;">
     * Les dates de l’Aïd al-Fitr et de l’Aïd al-Adha sont déterminées selon l’annonce religieuse officielle.
+  </div>
+  <!-- Ajoute ceci sous la grille du calendrier -->
+  <div style="margin-top: 18px; font-size: 1em;">
+    <span style="display:inline-block;width:18px;height:18px;background:#43b97f;border-radius:4px;margin-right:6px;vertical-align:middle;"></span>
+    <span>Jour férié ou fête religieuse</span>
+    <span style="display:inline-block;width:18px;height:18px;background:#ffe5b4;border-radius:4px;margin:0 6px 0 18px;vertical-align:middle;border:1px solid #ffd699;"></span>
+    <span>Weekend (dimanche)</span>
   </div>
 </div>

@@ -45,6 +45,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels-user/calendrier-jours-officiels.component';
 import { CalendrierJoursOfficielsAdminComponent } from './ui/home-admin/calendrier-jours-officiels-admin/calendrier-jours-officiels-admin.component';
+import { MesDemandesCongesComponent } from './ui/home-user/mes-demandes-conges/mes-demandes-conges.component';
 
 registerLocaleData(fr);
 
@@ -64,9 +65,9 @@ registerLocaleData(fr);
     EmployesAdminComponent,
     DemandesCongesAdminComponent,
     CalendrierJoursOfficielsComponent,
-    CalendrierJoursOfficielsAdminComponent
-   
-
+    CalendrierJoursOfficielsAdminComponent,
+    MesDemandesCongesComponent
+    
   ],
   imports: [
     BrowserModule,
