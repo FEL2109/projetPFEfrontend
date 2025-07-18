@@ -1,27 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
-interface LeaveRequest {
-  type: string;
-  startDate: string;
-  endDate: string;
-  days: number;
-  status: 'En attente' | 'Refusée' | 'Approuvée';
-  comment: string;
-  approver: string;
-}
-
+import { DemandeCongeService } from '../../../services/demamdeConge.service';
 @Component({
   selector: 'app-demandes-conges-admin',
   templateUrl: './demandes-conges-admin.component.html',
   styleUrls: ['./demandes-conges-admin.component.css']
 })
 export class DemandesCongesAdminComponent implements OnInit {
-  stats = [
-    { value: 10, label: 'Demandes congés disponibles', color: '#E6F4EA' },
-    { value: 2, label: 'Solde compensatoire', color: '#F1F9F6' },
-    { value: 3, label: 'Demandes congés refusées', color: '#F8E7E8' },
-    { value: 2, label: 'Demandes congés en attente', color: '#FFF8E1' }
-  ];
+
+  demandes: any[] = [];
+  leaveRequests: any[] = []; // liste filtrée affichée dans le tableau
+  loading: boolean = true;
+  errorMessage: string | null = null;
 
   filter = {
     type: '',
@@ -29,101 +18,138 @@ export class DemandesCongesAdminComponent implements OnInit {
     startDate: null as Date | null
   };
 
-  originalLeaveRequests: LeaveRequest[] = []; // à remplir avec tes données originales
-  leaveRequests: LeaveRequest[] = [
-    {
-      type: 'Congé annuel',
-      startDate: '31 Dec 2024',
-      endDate: '10 Jan 2025',
-      days: 1,
-      status: 'En attente',
-      comment: 'Commentaire....',
-      approver: 'Avinash'
-    },
-    {
-      type: 'Congé annuel',
-      startDate: '31 Dec 2024',
-      endDate: '31 Dec 2024',
-      days: 2,
-      status: 'Refusée',
-      comment: 'Commentaire....',
-      approver: 'Avinash'
-    },
-    {
-      type: 'Congé maladie',
-      startDate: '25 Dec 2024',
-      endDate: '25 Dec 2024',
-      days: 1,
-      status: 'Approuvée',
-      comment: 'Commentaire....',
-      approver: 'Avinash'
-    },
-    {
-      type: 'Congé annuel',
-      startDate: '10 Dec 2024',
-      endDate: '13 Dec 2024',
-      days: 3,
-      status: 'Approuvée',
-      comment: 'Commentaire....',
-      approver: 'Avinash'
-    },
-    {
-      type: 'Congé maladie',
-      startDate: '8 Nov 2024',
-      endDate: '13 Nov 2024',
-      days: 5,
-      status: 'Approuvée',
-      comment: 'Commentaire....',
-      approver: 'Avinash'
-    },
-    {
-      type: 'Congé annuel',
-      startDate: '8 Nov 2024',
-      endDate: '13 Nov 2024',
-      days: 5,
-      status: 'Approuvée',
-      comment: 'Commentaire....',
-      approver: 'Avinash'
-    }
+  stats = [
+    { label: 'Total demandes', value: 0 },
+    { label: 'En attente', value: 0 },
+    { label: 'Approuvées', value: 0 },
+    { label: 'Refusées', value: 0 }
   ];
 
-  selectedRequest: any = null;
+  constructor(private demandeCongeService: DemandeCongeService) {}
 
-  ngOnInit() {
-    // Quand tu charges les données, garde une copie originale
-    this.originalLeaveRequests = [...this.leaveRequests];
+  ngOnInit(): void {
+    this.fetchDemandes();
   }
 
-  accepter(req: any) {
-    // Votre logique d’acceptation ici
-    req.status = 'Approuvée';
-  }
-
-  refuser(req: any) {
-    // Votre logique de refus ici
-    req.status = 'Refusée';
-  }
-
-  applyFilter() {
-    this.leaveRequests = this.originalLeaveRequests.filter(req => {
-      const matchType = !this.filter.type || req.type === this.filter.type;
-      const matchStatus = !this.filter.status || req.status === this.filter.status;
-      const matchDate = !this.filter.startDate || new Date(req.startDate).toDateString() === new Date(this.filter.startDate).toDateString();
-      return matchType && matchStatus && matchDate;
+  fetchDemandes(): void {
+    this.loading = true;
+    this.errorMessage = null;
+    this.demandeCongeService.getAllDemandes().subscribe({
+      next: (data) => {
+        // Transformation des données reçues pour correspondre au template
+        this.demandes = data.map((d: any) => ({
+          id: d.idDemande,
+          type: this.mapTypeCongeIdToString(d.typeCongeId),
+          startDate: d.dateDebut,
+          endDate: this.calculateEndDate(d.dateDebut, d.nombreJours),
+          days: d.nombreJours,
+          status: this.mapStatutToLabel(d.statut),
+          comment: d.commentaire,
+          approver: this.getApproverName(d.managerId) // Retourne null ou nom si disponible
+        }));
+        this.updateStats();
+        this.applyFilter();
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des demandes de congé', err);
+        this.errorMessage = `Erreur ${err.status}: ${err.message}`;
+        this.loading = false;
+      }
     });
   }
 
-  resetFilter() {
+  mapTypeCongeIdToString(typeCongeId: number): string {
+    switch(typeCongeId) {
+      case 1: return 'Congé annuel';
+      case 2: return 'Congé maladie';
+      // Ajoute d'autres mappings si nécessaire
+      default: return 'Autre';
+    }
+  }
+
+  calculateEndDate(startDate: string, days: number): string {
+    const start = new Date(startDate);
+    start.setDate(start.getDate() + days - 1);
+    return start.toISOString().split('T')[0]; // format YYYY-MM-DD
+  }
+
+  mapStatutToLabel(statut: string): string {
+    switch(statut) {
+      case 'EnAttente': return 'En attente';
+      case 'Approuvee': return 'Approuvées';
+      case 'Refusee': return 'Refusées';
+      default: return statut;
+    }
+  }
+
+  getApproverName(managerId: number): string | null {
+    // TODO: si tu as une liste des managers/employés, cherche ici le nom
+    // Sinon retourne null pour ne rien afficher
+    return null;
+  }
+
+  updateStats(): void {
+    this.stats[0].value = this.demandes.length;
+    this.stats[1].value = this.demandes.filter(d => d.status === 'En attente').length;
+    this.stats[2].value = this.demandes.filter(d => d.status === 'Approuvées').length;
+    this.stats[3].value = this.demandes.filter(d => d.status === 'Refusées').length;
+  }
+
+  applyFilter(): void {
+    this.leaveRequests = this.demandes.filter(req => {
+      let match = true;
+      if (this.filter.type && req.type !== this.filter.type) match = false;
+      if (this.filter.status && req.status !== this.filter.status) match = false;
+      if (this.filter.startDate) {
+        const reqDate = new Date(req.startDate);
+        const filterDate = new Date(this.filter.startDate);
+        filterDate.setHours(0, 0, 0, 0);
+        reqDate.setHours(0, 0, 0, 0);
+        if (reqDate < filterDate) match = false;
+      }
+      return match;
+    });
+  }
+
+  resetFilter(): void {
     this.filter = { type: '', status: '', startDate: null };
-    this.leaveRequests = [...this.originalLeaveRequests];
+    this.applyFilter();
   }
 
   getStatusType(status: string): string {
     switch (status) {
-      case 'En attente': return 'warning';
-      case 'Refusée': return 'error';
-      case 'Approuvée': return 'success';
-      default: return '';
+      case 'En attente': return 'processing';
+      case 'Approuvées': return 'success';
+      case 'Refusées': return 'error';
+      default: return 'default';
     }
   }
+
+  accepter(req: any): void {
+    this.loading = true;
+    this.demandeCongeService.accepterDemande(req.id).subscribe({
+      next: (response) => {
+        this.fetchDemandes();
+      },
+      error: (err) => {
+        this.errorMessage = `Erreur lors de l'approbation: ${err.status}`;
+        this.loading = false;
+      }
+    });
+  }
+
+  refuser(req: any): void {
+    this.loading = true;
+    this.demandeCongeService.refuserDemande(req.id).subscribe({
+      next: (response) => {
+        this.fetchDemandes();
+      },
+      error: (err) => {
+        this.errorMessage = `Erreur lors du refus: ${err.status}`;
+        this.loading = false;
+      }
+    });
+  }
+
 }

@@ -1,20 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-profil-user',
   templateUrl: './profil-user.component.html',
   styleUrls: ['./profil-user.component.css']
 })
-export class ProfilUserComponent {
-  user = {
-    id: 'ISER001',
-    nom: 'El Amrani',
-    prenom: 'Lamia',
-    email: 'lamia.elamrani@iser.ma',
-    telephone: '+212 612345678',
-    photoUrl: 'assets/images/photo-profil.jpg'
-  };
+export class ProfilUserComponent implements OnInit {
+  currentUser: any;
+
+  @Output() toggleMenu = new EventEmitter<void>();
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.currentUser = this.authService.getCurrentUser();
+    console.log('Utilisateur connecté :', this.currentUser);
+  }
+
+  onToggleMenu(): void {
+    this.toggleMenu.emit();
+  }
 }
-
-
-

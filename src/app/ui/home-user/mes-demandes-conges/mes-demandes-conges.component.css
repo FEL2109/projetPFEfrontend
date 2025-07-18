@@ -1,14 +1,14 @@
 .mes-demandes-wrapper {
-  background: #fff;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #22336b18;
+  background: transparent;      /* plus de fond blanc */
+  border-radius: 0;             /* plus d'arrondi */
+  box-shadow: none;             /* plus d'ombre */
   padding: 32px;
-  margin: 40px auto;
+  margin: 100px auto 40px auto;
   max-width: 1500px;
   min-width: 700px;
   width: 98vw;
   box-sizing: border-box;
-  margin-left: 60px; /* <-- Ajoute de l'espace après le menu */
+  margin-left: 60px;
 }
 
 h2 {

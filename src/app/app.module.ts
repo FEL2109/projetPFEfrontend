@@ -24,7 +24,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ProfilUserComponent } from './ui/home-user/profil-user/profil-user.component';
-import { SoumettreDemandeCongeComponent } from './ui/home-user/soumettre-demande-conge/soumettre-demande-conge.component';
+import { SoumettreDemandeCongeComponent } from './ui/home-admin/soumettre-demande-conge/soumettre-demande-conge.component';
 import { TableauDeBordUserComponent } from './ui/home-user/tableau-de-bord-user/tableau-de-bord-user.component';
 import { TableauDeBordAdminComponent } from './ui/home-admin/tableau-de-bord-admin/tableau-de-bord-admin.component';
 import { ProfilAdminComponent } from './ui/home-admin/profil-admin/profil-admin.component';
@@ -41,11 +41,15 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzPopoverModule } from 'ng-zorro-antd/popover';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels-user/calendrier-jours-officiels.component';
 import { CalendrierJoursOfficielsAdminComponent } from './ui/home-admin/calendrier-jours-officiels-admin/calendrier-jours-officiels-admin.component';
 import { MesDemandesCongesComponent } from './ui/home-user/mes-demandes-conges/mes-demandes-conges.component';
+import { HistoriquePersonnelComponent } from './ui/home-user/historique-personnel/historique-personnel.component';
+import { SoldeCongesComponent } from './ui/home-user/solde-conges/solde-conges.component';
+import { IcuSafePipe } from './ui/home-user/tableau-de-bord-user/icu-safe.pipe';
 
 registerLocaleData(fr);
 
@@ -66,7 +70,10 @@ registerLocaleData(fr);
     DemandesCongesAdminComponent,
     CalendrierJoursOfficielsComponent,
     CalendrierJoursOfficielsAdminComponent,
-    MesDemandesCongesComponent
+    MesDemandesCongesComponent,
+    HistoriquePersonnelComponent,
+    SoldeCongesComponent,
+    IcuSafePipe
     
   ],
   imports: [
@@ -96,7 +103,8 @@ registerLocaleData(fr);
     NzModalModule,
     NzCheckboxModule,
     ReactiveFormsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    NzBadgeModule
 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

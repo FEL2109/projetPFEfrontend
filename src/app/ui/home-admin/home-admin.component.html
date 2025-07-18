@@ -1,4 +1,20 @@
 <nz-layout>
+  <div class="topbar">
+    <div class="topbar-right">
+      <button nz-button nzType="text" nzShape="circle" class="topbar-btn" title="Notifications">
+        <i nz-icon nzType="bell" nzTheme="outline"></i>
+      </button>
+      <button nz-button nzType="text" nzShape="circle" class="topbar-btn" title="Paramètres">
+        <i nz-icon nzType="setting" nzTheme="outline"></i>
+      </button>
+      <button nz-button nzType="text" nzShape="circle" class="topbar-btn" title="Profil">
+        <i nz-icon nzType="user" nzTheme="outline"></i>
+      </button>
+      <button nz-button nzType="text" nzShape="circle" class="topbar-btn" title="Déconnexion" (click)="logout()">
+        <i nz-icon nzType="logout" nzTheme="outline"></i>
+      </button>
+    </div>
+  </div>
   <nz-sider [nzWidth]="300" [nzTheme]="'dark'" class="sider">
     <div class="logo-container">
       <img src="assets/images/logoingecys.png" alt="Logo Ingecys" class="logo" />

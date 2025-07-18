@@ -12,6 +12,7 @@
   left: 25%; /* Décale le formulaire vers la droite */
   transform: translate(0, -50%); /* Centre verticalement en ajustant la position */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 30px; /* Ajoute ou augmente cette ligne pour descendre le formulaire */
 }
 
 .form-header {

@@ -2,14 +2,14 @@
   <nz-card class="profil-card">
     <div class="profil-header">
       <nz-avatar
-        [nzSrc]="photoUrl"
+        [nzSrc]="currentUser?.photoUrl"
         nzIcon="user"
         nzSize="large"
         class="profil-avatar"
       ></nz-avatar>
       <div class="profil-name">
-        <span>{{ prenom }} {{ nom }}</span>
-        <span class="profil-id">ID: {{ id }}</span>
+        <span>{{ currentUser?.given_name}} {{ currentUser?.family_name }}</span>
+        <span class="profil-id">ID: {{ currentUser?.email }}</span>
       </div>
     </div>
     <nz-divider></nz-divider>
@@ -21,16 +21,19 @@
       class="profil-descriptions"
     >
       <nz-descriptions-item nzTitle="Nom">
-        <div class="desc-value">{{ nom }}</div>
+        <div class="desc-value">{{ currentUser?.family_name }}</div>
       </nz-descriptions-item>
       <nz-descriptions-item nzTitle="Prénom">
-        <div class="desc-value">{{ prenom }}</div>
+        <div class="desc-value">{{ currentUser?.given_name }}</div>
       </nz-descriptions-item>
       <nz-descriptions-item nzTitle="Email">
-        <div class="desc-value">{{ email }}</div>
+        <div class="desc-value">{{ currentUser?.email }}</div>
       </nz-descriptions-item>
       <nz-descriptions-item nzTitle="Téléphone">
-        <div class="desc-value">{{ telephone }}</div>
+        <div class="desc-value">{{ currentUser?.telephone }}</div>
+      </nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Poste">
+        <div class="desc-value">{{ currentUser?.poste }}</div>
       </nz-descriptions-item>
     </nz-descriptions>
   </nz-card>

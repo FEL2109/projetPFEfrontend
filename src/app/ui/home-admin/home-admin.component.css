@@ -36,3 +36,28 @@
   background-color: #6b2952 !important; /* Couleur de l'élément actif */
   color: #ffffff !important; /* Texte blanc pour l'élément actif */
 }
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 300px; /* Commence après le menu violet */
+  height: 56px;
+  width: calc(100% - 300px); /* Va jusqu'à l'extrême droite de la page */
+  background: #fff;
+  box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 32px;
+  z-index: 100;
+}
+
+.topbar-right {
+  display: flex;
+  gap: 16px;
+}
+
+.topbar-btn {
+  font-size: 20px !important;
+  color: #22336b !important;
+}

@@ -1,0 +1,52 @@
+<div class="historique-wrapper">
+  <nz-card nzTitle="Historique personnel" [nzExtra]="extraTemplate">
+    <div class="filters-row">
+      <nz-select [(ngModel)]="selectedType" (ngModelChange)="applyFilter()" class="filter-select">
+        <nz-option nzValue="" nzLabel="Tous les types"></nz-option>
+        <nz-option nzValue="Congé" nzLabel="Congé"></nz-option>
+        <nz-option nzValue="Absence" nzLabel="Absence"></nz-option>
+        <nz-option nzValue="Absence Non Justifiée" nzLabel="Absence Non Justifiée"></nz-option>
+        <nz-option nzValue="Retard" nzLabel="Retard"></nz-option>
+      </nz-select>
+      <nz-select [(ngModel)]="selectedStatus" (ngModelChange)="applyFilter()" class="filter-select">
+        <nz-option nzValue="" nzLabel="Tous les statuts"></nz-option>
+        <nz-option nzValue="Validé" nzLabel="Validé"></nz-option>
+        <nz-option nzValue="Refusé" nzLabel="Refusé"></nz-option>
+        <nz-option nzValue="En attente" nzLabel="En attente"></nz-option>
+        <nz-option nzValue="Non justifiée" nzLabel="Non justifiée"></nz-option>
+      </nz-select>
+    </div>
+    <nz-table [nzData]="filteredData" nzBordered>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Motif</th>
+          <th>Début</th>
+          <th>Fin</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of filteredData">
+          <td>{{ item.type }}</td>
+          <td>{{ item.motif }}</td>
+          <td>{{ item.debut | date:'dd/MM/yyyy' }}</td>
+          <td>{{ item.fin | date:'dd/MM/yyyy' }}</td>
+          <td>
+            <ng-container *ngIf="item.statut">
+              <nz-badge
+                [nzStatus]="getStatusColor(item.statut)"
+                [nzText]="item.statut">
+              </nz-badge>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-card>
+  <ng-template #extraTemplate>
+    <button nz-button nzType="default" nzShape="round" (click)="exportExcel()">
+      <i nz-icon nzType="download"></i> Exporter
+    </button>
+  </ng-template>
+</div>

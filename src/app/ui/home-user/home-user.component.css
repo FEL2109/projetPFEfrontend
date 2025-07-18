@@ -47,10 +47,39 @@
   background: #ffffff;
   min-height: 280px;
   font-family: Helvetica, Arial, sans-serif;
+  margin-left: 300px;
+  max-width: 1200px;
+  margin-top: 56px; /* Ajoute cet espace pour laisser passer la topbar */
 }
 
 h1 {
   color: #6b2952;
   font-size: 24px;
   font-weight: bold;
+}
+
+/* Ajoute dans c:\Users\lamaa\projetPfeFront\src\app\ui\home-user\home-user.component.css */
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 300px; /* Commence après le menu violet */
+  height: 56px;
+  width: calc(100% - 300px); /* Va jusqu'à l'extrême droite de la page */
+  background: #fff;
+  box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 32px;
+  z-index: 100;
+}
+
+.topbar-right {
+  display: flex;
+  gap: 16px;
+}
+
+.topbar-btn {
+  font-size: 20px !important;
+  color: #22336b !important;
 }

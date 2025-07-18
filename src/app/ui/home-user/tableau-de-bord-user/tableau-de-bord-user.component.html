@@ -1,57 +1,194 @@
-<nz-layout>
-  <nz-content class="main-content">
-    <div class="dashboard-wrapper-pro">
-      <div class="dashboard-main-row">
+
+
+<nz-layout style="background: #f8f9ff; min-height: 100vh;">
+  <!-- Bouton et statistiques à droite -->
+  <div class="dashboard-float-right">
+    <button
+      nz-button
+      nzType="primary"
+      [routerLink]="['/home-user/soumettre-demande-conge']"
+      class="dashboard-action-btn">
+      <i nz-icon nzType="plus-circle" style="margin-right: 10px;"></i>
+      Déposer une nouvelle demande de congé
+    </button>
+    <div class="dashboard-stats-card">
+      <div class="dashboard-stats-title">
+        Répartition des types de congés (2025)
+      </div>
+      <div class="dashboard-piechart-legend-below">
+        <ngx-charts-pie-chart
+          [results]="congesPieData"
+          [view]="pieChartView"
+          [legend]="false"
+          [labels]="true"
+          [doughnut]="true"
+          [explodeSlices]="false"
+          [gradient]="false"
+          [colorScheme]="colorScheme"
+          style="display: block; margin: 0 auto; width: 100%; max-width: 600px; height: auto;">
+        </ngx-charts-pie-chart>
+        <div class="dashboard-pie-legend-pro">
+          <ng-container *ngFor="let item of congesPieData; let i = index">
+            <span class="legend-pro-item">
+              <span class="legend-pro-dot-square legend-pro-dot-force-square" [style.background-color]="colorScheme.domain[i % colorScheme.domain.length]" style="display:inline-block;width:18px;height:18px;min-width:18px;min-height:18px;max-width:18px;max-height:18px;border-radius:0 !important;border:2px solid #fff;box-shadow:0 1px 4px #22336b22;vertical-align:middle;margin-right:8px;"></span>
+              <span class="legend-pro-label">{{ item.name }}</span>
+            </span>
+          </ng-container>
+        </div>
+      </div>
+      <div class="dashboard-stats-footer">
+        <span>Taux de présence :</span>
+        <span class="dashboard-stats-taux">{{ tauxPresence }}%</span>
+      </div>
+    </div>
+  </div>
+  <nz-content class="main-content" style="background: transparent;">
+    <div class="dashboard-wrapper-pro" style="background: transparent; box-shadow: none; padding: 0;">
+      <div class="dashboard-main-row" style="background: transparent; box-shadow: none;">
         <!-- Colonne gauche : Bienvenue + Statistiques -->
         <div class="dashboard-col-gauche">
-          <div class="welcome-block-pro">
+          <div class="welcome-block-pro" style="background: transparent; box-shadow: none;">
             <span class="dashboard-title">Bienvenue dans votre espace personnel employé</span>
             <div class="dashboard-subtitle">Gérez vos congés et suivez vos indicateurs RH</div>
           </div>
-          <div class="dashboard-stats-row-pro">
-            <nz-card class="stat-card-pro green">
-              <i nz-icon nzType="wallet" nzTheme="outline" class="stat-icon"></i>
-              <div class="stat-value">{{ soldeConges }}</div>
-              <div class="stat-label">Solde de congé</div>
-            </nz-card>
-            <nz-card class="stat-card-pro yellow">
-              <i nz-icon nzType="calendar" nzTheme="outline" class="stat-icon"></i>
-              <div class="stat-value">{{ joursPris }}</div>
-              <div class="stat-label">Jours pris</div>
-            </nz-card>
-          </div>
-          <!-- Ajoute ceci juste après la section statistiques dans dashboard-col-gauche -->
-          <div class="notifications-section">
-            <div class="notifications-title">
-              <i nz-icon nzType="bell" nzTheme="twotone" class="notif-icon"></i>
-              Notifications
+          <!-- Compteur d'absences moderne -->
+          <div class="absence-counter-card dashboard-card" style="box-shadow: 0 2px 12px #22336b11;">
+            <div class="absence-counter-header">
+              <i nz-icon nzType="info-circle" nzTheme="outline"></i>
+              <span>Compteur d'absences</span>
+              <span class="absence-counter-badge">Jours</span>
             </div>
-            <ul class="notifications-list">
-              <li *ngFor="let notif of notifications">
-                <span class="notif-icon"><i nz-icon nzType="exclamation-circle" nzTheme="outline"></i></span>
-                <span class="notif-message">{{ notif.text }}</span>
-                <span class="notif-date">{{ notif.time | date:'short' }}</span>
-              </li>
-              <li *ngIf="!notifications?.length" class="notif-empty">Aucune notification</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Colonne droite : Fériés au-dessus, Agenda en dessous -->
-        <div class="dashboard-col-droite">
-          <div class="ferie-card-holiday-pro">
-            <div class="ferie-header">
-              <span class="ferie-arrow" (click)="prevHoliday()">&lt;</span>
-              <span class="ferie-title">Prochains jours fériés</span>
-              <span class="ferie-arrow" (click)="nextHoliday()">&gt;</span>
-            </div>
-            <div class="ferie-content" *ngIf="nextHolidays.length">
-              <div class="ferie-label">{{ nextHolidays[holidayIndex]?.label }}</div>
-              <div class="ferie-date">
-                {{ nextHolidays[holidayIndex]?.date | date:'EEEE d MMMM y' : 'fr' }}
+            <div class="absence-counter-row">
+              <div class="absence-counter-col">
+                <div class="absence-counter-value">{{ acquis }}</div>
+                <div class="absence-counter-label">ACQUIS</div>
+              </div>
+              <div class="absence-counter-col">
+                <div class="absence-counter-value">{{ soldeConges }}</div>
+                <div class="absence-counter-label">SOLDE</div>
+              </div>
+              <div class="absence-counter-col">
+                <div class="absence-counter-value">{{ joursPris }}</div>
+                <div class="absence-counter-label">PRIS</div>
               </div>
             </div>
           </div>
-          <nz-card class="calendar-card-pro" nzBordered="false">
+          <!-- Notifications supprimées -->
+
+
+          <!-- Statistiques graphiques utilisateur -->
+          <div class="dashboard-card user-stats-widget">
+            <div style="font-weight: 600; color: #22336b; margin-bottom: 10px; font-size: 1.08em; display: flex; align-items: center; gap: 8px;">
+              <i nz-icon nzType="bar-chart" style="color: #ffc300;"></i>
+              Statistiques graphiques
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+              <!-- Graphique 1 : Evolution des absences sur 12 mois -->
+              <div>
+                <div style="font-weight: 500; color: #888; margin-bottom: 4px;">Evolution des absences (12 derniers mois)</div>
+                <ngx-charts-line-chart
+                  [results]="absencesMoisData"
+                  [scheme]="colorScheme"
+                  [xAxis]="true"
+                  [yAxis]="true"
+                  [legend]="false"
+                  [showXAxisLabel]="true"
+                  [showYAxisLabel]="true"
+                  [xAxisLabel]="'Mois'"
+                  [yAxisLabel]="'Jours d\'absence'"
+                  [autoScale]="true"
+                  [curve]="'linear'"
+                  style="height: 180px; width: 100%;">
+                </ngx-charts-line-chart>
+              </div>
+              <!-- Graphique 2 : Répartition des absences par type (barres) -->
+              <div>
+                <div style="font-weight: 500; color: #888; margin-bottom: 4px;">Répartition des absences par type</div>
+                <ngx-charts-bar-vertical
+                  [results]="absencesTypeData"
+                  [scheme]="colorScheme"
+                  [xAxis]="true"
+                  [yAxis]="true"
+                  [legend]="false"
+                  [showXAxisLabel]="true"
+                  [showYAxisLabel]="true"
+                  [xAxisLabel]="'Type'"
+                  [yAxisLabel]="'Jours'"
+                  style="height: 180px; width: 100%;">
+                </ngx-charts-bar-vertical>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prochaines absences -->
+          <div class="dashboard-card next-absences-widget">
+            <div style="font-weight: 600; color: #22336b; margin-bottom: 10px; font-size: 1.08em; display: flex; align-items: center; gap: 8px;">
+              <i nz-icon nzType="clock-circle" style="color: #34c759;"></i>
+              Prochaines absences
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+              <li *ngFor="let absence of prochainesAbsences; let i = index" style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <span style="font-weight: 600; color: #22336b;">{{ absence.type }}</span>
+                <span style="color: #888;">du {{ absence.debut | date:'dd/MM/yyyy' }} au {{ absence.fin | date:'dd/MM/yyyy' }}</span>
+              </li>
+              <li *ngIf="!prochainesAbsences?.length" style="color: #bbb; font-style: italic;">Aucune absence à venir</li>
+            </ul>
+          </div>
+
+          <!-- Dernières demandes -->
+          <div class="dashboard-card last-requests-widget">
+            <div style="font-weight: 600; color: #22336b; margin-bottom: 10px; font-size: 1.08em; display: flex; align-items: center; gap: 8px;">
+              <i nz-icon nzType="file-done" style="color: #22336b;"></i>
+              Dernières demandes
+            </div>
+            <table style="width: 100%; font-size: 0.98em; border-collapse: collapse;">
+              <thead>
+                <tr style="color: #888; font-weight: 600;">
+                  <th style="text-align: left; padding-bottom: 4px;">Type</th>
+                  <th style="text-align: left; padding-bottom: 4px;">Date</th>
+                  <th style="text-align: left; padding-bottom: 4px;">Statut</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let demande of dernieresDemandes">
+                  <td>{{ demande.type }}</td>
+                  <td>{{ demande.date | date:'dd/MM/yyyy' }}</td>
+                  <td>
+                    <span [ngStyle]="{
+                      'color': demande.statut === 'Validée' ? '#34c759' : (demande.statut === 'Refusée' ? '#ff6384' : '#ffc300'),
+                      'font-weight': 'bold'
+                    }">{{ demande.statut }}</span>
+                  </td>
+                </tr>
+                <tr *ngIf="!dernieresDemandes?.length">
+                  <td colspan="3" style="color: #bbb; font-style: italic; text-align: center;">Aucune demande récente</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="text-align: right; margin-top: 8px;">
+              <a [routerLink]="['/home-user/historique-personnel']" style="color: #22336b; font-weight: 600; text-decoration: underline; font-size: 0.97em;">Voir tout l'historique</a>
+            </div>
+          </div>
+        </div>
+        <!-- Colonne droite : Fériés au-dessus, Agenda en dessous -->
+        <div class="dashboard-col-droite" style="display: flex; flex-direction: column; gap: 24px; background: transparent; box-shadow: none;">
+          <div style="display: flex; align-items: flex-start; gap: 16px; width: 100%; background: transparent; box-shadow: none;">
+            <!-- Bloc Prochains jours fériés -->
+            <div class="ferie-card-holiday-pro dashboard-card" style="box-shadow: 0 2px 12px #22336b11;">
+              <div class="ferie-header">
+                <span class="ferie-arrow" (click)="prevHoliday()">&lt;</span>
+                <span class="ferie-title">Prochains jours fériés</span>
+                <span class="ferie-arrow" (click)="nextHoliday()">&gt;</span>
+              </div>
+              <div class="ferie-content" *ngIf="nextHolidays.length">
+                <div class="ferie-label">{{ nextHolidays[holidayIndex]?.label | icuSafe }}</div>
+                <div class="ferie-date">
+                  {{ nextHolidays[holidayIndex]?.date | date:'EEEE d MMMM y' : 'fr' }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <nz-card class="calendar-card-pro dashboard-card" nzBordered="false" style="box-shadow: 0 2px 12px #22336b11;">
             <div class="calendar-title">Mon Agenda</div>
             <nz-calendar
               [nzFullscreen]="false"
@@ -64,6 +201,316 @@
     </div>
   </nz-content>
 </nz-layout>
+
+<!-- Ajout de styles personnalisés pour améliorer le design -->
+<style>
+/* Placer la légende SOUS le graphique, centrée et horizontale */
+.dashboard-piechart-legend-below {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.dashboard-piechart-legend-native-below {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+.dashboard-piechart-legend-native-below .legend-labels {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.dashboard-piechart-legend-native-below .legend-label {
+  margin-bottom: 0 !important;
+  font-size: 1em;
+  color: #22336b;
+  font-weight: 500;
+  background: transparent;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.dashboard-float-right {
+  position: fixed;
+  top: 90px;
+  right: 48px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 420px;
+  gap: 28px;
+}
+.dashboard-action-btn {
+  width: 100%;
+  font-size: 1.18em;
+  font-weight: 700;
+  padding: 18px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px #22336b22;
+  letter-spacing: 0.5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #22336b 60%, #3a4a8c 100%);
+  color: #fff;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.dashboard-action-btn:hover {
+  background: linear-gradient(90deg, #22336b 80%, #ffc300 100%);
+  box-shadow: 0 6px 24px #22336b33;
+}
+.dashboard-stats-card {
+  margin-top: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #22336b11;
+  padding: 22px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard-stats-title {
+  font-weight: 700;
+  color: #22336b;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 1.1em;
+}
+.dashboard-stats-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 1em;
+}
+.dashboard-stats-taux {
+  color: #34c759;
+  font-weight: bold;
+  margin-left: 6px;
+}
+.dashboard-main-row {
+  display: flex;
+  flex-direction: row;
+  gap: 36px;
+  position: relative;
+}
+.dashboard-col-gauche {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.dashboard-col-droite {
+  flex: 1;
+}
+.dashboard-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #22336b11;
+  padding: 28px 24px 22px 24px;
+  margin-bottom: 18px;
+}
+.absence-counter-card {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.absence-counter-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.08em;
+  margin-bottom: 18px;
+}
+.absence-counter-badge {
+  background: #ffc300;
+  color: #22336b;
+  border-radius: 8px;
+  padding: 2px 10px;
+  font-size: 0.95em;
+  margin-left: 10px;
+}
+.absence-counter-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+.absence-counter-col {
+  flex: 1;
+  text-align: center;
+}
+.absence-counter-value {
+  font-size: 2.1em;
+  font-weight: 700;
+  color: #22336b;
+}
+.absence-counter-label {
+  font-size: 1em;
+  color: #888;
+  margin-top: 2px;
+}
+.notifications-section {
+  margin-top: 0;
+}
+.notifications-title {
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.08em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.notifications-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1em;
+  transition: background 0.2s;
+}
+.notifications-list li:last-child {
+  border-bottom: none;
+}
+.notif-icon {
+  color: #ffc300;
+  font-size: 1.2em;
+}
+.notif-message {
+  flex: 1;
+  color: #22336b;
+}
+.notif-date {
+  color: #888;
+  font-size: 0.95em;
+}
+.notif-empty {
+  text-align: center;
+  color: #bbb;
+  font-style: italic;
+  padding: 12px 0;
+}
+.ferie-card-holiday-pro {
+  min-width: 260px;
+  max-width: 340px;
+  margin: 0 auto;
+  background: #f8f9ff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #22336b11;
+  padding: 18px 18px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ferie-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.05em;
+  margin-bottom: 10px;
+}
+.ferie-arrow {
+  cursor: pointer;
+  color: #22336b;
+  font-size: 1.3em;
+  padding: 0 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.ferie-arrow:hover {
+  background: #e6eaff;
+}
+.ferie-label {
+  font-weight: 700;
+  color: #22336b;
+  font-size: 1.1em;
+  margin-bottom: 2px;
+}
+.ferie-date {
+  color: #888;
+  font-size: 1em;
+}
+.calendar-card-pro {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #22336b11;
+  padding: 18px 12px 12px 12px;
+}
+.calendar-title {
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.08em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.dashboard-title {
+  font-size: 1.5em;
+  font-weight: 800;
+  color: #22336b;
+  margin-bottom: 6px;
+  display: block;
+}
+.dashboard-subtitle {
+  font-size: 1.08em;
+  color: #888;
+/* Pastille carrée stricte pour la légende */
+.legend-pro-dot-square,
+.legend-pro-dot-force-square {
+  border-radius: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  display: inline-block !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 1px 4px #22336b22 !important;
+  background-clip: padding-box !important;
+  vertical-align: middle !important;
+  margin-right: 8px;
+}
+  margin-bottom: 18px;
+}
+@media (max-width: 1200px) {
+  .dashboard-float-right {
+    position: static;
+    width: 100%;
+    margin-bottom: 24px;
+    align-items: stretch;
+  }
+  .dashboard-main-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+@media (max-width: 900px) {
+  .dashboard-card, .dashboard-stats-card, .calendar-card-pro, .ferie-card-holiday-pro {
+    padding: 14px 8px 10px 8px;
+    border-radius: 10px;
+  }
+  .dashboard-float-right {
+    right: 0;
+    padding: 0 4vw;
+  }
+}
+</style>
 
 <script>
   notifications = [

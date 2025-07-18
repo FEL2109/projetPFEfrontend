@@ -1,15 +1,52 @@
 import { Component, OnInit } from '@angular/core';
 import { ScaleType } from '@swimlane/ngx-charts';
 
+interface ChartSerie { name: string; value: number; }
+interface ChartLine { name: string; series: ChartSerie[]; }
+
 @Component({
   selector: 'app-tableau-de-bord-user',
   templateUrl: './tableau-de-bord-user.component.html',
   styleUrls: ['./tableau-de-bord-user.component.css']
 })
 export class TableauDeBordUserComponent implements OnInit {
-  // Propriétés pour le template
-  soldeConges = 10;
-  joursPris = 12;
+  pieChartView: [number, number] = [700, 420];
+  // Pour widgets tableau de bord
+  joursAbsenceMois: number = 0;
+  prochainesAbsences: { type: string, debut: Date, fin: Date }[] = [];
+  dernieresDemandes: { type: string, date: Date, statut: string }[] = [];
+  // Données pour les graphiques statistiques
+  absencesMoisData: ChartLine[] = [
+    {
+      name: 'Absences',
+      series: [
+        { name: 'Jan', value: 1 },
+        { name: 'Fév', value: 0 },
+        { name: 'Mar', value: 2 },
+        { name: 'Avr', value: 1 },
+        { name: 'Mai', value: 3 },
+        { name: 'Juin', value: 2 },
+        { name: 'Juil', value: 1 },
+        { name: 'Août', value: 0 },
+        { name: 'Sep', value: 2 },
+        { name: 'Oct', value: 1 },
+        { name: 'Nov', value: 0 },
+        { name: 'Déc', value: 1 }
+      ]
+    }
+  ];
+
+  absencesTypeData: ChartSerie[] = [
+    { name: 'Absence justifiée', value: 3 },
+    { name: 'Absence non justifiée', value: 1 },
+    { name: 'Absence pour formation', value: 2 },
+    { name: 'Arrêt maladie', value: 2 },
+    { name: 'Renouvellement arrêt maladie', value: 1 }
+  ];
+  acquis = 25; // Nombre de jours acquis
+  soldeConges = 10; // Solde de congés restants
+  joursPris = 12; // Jours déjà pris
+
   notifications = [
     { text: "Votre demande de congé a été approuvée.", time: new Date() },
     { text: "Nouveau jour férié ajouté au calendrier.", time: new Date() }
@@ -66,14 +103,42 @@ export class TableauDeBordUserComponent implements OnInit {
     { name: 'Ven', value: 6 }
   ];
 
+
+  // Palette 8 couleurs harmonisées, accessibles et distinctes (ordre = congesPieData)
   colorScheme = {
-    domain: ['#22336b', '#ffc300', '#34c759'],
+    domain: [
+      '#a23a4a', // Congé payé (bordeaux)
+      '#a2c3e6', // Congé sans solde (bleu très clair)
+      '#c7e6f7', // Congé maternité/paternité (bleu ciel très pâle)
+      '#7b6d8d', // Absence justifiée (mauve/gris)
+      '#e6b7b7', // Absence non justifiée (rose pâle)
+      '#b7dbe6', // Absence pour formation (bleu glacier)
+      '#a2b7e6', // Arrêt maladie (bleu lavande)
+      '#e6a2a2'  // Renouvellement arrêt maladie (rose brique clair)
+    ],
     name: 'custom',
     selectable: true,
-    group: ScaleType.Ordinal // Ajoute cette ligne
+    group: ScaleType.Ordinal
   };
 
+  congesPieData = [
+    { name: 'Congé payé', value: 8 },
+    { name: 'Congé sans solde', value: 2 },
+    { name: 'Congé maternité/paternité', value: 1 },
+    { name: 'Absence justifiée', value: 3 },
+    { name: 'Absence non justifiée', value: 1 },
+    { name: 'Absence pour formation', value: 2 },
+    { name: 'Arrêt maladie', value: 2 },
+    { name: 'Renouvellement arrêt maladie', value: 1 }
+  ];
+
+  tauxPresence = 94; // Exemple, à adapter selon tes données
+
   ngOnInit() {
+    // Responsive chart view
+    this.updatePieChartView();
+    window.addEventListener('resize', this.updatePieChartView.bind(this));
+
     // Force la conversion en Date pour chaque congé
     this.allCongesMaroc = this.allCongesMaroc.map(c => ({
       ...c,
@@ -81,6 +146,50 @@ export class TableauDeBordUserComponent implements OnInit {
     }));
     this.congesAVenir = this.getNextConges();
     this.nextHolidays = this.getNextHolidays();
+
+    // --- Widgets personnalisés ---
+    this.joursAbsenceMois = this.calculerJoursAbsenceMois();
+    this.prochainesAbsences = this.getProchainesAbsences();
+    this.dernieresDemandes = this.getDernieresDemandes();
+  }
+
+  updatePieChartView() {
+    // Responsive: largeur max 600px, min 320px, hauteur proportionnelle
+    const container = document.querySelector('.dashboard-stats-card');
+    let width = 700;
+    if (container) {
+      width = Math.max(500, Math.min(800, container.clientWidth - 8));
+    } else {
+      width = Math.max(500, Math.min(800, window.innerWidth - 32));
+    }
+    const height = Math.round(width * 0.6);
+    this.pieChartView = [width, height];
+  }
+
+  // Calcule le nombre de jours d'absence sur le mois courant (exemple fictif)
+  calculerJoursAbsenceMois(): number {
+    // À remplacer par la vraie logique métier
+    // Ici, on simule 2 jours d'absence ce mois
+    return 2;
+  }
+
+  // Retourne les 2 prochaines absences (exemple fictif)
+  getProchainesAbsences() {
+    // À remplacer par la vraie logique (API ou service)
+    return [
+      { type: 'Congé payé', debut: new Date(2025, 6, 15), fin: new Date(2025, 6, 20) },
+      { type: 'Maladie', debut: new Date(2025, 7, 2), fin: new Date(2025, 7, 3) }
+    ];
+  }
+
+  // Retourne les 3 dernières demandes (exemple fictif)
+  getDernieresDemandes() {
+    // À remplacer par la vraie logique (API ou service)
+    return [
+      { type: 'Congé payé', date: new Date(2025, 5, 10), statut: 'Validée' },
+      { type: 'Sans solde', date: new Date(2025, 4, 22), statut: 'En attente' },
+      { type: 'Maladie', date: new Date(2025, 3, 5), statut: 'Refusée' }
+    ];
   }
 
   // Renvoie les deux prochains congés à venir
@@ -94,10 +203,13 @@ export class TableauDeBordUserComponent implements OnInit {
   // Méthode pour obtenir les 3 prochains jours fériés/fêtes religieuses
   getNextHolidays(count = 3) {
     const today = new Date();
+    // Nettoyage des labels pour éviter les accolades non fermées
+    const clean = (str: string) => str ? str.replace(/[{}]/g, '') : '';
     return this.allHolidays2025
       .filter(j => j.date >= today)
       .sort((a, b) => a.date.getTime() - b.date.getTime())
-      .slice(0, count);
+      .slice(0, count)
+      .map(j => ({ ...j, label: clean(j.label) }));
   }
 
   // Pour le point rouge dans le calendrier

@@ -1,0 +1,46 @@
+<div class="solde-conges-container">
+  <nz-card nzTitle="Mon solde de congés" [nzBordered]="false">
+    <div class="solde-summary">
+      <div class="solde-item">
+        <i nz-icon nzType="wallet" nzTheme="outline" class="solde-icon"></i>
+        <div>
+          <div class="solde-label">Solde annuel</div>
+          <div class="solde-value">{{ soldeAnnuel }} jours</div>
+        </div>
+      </div>
+      <div class="solde-item">
+        <i nz-icon nzType="check-circle" nzTheme="twotone" class="solde-icon" nzTwoToneColor="#52c41a"></i>
+        <div>
+          <div class="solde-label">Congés pris</div>
+          <div class="solde-value">{{ congesPris }} jours</div>
+        </div>
+      </div>
+      <div class="solde-item">
+        <i nz-icon nzType="clock-circle" nzTheme="twotone" class="solde-icon" nzTwoToneColor="#faad14"></i>
+        <div>
+          <div class="solde-label">Congés restants</div>
+          <div class="solde-value solde-restant">{{ soldeRestant }} jours</div>
+        </div>
+      </div>
+    </div>
+    <nz-divider>Historique</nz-divider>
+    <nz-table [nzData]="historiqueConges" nzSize="small" [nzBordered]="true">
+      <thead>
+        <tr>
+          <th>Année</th>
+          <th>Solde initial</th>
+          <th>Pris</th>
+          <th>Restant</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ligne of historiqueConges">
+          <td>{{ ligne.annee }}</td>
+          <td>{{ ligne.initial }}</td>
+          <td>{{ ligne.pris }}</td>
+          <td>{{ ligne.restant }}</td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-card>
+</div>

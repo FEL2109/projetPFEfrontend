@@ -1,0 +1,76 @@
+:host ::ng-deep .ant-card-head-title {
+  font-weight: bold;
+  color: #22336b;
+  font-size: 1.5em;
+}
+
+.solde-conges-container {
+  width: calc(100vw - 20px);
+  max-width: 1600px;
+  margin: 70px 0 0 20px;
+  padding: 0 32px;
+  min-height: 80vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.solde-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 16px;
+}
+
+.solde-item {
+  display: flex;
+  align-items: center;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 16px;
+  flex: 1 1 0;
+  min-width: 0;
+  box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.solde-icon {
+  font-size: 2.2em;
+  margin-right: 14px;
+}
+
+.solde-label {
+  font-size: 1.15em;
+  color: #888;
+}
+
+.solde-value {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #222;
+}
+
+.solde-restant {
+  color: #52c41a;
+}
+
+/* Agrandir le mot "Historique" */
+.nz-divider-inner-text, .ant-divider-inner-text {
+  font-size: 2em !important;
+  font-weight: bold !important;
+  color: #7a3a6e !important; /* couleur assortie au menu */
+  letter-spacing: 1px !important;
+  margin-bottom: 18px !important;
+  text-transform: uppercase;
+}
+
+/* Agrandir le tableau */
+:host ::ng-deep .ant-table {
+  font-size: 1.18em !important;
+}
+:host ::ng-deep .ant-table-thead > tr > th {
+  font-size: 1.18em !important;
+}
+:host ::ng-deep .ant-table-tbody > tr > td {
+  font-size: 1.18em !important;
+}

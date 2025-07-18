@@ -8,24 +8,27 @@
 /* Tableau élargi et moderne */
 .table-wrapper {
   width: 100%;
-  max-width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   background: #fff;
   border-radius: 18px;
   box-shadow: 0 4px 18px 0 rgba(44,62,80,0.09);
   padding: 32px 24px 62px 24px;
   position: relative;
   min-width: 900px;
+  padding-bottom: 62px; /* laisse de la place pour la pagination */
 }
 
 /* Pagination custom en bas à droite */
 .custom-pagination {
-  position: absolute;
-  right: 32px;
-  bottom: 18px;
+  width: 100%;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 8px;
-  justify-content: flex-end;
+  position: static; /* enlève absolute si tu veux qu'elle suive la largeur du tableau */
+  margin-top: 12px;
+  padding-right: 0;
 }
 .page-btn {
   background: #fff;
@@ -128,11 +131,20 @@ nz-table .ant-table-tbody > tr > td {
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
-  .table-wrapper { min-width: 0; }
-  .modern-search-bar { width: 98vw; min-width: 180px; }
-}
 @media (max-width: 800px) {
   .modern-search-bar { width: 100%; }
   .table-wrapper { padding: 10px 2px 60px 2px; }
+}
+
+/* Pagination alignée avec le tableau */
+:host ::ng-deep .ant-table-pagination {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0;
 }
