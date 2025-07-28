@@ -25,23 +25,6 @@
   </div>
   <div class="holidays-tables">
     <div class="holidays-section">
-      <div class="holidays-title">FÊTES RELIGIEUSES</div>
-      <nz-table #religiousTable [nzData]="religiousHolidays" [nzBordered]="false">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Fête</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let h of religiousHolidays">
-            <td>{{ h.date | date:'d MMMM':'':'fr-FR' }}</td>
-            <td>{{ h.name }}</td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
-    <div class="holidays-section">
       <div class="holidays-title">FÊTES NATIONALES</div>
       <nz-table #nationalTable [nzData]="nationalHolidays" [nzBordered]="false">
         <thead>
@@ -52,6 +35,23 @@
         </thead>
         <tbody>
           <tr *ngFor="let h of nationalHolidays">
+            <td>{{ h.date | date:'d MMMM':'':'fr-FR' }}</td>
+            <td>{{ h.name }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    <div class="holidays-section">
+      <div class="holidays-title">FÊTES RELIGIEUSES</div>
+      <nz-table #religiousTable [nzData]="religiousHolidays" [nzBordered]="false">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Fête</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let h of religiousHolidays">
             <td>{{ h.date | date:'d MMMM':'':'fr-FR' }}</td>
             <td>{{ h.name }}</td>
           </tr>

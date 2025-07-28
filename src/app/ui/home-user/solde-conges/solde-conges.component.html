@@ -1,46 +1,47 @@
-<div class="solde-conges-container">
-  <nz-card nzTitle="Mon solde de congés" [nzBordered]="false">
-    <div class="solde-summary">
-      <div class="solde-item">
-        <i nz-icon nzType="wallet" nzTheme="outline" class="solde-icon"></i>
-        <div>
-          <div class="solde-label">Solde annuel</div>
-          <div class="solde-value">{{ soldeAnnuel }} jours</div>
-        </div>
-      </div>
-      <div class="solde-item">
-        <i nz-icon nzType="check-circle" nzTheme="twotone" class="solde-icon" nzTwoToneColor="#52c41a"></i>
-        <div>
-          <div class="solde-label">Congés pris</div>
-          <div class="solde-value">{{ congesPris }} jours</div>
-        </div>
-      </div>
-      <div class="solde-item">
-        <i nz-icon nzType="clock-circle" nzTheme="twotone" class="solde-icon" nzTwoToneColor="#faad14"></i>
-        <div>
-          <div class="solde-label">Congés restants</div>
-          <div class="solde-value solde-restant">{{ soldeRestant }} jours</div>
-        </div>
-      </div>
+<div class="solde-conges-container" style="max-width: 100vw; margin: 0; padding: 32px 0;">
+  <div style="width: 100%; background: #fff; border-radius: 18px; box-shadow: none; margin-bottom: 0; padding: 0 0 18px 0;">
+    <div style="font-size: 2.3rem; color: #22336b; font-weight: 700; margin-bottom: 28px; text-align: center;">Mon solde de congés</div>
+    <div style="display: flex; gap: 32px; margin-bottom: 28px; flex-wrap: nowrap; width: 100%; justify-content: center; overflow-x: auto;">
+      <mat-chip color="primary" selected style="font-size: 1.3rem; padding: 22px 80px; min-width: 380px; background: #eaf3fa; color: #22336b; font-weight: 700; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+        <span style="font-weight: 700; font-size: 2.3rem;">18</span> jours/an
+      </mat-chip>
+      <mat-chip color="accent" selected style="font-size: 1.3rem; padding: 22px 80px; min-width: 380px; background: #f3faf4; color: #34c759; font-weight: 700; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+        <span style="font-weight: 700; font-size: 2.3rem;">{{ congesPris }}</span> pris
+      </mat-chip>
+      <mat-chip color="warn" selected style="font-size: 1.3rem; padding: 22px 80px; min-width: 380px; background: #fff8f6; color: #22336b; font-weight: 700; font-size: 2rem; display: flex; align-items: center; justify-content: center;">
+        <span style="font-weight: 700; font-size: 2.3rem;">{{ soldeRestant }}</span> restants
+      </mat-chip>
     </div>
-    <nz-divider>Historique</nz-divider>
-    <nz-table [nzData]="historiqueConges" nzSize="small" [nzBordered]="true">
-      <thead>
-        <tr>
-          <th>Année</th>
-          <th>Solde initial</th>
-          <th>Pris</th>
-          <th>Restant</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let ligne of historiqueConges">
-          <td>{{ ligne.annee }}</td>
-          <td>{{ ligne.initial }}</td>
-          <td>{{ ligne.pris }}</td>
-          <td>{{ ligne.restant }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-  </nz-card>
+    <div style="background: #f8fafc; margin-bottom: 28px; box-shadow: none; border-radius: 12px; padding: 18px 32px; font-size: 1.25rem; color: #22336b; max-width: 1000px; margin-left: auto; margin-right: auto; text-align: center;">
+      <mat-icon style="color: #ffc300; vertical-align: middle; margin-right: 8px;">info</mat-icon>
+      Vous avez droit à <b>18 jours de congé payé par an</b>. Les congés non pris sont reportables sur l’année suivante uniquement. <b>Au-delà de 2 ans, ils sont perdus.</b>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: flex-start; width: 100%;">
+      <table mat-table [dataSource]="historiqueConges" class="mat-elevation-z1 solde-table-custom" style="min-width: 900px; max-width: 1100px; width: 100%; background: #f9f9fc; border-radius: 16px; margin: 0 auto; box-shadow: 0 4px 24px #e0e0e0; border: 1.5px solid #d1d5db; font-family: 'Segoe UI', 'Arial', sans-serif; font-size: 1.15em; color: #22336b; border-collapse: separate; border-spacing: 0;">
+        <ng-container matColumnDef="annee">
+          <th mat-header-cell *matHeaderCellDef style="border-right: 1px solid #d1d5db;">Année</th>
+          <td mat-cell *matCellDef="let ligne" style="border-right: 1px solid #e0e0e0;">{{ ligne.annee }}</td>
+        </ng-container>
+        <ng-container matColumnDef="initial">
+          <th mat-header-cell *matHeaderCellDef style="border-right: 1px solid #d1d5db;">Solde initial</th>
+          <td mat-cell *matCellDef="let ligne" style="border-right: 1px solid #e0e0e0;">{{ ligne.initial }}</td>
+        </ng-container>
+        <ng-container matColumnDef="pris">
+          <th mat-header-cell *matHeaderCellDef style="border-right: 1px solid #d1d5db;">Pris</th>
+          <td mat-cell *matCellDef="let ligne" style="border-right: 1px solid #e0e0e0;">{{ ligne.pris }}</td>
+        </ng-container>
+        <ng-container matColumnDef="restant">
+          <th mat-header-cell *matHeaderCellDef style="border-right: 1px solid #d1d5db;">Restant</th>
+          <td mat-cell *matCellDef="let ligne" style="border-right: 1px solid #e0e0e0;">{{ ligne.restant }}</td>
+        </ng-container>
+        <ng-container matColumnDef="perime">
+          <th mat-header-cell *matHeaderCellDef>Périmé</th>
+          <td mat-cell *matCellDef="let ligne">{{ ligne.perime ? 'Oui' : 'Non' }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="['annee', 'initial', 'pris', 'restant', 'perime']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['annee', 'initial', 'pris', 'restant', 'perime'];"></tr>
+      </table>
+    </div>
+  </div>
 </div>

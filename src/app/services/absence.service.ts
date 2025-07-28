@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class DemandeCongeService {
-  private apiUrl = 'http://localhost:8080/api/demandes';
+export class AbsenceService {
+  private apiUrl = 'http://localhost:8080/api/absences';
 
   constructor(private http: HttpClient) {}
 
@@ -18,22 +18,15 @@ export class DemandeCongeService {
     });
   }
 
-  getAllDemandes(): Observable<any[]> {
+  getAllAbsences(): Observable<any[]> {
     const headers = this.getAuthHeaders();
     return this.http.get<any[]>(this.apiUrl, { headers });
   }
-  accepterDemande(id: number): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.put<any>(`${this.apiUrl}/${id}/accepter`, {}, { headers });
-  }
 
-  creerDemande(demande: any): Observable<any> {
+  creerAbsence(demande: any): Observable<any> {
     const headers = this.getAuthHeaders();
     return this.http.post<any>(this.apiUrl, demande, { headers });
   }
 
-  refuserDemande(id: number): Observable<any> {
-    const headers = this.getAuthHeaders();
-    return this.http.put<any>(`${this.apiUrl}/${id}/refuser`, {}, { headers });
-  }
+ 
 }

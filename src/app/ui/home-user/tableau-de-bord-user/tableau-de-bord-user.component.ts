@@ -1,4 +1,7 @@
+
+
 import { Component, OnInit } from '@angular/core';
+import { DemandeCongeService } from '../../../services/demamdeConge.service';
 import { ScaleType } from '@swimlane/ngx-charts';
 
 interface ChartSerie { name: string; value: number; }
@@ -10,6 +13,14 @@ interface ChartLine { name: string; series: ChartSerie[]; }
   styleUrls: ['./tableau-de-bord-user.component.css']
 })
 export class TableauDeBordUserComponent implements OnInit {
+  demandesConges: any[] = [];
+  // Statut dynamique pour la demande de congé (exemple, à adapter selon vos données réelles)
+  demandeCongeStatut: 'En attente' | 'Validée' | 'Refusée' = 'En attente';
+
+  get demandesEnAttente(): number {
+    // On compte les demandes dont le statut est 'En attente' dans les dernières demandes
+    return (this.dernieresDemandes || []).filter((d: any) => d.statut === 'En attente').length;
+  }
   pieChartView: [number, number] = [700, 420];
   // Pour widgets tableau de bord
   joursAbsenceMois: number = 0;
@@ -48,9 +59,14 @@ export class TableauDeBordUserComponent implements OnInit {
   joursPris = 12; // Jours déjà pris
 
   notifications = [
-    { text: "Votre demande de congé a été approuvée.", time: new Date() },
-    { text: "Nouveau jour férié ajouté au calendrier.", time: new Date() }
+    { text: "Votre demande de congé a été approuvée.", time: new Date(), type: 'success' },
+    { text: "Nouveau jour férié ajouté au calendrier.", time: new Date(), type: 'info' },
+    // Ajoutez d'autres notifications avec type: 'success' | 'warning' | 'error' | 'info'
   ];
+  // Prévision de solde de congés à la fin de l'année (exemple simple)
+  soldePrevu: number = 0;
+  soldePrevuPercent: number = 0;
+  tauxAbsEquipe: number = 5.1; // Exemple, à remplacer par la vraie donnée
   date = new Date();
   isModalVisible = false;
   today = new Date();
@@ -134,6 +150,10 @@ export class TableauDeBordUserComponent implements OnInit {
 
   tauxPresence = 94; // Exemple, à adapter selon tes données
 
+  demandesStats = { total: 0, validees: 0, enAttente: 0, refusees: 0 };
+
+  constructor(private demandeCongeService: DemandeCongeService) {}
+
   ngOnInit() {
     // Responsive chart view
     this.updatePieChartView();
@@ -150,7 +170,51 @@ export class TableauDeBordUserComponent implements OnInit {
     // --- Widgets personnalisés ---
     this.joursAbsenceMois = this.calculerJoursAbsenceMois();
     this.prochainesAbsences = this.getProchainesAbsences();
-    this.dernieresDemandes = this.getDernieresDemandes();
+
+    // Charger toutes les demandes de congés via le service (comme MesDemandesCongesComponent)
+    this.loadDemandesConges();
+
+    // --- Prévision de solde de congés ---
+    this.calculerSoldePrevu();
+  }
+  // Calcule la prévision de solde de congés à la fin de l'année
+  calculerSoldePrevu() {
+    // Exemple simple : solde actuel - (moyenne jours pris/mois * nb mois restants)
+    const moisActuel = new Date().getMonth() + 1;
+    const moisRestants = 12 - moisActuel;
+    const moyenneJoursPrisParMois = this.joursPris / (moisActuel || 1);
+    this.soldePrevu = Math.max(0, Math.round(this.soldeConges - moyenneJoursPrisParMois * moisRestants));
+    this.soldePrevuPercent = Math.round((this.soldePrevu / (this.acquis || 1)) * 100);
+  }
+
+  loadDemandesConges() {
+    this.demandeCongeService.getAllDemandes().subscribe({
+      next: (data) => {
+        this.demandesConges = data;
+        this.setDemandesStats();
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des demandes de congés:', error);
+        // fallback test data (2 approuvée, 2 refusée, 1 en attente)
+        this.demandesConges = [
+          { type: 'Congé payé', date: new Date(2025, 5, 10), statut: 'Approuvée' },
+          { type: 'Sans solde', date: new Date(2025, 4, 22), statut: 'En attente' },
+          { type: 'Maladie', date: new Date(2025, 3, 5), statut: 'Refusée' },
+          { type: 'Congé payé', date: new Date(2025, 2, 12), statut: 'Approuvée' },
+          { type: 'Sans solde', date: new Date(2025, 1, 18), statut: 'Refusée' }
+        ];
+        this.setDemandesStats();
+      }
+    });
+  }
+
+  setDemandesStats() {
+    const demandes = this.demandesConges || [];
+    // Harmonisation avec la logique de MesDemandesCongesComponent
+    this.demandesStats.total = demandes.length;
+    this.demandesStats.validees = demandes.filter(d => (d.statut || '').toLowerCase().replace(/é/g, 'e').includes('approuve') || (d.statut || '').toLowerCase().replace(/é/g, 'e').includes('valide')).length;
+    this.demandesStats.enAttente = demandes.filter(d => (d.statut || '').toLowerCase().includes('attente')).length;
+    this.demandesStats.refusees = demandes.filter(d => (d.statut || '').toLowerCase().replace(/é/g, 'e').includes('refuse')).length;
   }
 
   updatePieChartView() {

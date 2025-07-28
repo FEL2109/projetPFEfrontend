@@ -1,22 +1,22 @@
 .form-container {
   padding: 40px;
   font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: #fafafa; /* Material Grey 50 */
+  border: 1.5px solid #e0e0e0; /* Material Grey 300 */
   border-radius: 8px;
   width: 70%; /* Ajuste la largeur du formulaire */
   height: auto; /* Ajuste automatiquement la hauteur */
   margin: 0; /* Supprime les marges automatiques */
-  position: absolute; /* Permet un positionnement précis */
-  top: 50%; /* Place le formulaire au milieu verticalement */
-  left: 25%; /* Décale le formulaire vers la droite */
-  transform: translate(0, -50%); /* Centre verticalement en ajustant la position */
+  position: fixed; /* Permet un positionnement précis */
+  top: 50%; /* Centre verticalement */
+  left: 50%; /* Centre horizontalement */
+  transform: translate(-50%, -50%); /* Centre parfaitement */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 30px; /* Ajoute ou augmente cette ligne pour descendre le formulaire */
+  margin-top: 0; /* Plus besoin de marge supplémentaire */
 }
 
 .form-header {
-  background-color: #661a4c;
+  background: linear-gradient(90deg, #43a047 0%, #00bcd4 100%);
   padding: 20px; /* Ajuste l'espace interne */
   border-radius: 8px; /* Ajoute des coins arrondis */
   text-align: center;
@@ -24,7 +24,7 @@
   font-size: 1.5em; /* Ajuste la taille du texte */
   font-weight: bold; /* Texte en gras */
   width: 100%; /* S'assure que le rectangle occupe toute la largeur */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un effet de profondeur */
+  box-shadow: 0 6px 24px 0 rgba(0, 188, 212, 0.10), 0 1.5px 4px 0 rgba(67, 160, 71, 0.10); /* Ajoute une ombre pour un effet de profondeur */
 }
 
 .form-header h2 {
@@ -34,9 +34,10 @@
 }
 
 h2 {
-  color: #661a4c;
+  color: #00bcd4;
   text-align: center;
   margin-bottom: 30px; /* Ajoute de l'espace entre le titre et le formulaire */
+  letter-spacing: 1px;
 }
 
 .form-group {
@@ -48,10 +49,16 @@ h2 {
 }
 
 label {
+  color: #212121; /* Material Grey 900 for strong black */
+  font-size: 1.08em;
   font-weight: bold;
-  color: #333;
-  display: block;
-  margin-bottom: 10px;
+/* Pour les labels principaux du formulaire (Type de congé, Jours, Date de début, etc.) */
+.form-group > label {
+  color: #212121;
+  font-weight: bold;
+  font-size: 1.12em;
+  letter-spacing: 0.01em;
+}
 }
 
 .note {
@@ -91,7 +98,7 @@ label {
   align-items: center;
   gap: 5px;
   cursor: pointer;
-  color: #661a4c;
+  color: #00bcd4;
   font-weight: bold;
 }
 
@@ -109,8 +116,8 @@ label {
 
 button[nz-button][nzType="primary"].btn-submit,
 button[nz-button][nzType="default"].btn-cancel {
-  background-color: #661a4c;
-  border-color: #661a4c;
+  background-color: #43a047;
+  border-color: #43a047;
   padding: 15px 40px; /* Agrandit les boutons */
   font-size: 1.2em; /* Augmente la taille du texte */
   font-weight: bold; /* Texte en gras */
@@ -120,11 +127,12 @@ button[nz-button][nzType="default"].btn-cancel {
   display: flex;
   justify-content: center; /* Centre le texte horizontalement */
   align-items: center; /* Centre le texte verticalement */
+  box-shadow: 0 2px 8px 0 rgba(67, 160, 71, 0.10);
 }
 
 button[nz-button][nzType="primary"].btn-submit:hover {
-  background-color: #4d1138;
-  border-color: #4d1138;
+  background-color: #00bcd4;
+  border-color: #00bcd4;
 }
 
 button[nz-button][nzType="default"].btn-cancel {
@@ -143,8 +151,8 @@ button[nz-button][nzType="default"].btn-cancel:hover {
 .nz-date-picker-focused,
 textarea:focus,
 button:focus {
-  border-color: #661a4c !important;
-  box-shadow: 0 0 0 2px rgba(102, 26, 76, 0.2) !important;
+  border-color: #00bcd4 !important;
+  box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.18) !important;
 }
 
 .switch-buttons {
@@ -155,9 +163,9 @@ button:focus {
 }
 
 .switch-buttons button {
-  background: #f9f9f9;
-  border: 2px solid #661a4c;
-  color: #661a4c;
+  border: 2px solid #00bcd4;
+  color: #00bcd4;
+  background: #e0f2f1;
   font-weight: bold;
   font-size: 1.1em;
   padding: 10px 36px;
@@ -168,6 +176,12 @@ button:focus {
 
 .switch-buttons button.active,
 .switch-buttons button:hover {
-  background: #661a4c;
+  background: #43a047;
   color: #fff;
+  border-color: #388e3c;
+}
+
+.form-group:focus-within {
+  box-shadow: 0 2px 8px 0 rgba(0, 188, 212, 0.08);
+  transition: box-shadow 0.2s;
 }

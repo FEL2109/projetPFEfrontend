@@ -1,14 +1,30 @@
+/* Suppression de la bande grise : fond blanc uniforme */
+body, .ant-layout, nz-layout, .main-content, .content-container {
+  background: #fff !important;
+}
+
 .mes-demandes-wrapper {
-  background: transparent;      /* plus de fond blanc */
-  border-radius: 0;             /* plus d'arrondi */
-  box-shadow: none;             /* plus d'ombre */
+  background: #fff !important;
+  border-radius: 0;
+  box-shadow: none;
+/* Forcer le fond blanc sur toute la page et layout (anti-bande grise) */
+:host ::ng-deep .ant-layout,
+:host ::ng-deep nz-layout,
+:host ::ng-deep .main-content,
+:host ::ng-deep .content-container,
+body {
+  background: #fff !important;
+}
   padding: 32px;
   margin: 100px auto 40px auto;
-  max-width: 1500px;
-  min-width: 700px;
-  width: 98vw;
+  max-width: 1600px;
+  min-width: 350px;
+  width: 100%;
   box-sizing: border-box;
-  margin-left: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 h2 {
@@ -24,6 +40,7 @@ h2 {
   overflow: hidden;
   margin: 0 auto;
   width: 100%;
+  max-width: 1500px;
 }
 
 :host ::ng-deep .ant-table {
@@ -39,4 +56,146 @@ h2 {
 
 :host ::ng-deep .ant-table-tbody > tr > td {
   font-size: 1.05rem;
+}
+
+/* Header section */
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Tab buttons */
+.tab-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: 2px solid #b6e27b;
+  background: #f8fcf6;
+  color: #22336b;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(141, 198, 63, 0.08);
+}
+
+.tab-btn:hover {
+  border-color: #8dc63f;
+  color: #8dc63f;
+  background: #e6f4d7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(141, 198, 63, 0.13);
+}
+
+.tab-btn.active {
+  background: linear-gradient(90deg, #8dc63f 60%, #b6e27b 100%);
+  color: #fff;
+  border-color: #8dc63f;
+  box-shadow: 0 4px 12px rgba(141, 198, 63, 0.18);
+}
+
+.tab-btn.active:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(141, 198, 63, 0.22);
+}
+
+/* Table container */
+.table-container {
+  background: #f8fcf6;
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(141, 198, 63, 0.10);
+  overflow: hidden;
+  margin-top: 20px;
+  border: 1.5px solid #8dc63f33;
+  margin-left: auto;
+  margin-right: auto;
+  width: 1400px;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 24px;
+  margin: 0;
+  background: linear-gradient(90deg, #e6f4d7 0%, #b6e27b 100%);
+  border-bottom: 2px solid #8dc63f44;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #22336b;
+}
+
+.table-title nz-icon {
+  font-size: 1.2rem;
+  color: #8dc63f;
+}
+/* Champs de formulaire Material/NG-Zorro */
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #8dc63f;
+  border-color: #8dc63f;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #8dc63f;
+  border-color: #8dc63f;
+}
+
+:host ::ng-deep .mat-form-field-label {
+  color: #22336b !important;
+}
+
+:host ::ng-deep .mat-input-element, :host ::ng-deep input, :host ::ng-deep textarea {
+  color: #22336b;
+}
+
+:host ::ng-deep .ant-btn-primary, :host ::ng-deep .mat-raised-button.mat-primary {
+  background: linear-gradient(90deg, #8dc63f 60%, #b6e27b 100%) !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 600;
+  box-shadow: 0 2px 8px #8dc63f33;
+}
+
+:host ::ng-deep .ant-btn-default, :host ::ng-deep .mat-stroked-button {
+  border: 2px solid #8dc63f !important;
+  color: #8dc63f !important;
+  background: #fff !important;
+  font-weight: 600;
+}
+
+:host ::ng-deep .ant-btn-default:hover, :host ::ng-deep .mat-stroked-button:hover {
+  background: #e6f4d7 !important;
+  color: #22336b !important;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .tab-buttons {
+    justify-content: center;
+  }
+  
+  .tab-btn {
+    flex: 1;
+    justify-content: center;
+  }
 }

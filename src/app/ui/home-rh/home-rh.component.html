@@ -1,1 +1,40 @@
-<p>home-rh works!</p>
+<nz-layout>
+  <!-- Topbar supprimée, tout est dans le nz-header -->
+  <nz-header class="main-header">
+    <div class="main-header-content">
+      <div class="main-header-left">
+        <img src="assets/images/logo.png" alt="Logo Ingecys" class="main-header-logo" />
+        <nav class="main-header-nav">
+          <a routerLink="/home-rh/dashboard" routerLinkActive="active-link" title="Tableau de bord">
+            Tableau de bord
+          </a>
+          <a routerLink="/home-rh/retards-absences" routerLinkActive="active-link" title="Retards & Absences">
+            Retards & Absences
+          </a>
+          <a routerLink="/home-rh/messagerie" routerLinkActive="active-link" title="Messagerie">
+            Messagerie
+          </a>
+          <a routerLink="/home-rh/gestion-employes" routerLinkActive="active-link" title="Employés">
+            Employés
+          </a>
+        </nav>
+      </div>
+      <div class="topbar-right">
+        <button nz-button nzType="text" nzShape="circle" class="topbar-btn" title="Notifications" matRipple [matBadge]="'3'" matBadgeColor="warn" matBadgeOverlap="false">
+          <mat-icon style="color: #222;">notifications</mat-icon>
+        </button>
+        <button nz-button nzType="text" nzShape="circle" class="topbar-btn" title="Profil" matRipple>
+          <mat-icon style="color: #222;">account_circle</mat-icon>
+        </button>
+        <button nz-button nzType="text" nzShape="circle" class="topbar-btn" title="Se déconnecter" (click)="logout()" matRipple>
+          <mat-icon style="color: #222;">logout</mat-icon>
+        </button>
+      </div>
+    </div>
+  </nz-header>
+  <nz-layout>
+    <nz-content class="content-container">
+      <router-outlet></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

@@ -13,21 +13,21 @@
   </div>
 
   <!-- Formulaire Congé -->
-  <form nz-form *ngIf="selectedForm === 'conge'">
+  <form nz-form *ngIf="selectedForm === 'conge'" (ngSubmit)="onSubmit()">
     <!-- Type de congé -->
     <div class="form-group">
       <label for="type">Type de congé :</label>
-      <nz-select id="type" name="type" class="form-control" nzPlaceHolder="Sélectionnez un type de congé">
-        <nz-option nzValue="conge-paye" nzLabel="Congé payé"></nz-option>
-        <nz-option nzValue="conge-sans-solde" nzLabel="Congé sans solde"></nz-option>
-        <nz-option nzValue="maternite-paternite" nzLabel="Congé maternité/paternité"></nz-option>
+      <nz-select id="type" name="type" class="form-control" nzPlaceHolder="Sélectionnez un type de congé" [(ngModel)]="typeConge">
+        <nz-option nzValue="conge_paye" nzLabel="Congé payé"></nz-option>
+        <nz-option nzValue="conge_sans_solde" nzLabel="Congé sans solde"></nz-option>
+        <nz-option nzValue="maternite_paternite" nzLabel="Congé maternité/paternité"></nz-option>
       </nz-select>
     </div>
 
     <!-- Jours -->
     <div class="form-group">
       <label for="jours">Jours :</label>
-      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours">
+      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours" [(ngModel)]="nombreJours">
         <nz-option *ngFor="let jour of jours" [nzValue]="jour" [nzLabel]="jour"></nz-option>
       </nz-select>
     </div>
@@ -35,13 +35,13 @@
     <!-- Date de début -->
     <div class="form-group">
       <label for="startDate">Date de début <span class="note">*inclus</span> :</label>
-      <nz-date-picker id="startDate" name="startDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
+      <nz-date-picker id="startDate" name="startDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date" [(ngModel)]="dateDebut"></nz-date-picker>
     </div>
 
     <!-- Date de fin -->
     <div class="form-group">
       <label for="endDate">Date de fin <span class="note">*inclus</span> :</label>
-      <nz-date-picker id="endDate" name="endDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
+      <nz-date-picker id="endDate" name="endDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date" [(ngModel)]="dateFin"></nz-date-picker>
     </div>
 
     <!-- Commentaire -->
@@ -49,6 +49,7 @@
       <label for="commentaire">Commentaire :</label>
       <textarea id="commentaire" name="commentaire" class="form-control commentaire-input" maxlength="300"
         placeholder="Ajoutez un commentaire (max. 300 caractères)"
+        [(ngModel)]="comment"
         (input)="updateCharCount($event)"></textarea>
       <small class="char-counter">{{ comment.length }}/300</small>
     </div>
@@ -69,28 +70,28 @@
     <!-- Boutons -->
     <div class="form-actions">
       <button nz-button nzType="primary" type="submit" class="btn-submit">Soumettre</button>
-      <button nz-button nzType="default" type="button" class="btn-cancel">Annuler</button>
+      <button nz-button nzType="default" type="button" class="btn-cancel" (click)="onCancel()">Annuler</button>
     </div>
   </form>
 
-  <!-- Formulaire Absence (identique à congé pour l’instant) -->
-  <form nz-form *ngIf="selectedForm === 'absence'">
+  <!-- Formulaire Absence -->
+  <form nz-form *ngIf="selectedForm === 'absence'" (ngSubmit)="onSubmit()">
     <!-- Type d'absence -->
     <div class="form-group">
       <label for="type">Type d'absence :</label>
-      <nz-select id="type" name="type" class="form-control" nzPlaceHolder="Sélectionnez un type d'absence">
-        <nz-option nzValue="absence-justifiee" nzLabel="Absence justifiée"></nz-option>
-        <nz-option nzValue="absence-non-justifiee" nzLabel="Absence non justifiée"></nz-option>
-        <nz-option nzValue="absence-formation" nzLabel="Absence pour formation"></nz-option>
-        <nz-option nzValue="arret-maladie" nzLabel="Arrêt maladie"></nz-option>
-        <nz-option nzValue="renouvellement-arret-maladie" nzLabel="Renouvellement arrêt maladie"></nz-option>
+      <nz-select id="type" name="type" class="form-control" nzPlaceHolder="Sélectionnez un type d'absence" [(ngModel)]="typeAbsence">
+        <nz-option nzValue="absence_justifiee" nzLabel="Absence justifiée"></nz-option>
+        <nz-option nzValue="absence_non_justifiee" nzLabel="Absence non justifiée"></nz-option>
+        <nz-option nzValue="absence_formation" nzLabel="Absence pour formation"></nz-option>
+        <nz-option nzValue="arret_maladie" nzLabel="Arrêt maladie"></nz-option>
+        <nz-option nzValue="renouvellement_arret_maladie" nzLabel="Renouvellement arrêt maladie"></nz-option>
       </nz-select>
     </div>
 
     <!-- Jours -->
     <div class="form-group">
       <label for="jours">Jours :</label>
-      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours">
+      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours" [(ngModel)]="nombreJours">
         <nz-option *ngFor="let jour of jours" [nzValue]="jour" [nzLabel]="jour"></nz-option>
       </nz-select>
     </div>
@@ -98,13 +99,13 @@
     <!-- Date de début -->
     <div class="form-group">
       <label for="startDate">Date de début <span class="note">*inclus</span> :</label>
-      <nz-date-picker id="startDate" name="startDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
+      <nz-date-picker id="startDate" name="startDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date" [(ngModel)]="dateDebut"></nz-date-picker>
     </div>
 
     <!-- Date de fin -->
     <div class="form-group">
       <label for="endDate">Date de fin <span class="note">*inclus</span> :</label>
-      <nz-date-picker id="endDate" name="endDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date"></nz-date-picker>
+      <nz-date-picker id="endDate" name="endDate" nzFormat="dd/MM/yyyy" nzPlaceHolder="Sélectionner la date" [(ngModel)]="dateFin"></nz-date-picker>
     </div>
 
     <!-- Commentaire -->
@@ -112,6 +113,7 @@
       <label for="commentaire">Commentaire :</label>
       <textarea id="commentaire" name="commentaire" class="form-control commentaire-input" maxlength="300"
         placeholder="Ajoutez un commentaire (max. 300 caractères)"
+        [(ngModel)]="comment"
         (input)="updateCharCount($event)"></textarea>
       <small class="char-counter">{{ comment.length }}/300</small>
     </div>
@@ -132,7 +134,7 @@
     <!-- Boutons -->
     <div class="form-actions">
       <button nz-button nzType="primary" type="submit" class="btn-submit">Soumettre</button>
-      <button nz-button nzType="default" type="button" class="btn-cancel">Annuler</button>
+      <button nz-button nzType="default" type="button" class="btn-cancel" (click)="onCancel()">Annuler</button>
     </div>
   </form>
 </div>

@@ -1,7 +1,13 @@
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MaterialModule } from './material.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,7 +21,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { FormsModule } from '@angular/forms';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { fr_FR } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, CommonModule } from '@angular/common';
 import fr from '@angular/common/locales/fr';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,7 +30,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { ProfilUserComponent } from './ui/home-user/profil-user/profil-user.component';
-import { SoumettreDemandeCongeComponent } from './ui/home-admin/soumettre-demande-conge/soumettre-demande-conge.component';
+import { SoumettreDemandeCongeComponent } from './ui/home-user/soumettre-demande-conge/soumettre-demande-conge.component'; 
 import { TableauDeBordUserComponent } from './ui/home-user/tableau-de-bord-user/tableau-de-bord-user.component';
 import { TableauDeBordAdminComponent } from './ui/home-admin/tableau-de-bord-admin/tableau-de-bord-admin.component';
 import { ProfilAdminComponent } from './ui/home-admin/profil-admin/profil-admin.component';
@@ -47,9 +53,13 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels-user/calendrier-jours-officiels.component';
 import { CalendrierJoursOfficielsAdminComponent } from './ui/home-admin/calendrier-jours-officiels-admin/calendrier-jours-officiels-admin.component';
 import { MesDemandesCongesComponent } from './ui/home-user/mes-demandes-conges/mes-demandes-conges.component';
-import { HistoriquePersonnelComponent } from './ui/home-user/historique-personnel/historique-personnel.component';
 import { SoldeCongesComponent } from './ui/home-user/solde-conges/solde-conges.component';
 import { IcuSafePipe } from './ui/home-user/tableau-de-bord-user/icu-safe.pipe';
+import { ProfilRhComponent } from './ui/home-rh/profil-rh/profil-rh.component';
+import { GestionEmployesComponent } from './ui/home-rh/gestion-employes/gestion-employes.component';
+import { RetardsAbsencesComponent } from './ui/home-rh/retards-absences/retards-absences.component';
+import { MessagerieRhComponent } from './ui/home-rh/messagerie-rh/messagerie-rh.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 registerLocaleData(fr);
 
@@ -71,16 +81,19 @@ registerLocaleData(fr);
     CalendrierJoursOfficielsComponent,
     CalendrierJoursOfficielsAdminComponent,
     MesDemandesCongesComponent,
-    HistoriquePersonnelComponent,
     SoldeCongesComponent,
-    IcuSafePipe
+    IcuSafePipe,
+    ProfilRhComponent,
+    GestionEmployesComponent,
+    RetardsAbsencesComponent,
+    MessagerieRhComponent
     
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     AppRoutingModule,
-    FormsModule,
     NzFormModule,
     NzInputModule,
     NzButtonModule,
@@ -104,13 +117,21 @@ registerLocaleData(fr);
     NzCheckboxModule,
     ReactiveFormsModule,
     NgxChartsModule,
-    NzBadgeModule
-
+    NzBadgeModule,
+    MaterialModule,
+    MatIconModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    { provide: NZ_I18N, useValue: fr_FR }
+    { provide: NZ_I18N, useValue: fr_FR },
+    NzMessageService
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(matIconRegistry: MatIconRegistry, domSanitizer: DomSanitizer) {
+    matIconRegistry.addSvgIcon('notifications', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/notifications.svg'));
+    matIconRegistry.addSvgIcon('account_circle', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/account_circle.svg'));
+    matIconRegistry.addSvgIcon('logout', domSanitizer.bypassSecurityTrustResourceUrl('assets/icons/logout.svg'));
+  }
+}

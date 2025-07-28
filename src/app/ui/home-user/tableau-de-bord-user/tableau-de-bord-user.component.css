@@ -1,3 +1,212 @@
+/* Modern Welcome Banner Styles */
+.dashboard-welcome-banner {
+  width: 100%;
+  background: linear-gradient(90deg, #22336b 60%, #3a5fc8 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 22px;
+  padding: 32px 48px 32px 40px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 32px #22336b22;
+  min-height: 170px;
+  position: relative;
+  overflow: hidden;
+}
+.dashboard-welcome-banner-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1 1 0;
+  z-index: 2;
+}
+.dashboard-welcome-title {
+  font-size: 2.2em;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.dashboard-welcome-subtitle {
+  font-size: 1.18em;
+  color: #e6eaff;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+.dashboard-welcome-banner-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 220px;
+  height: 100%;
+  z-index: 2;
+}
+.dashboard-welcome-img {
+  max-width: 200px;
+  max-height: 120px;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #22336b33;
+  background: transparent;
+}
+@media (max-width: 900px) {
+  .dashboard-welcome-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 16px 24px 16px;
+    min-height: 120px;
+  }
+  .dashboard-welcome-banner-right {
+    justify-content: center;
+    width: 100%;
+    margin-top: 18px;
+  }
+  .dashboard-welcome-img {
+    max-width: 140px;
+    max-height: 80px;
+  }
+}
+.dashboard-indicateur-value.red, .dashboard-indicateur-unit.red {
+  color: #e53935;
+}
+
+/* --- Custom widgets: Notifications, Prévision, Comparaison --- */
+.dashboard-notif-card {
+  box-shadow: 0 4px 24px #2d7be622;
+  border-radius: 18px;
+  margin-top: 18px;
+}
+.dashboard-notif-card .ant-timeline-item-content {
+  font-size: 1.08em;
+  color: #22336b;
+}
+.dashboard-notif-card .ant-timeline-item {
+  padding-bottom: 8px;
+}
+.dashboard-notif-card .ant-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.dashboard-forecast-card {
+  box-shadow: 0 4px 24px #8dc63f22;
+  border-radius: 18px;
+  margin-top: 18px;
+}
+.dashboard-forecast-card .mat-progress-spinner {
+  margin-right: 10px;
+}
+.dashboard-forecast-card span {
+  color: #22336b;
+}
+.dashboard-forecast-card .mat-progress-spinner circle {
+  stroke: #8dc63f;
+}
+
+.dashboard-compare-card {
+  box-shadow: 0 4px 24px #ffc30022;
+  border-radius: 18px;
+  margin-top: 18px;
+}
+.dashboard-compare-card .compare-label {
+  font-weight: 600;
+  color: #22336b;
+}
+.dashboard-compare-card .compare-value {
+  font-weight: 700;
+  font-size: 1.15em;
+}
+.dashboard-compare-card .compare-value.equipe {
+  color: #34c759;
+}
+.dashboard-compare-card .compare-value.user {
+  color: #e53935;
+}
+.dashboard-compare-card .compare-value.entreprise {
+  color: #ffc300;
+}
+/* Indicateurs synthétiques sous le bandeau de bienvenue */
+.dashboard-indicateurs-row {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 24px;
+  margin-bottom: 32px; /* Augmente l'espace sous les indicateurs */
+}
+.dashboard-indicateur-card {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px #22336b18;
+  padding: 22px 38px;
+  min-width: 320px;
+  max-width: 320px;
+  width: 320px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1.5px solid #f0f4fa;
+}
+.dashboard-indicateur-card:hover {
+  box-shadow: 0 8px 32px #8dc63f33;
+  transform: translateY(-4px) scale(1.03);
+}
+.dashboard-indicateur-value {
+  font-size: 2.5em;
+  font-weight: 800;
+  margin-right: 18px;
+  text-align: right;
+  line-height: 1.1;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+.dashboard-indicateur-unit {
+  font-size: 0.85em;
+  font-weight: 500;
+  color: #7fc8a9;
+  margin-top: 2px;
+  font-weight: 400;
+}
+.dashboard-indicateur-value.green {
+  color: #16a34a; /* Acceptée: vert */
+}
+.dashboard-indicateur-value.yellow {
+  color: #ffb300; /* En attente: jaune */
+}
+.dashboard-indicateur-value.red {
+  color: #ff3b30; /* Refusée: rouge */
+}
+.dashboard-indicateur-unit.green {
+  color: #16a34a;
+}
+.dashboard-indicateur-unit.yellow {
+  color: #ffb300;
+}
+.dashboard-indicateur-unit.red {
+  color: #ff3b30;
+}
+.dashboard-indicateur-value.orange, .dashboard-indicateur-value.orange .dashboard-indicateur-unit {
+  color: #ff8800;
+}
+.dashboard-indicateur-unit {
+  font-size: 0.85em;
+  font-weight: 500;
+  color: #7fc8a9;
+  margin-top: 2px;
+}
+.dashboard-indicateur-unit.yellow {
+  color: #ffb300;
+}
+.dashboard-indicateur-unit.orange {
+  color: #ff8800;
+}
+.dashboard-indicateur-label {
+  font-size: 1.18em;
+  color: #22336b;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.3;
+  word-break: break-word;
+}
 /* Légende pro sous le graphe circulaire */
 .dashboard-pie-legend-pro {
   display: flex;
@@ -50,11 +259,11 @@
   }
 }
 /* Fond général à droite du menu */
-.main-content {
-  padding-left: 40px; /* Réduit l'espace blanc à gauche (ex: 40px ou moins si tu veux) */
-  background: #fff;
+body, nz-layout, .main-content {
+  background: #fff !important;
   min-height: 100vh;
   box-sizing: border-box;
+}
 
 /* Le wrapper prend toute la place disponible, collé au bord gauche */
 .dashboard-wrapper {
@@ -71,14 +280,77 @@
 }
 
 /* Nouveau wrapper luxe */
+/* Aligner le dashboard avec la largeur du bandeau de bienvenue */
 .dashboard-wrapper-pro {
-  max-width: 1700px;   /* Augmente la largeur max du contenu */
-  margin: 40px auto 40px 0; /* Colle le dashboard à gauche */
-  padding: 0 32px;
+  max-width: 1200px;
+  margin: 40px auto 40px auto;
+  padding: 0 0 0 0;
   background: #f7fafd;
   border-radius: 32px;
   box-shadow: 0 8px 40px #22336b18;
   min-height: 90vh;
+}
+
+/* Ajoute un espace à droite de l'agenda sans l'élargir */
+.dashboard-col-droite {
+  margin-left: 32px;
+}
+
+/* Espace latéral droit pour widgets additionnels */
+.dashboard-side-space {
+  position: fixed;
+  top: 110px;
+  right: 32px;
+  width: 270px;
+  min-height: 400px;
+  background: #f8f9ff;
+  border-radius: 18px;
+  box-shadow: 0 6px 32px #22336b22;
+  z-index: 10;
+  padding: 18px 12px 18px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+
+.dashboard-side-space .ant-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #22336b11;
+  margin-bottom: 0;
+}
+.dashboard-side-space .ant-card-body {
+  padding: 14px 10px 10px 10px;
+}
+.dashboard-side-space .ant-card .ant-card-body > div,
+.dashboard-side-space .ant-card .ant-card-body > nz-timeline {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+.dashboard-side-space .ant-card .ant-card-body > div,
+.dashboard-side-space .ant-card .ant-card-body > nz-timeline,
+.dashboard-side-space .ant-card .ant-card-body span {
+  font-size: 1.01em;
+  color: #22336b;
+  font-weight: 500;
+}
+.dashboard-side-space .ant-card .ant-card-body .ant-timeline-item-content {
+  font-size: 0.98em;
+  color: #22336b;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+}
+.dashboard-side-space .ant-card .ant-card-body .ant-timeline-item {
+  padding-bottom: 7px;
+}
+.dashboard-side-space .ant-card .ant-card-body .ant-timeline-item:last-child {
+  padding-bottom: 0;
+}
+.dashboard-side-space .ant-card .ant-card-body .ant-timeline-item span {
+  font-size: 0.97em;
+}
+.dashboard-side-space .ant-card .ant-card-body .ant-timeline-item span[style*='color: #888'] {
+  color: #8a8a8a !important;
 }
 
 /* Bandeau de bienvenue */
@@ -132,7 +404,11 @@
   font-weight: 500;
   color: #888;
 }
-
+/* Harmonisation couleurs INGEcys IT */
+.stat-card.green .stat-value { color: #8dc63f; }
+.stat-card.yellow .stat-value { color: #b6e27b; }
+.stat-card.blue .stat-label { color: #2d7be6; }
+.stat-label { color: #8dc63f; }
 /* Header */
 .dashboard-header {
   display: flex;
@@ -143,12 +419,12 @@
 .dashboard-title {
   font-size: 2.2rem;
   font-weight: 800;
-  color: #22336b;
+  color: #2d7be6;
   letter-spacing: 1px;
 }
 .dashboard-subtitle {
   font-size: 1.1rem;
-  color: #888;
+  color: #8dc63f;
   margin-top: 4px;
 }
 
@@ -196,8 +472,11 @@
   flex-direction: column;
   align-items: center;
 }
+/* Agrandir le titre de l'agenda */
 .calendar-title {
-  font-size: 1.6rem;
+  font-size: 2.5rem;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px #22336b22;
   font-weight: 800;
   color: #22336b;
   text-align: center;
@@ -289,8 +568,8 @@
   box-shadow: 0 8px 32px #ffc30044;
   transform: translateY(-4px) scale(1.03);
 }
-.stat-card-pro.green .stat-value { color: #34c759; }
-.stat-card-pro.yellow .stat-value { color: #ffc300; }
+.stat-card-pro.green .stat-value { color: #8dc63f; }
+.stat-card-pro.yellow .stat-value { color: #b6e27b; }
 .stat-icon {
   font-size: 2.2rem;
   margin-bottom: 8px;
@@ -354,13 +633,16 @@
   align-items: center;
   margin-left: 8px;
 }
+/* Agrandir le titre des jours fériés */
 .ferie-header {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 2.2rem;
+  letter-spacing: 1.5px;
+  text-shadow: 0 2px 8px #22336b22;
+  font-weight: 700;
   color: #22336b;
   margin-bottom: 12px;
   gap: 12px;
@@ -540,6 +822,76 @@
   letter-spacing: 1px;
 }
 
+/* Amélioration du style NG-Zorro/Material pour le dashboard */
+.dashboard-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #22336b22;
+  padding: 32px 28px 26px 28px;
+  margin-bottom: 24px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.dashboard-card:hover {
+  box-shadow: 0 8px 32px #ffc30044;
+  transform: translateY(-4px) scale(1.03);
+}
+
+/* Prochaines absences NG-Zorro list */
+.next-absences-widget nz-list-item {
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #34c75922;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.next-absences-widget nz-list-item:hover {
+  box-shadow: 0 6px 24px #34c75944;
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* Dernières demandes NG-Zorro table */
+.last-requests-widget nz-table {
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #22336b22;
+  overflow: hidden;
+}
+.last-requests-widget nz-table tr {
+  transition: background 0.2s;
+}
+.last-requests-widget nz-table tr:hover {
+  background: #f7fafd;
+}
+
+/* NG-Zorro tags, avatars, badges */
+.nz-tag, nz-tag {
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  padding: 4px 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px #8dc63f22 !important;
+  background: linear-gradient(90deg, #8dc63f 60%, #b6e27b 100%) !important;
+  color: #fff !important;
+  margin-right: 8px !important;
+}
+.nz-avatar, nz-avatar {
+  box-shadow: 0 2px 8px #22336b22 !important;
+  border-radius: 8px !important;
+  margin-right: 8px !important;
+}
+.nz-badge, nz-badge {
+  font-size: 1em !important;
+  font-weight: 600 !important;
+  padding: 4px 12px !important;
+  border-radius: 8px !important;
+}
+
+/* Responsive pour cards NG-Zorro */
+@media (max-width: 900px) {
+  .dashboard-card {
+    padding: 16px 8px 10px 8px;
+    border-radius: 10px;
+  }
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .main-row {
@@ -575,14 +927,17 @@
 .dashboard-main-row {
   display: flex;
   flex-direction: row;
-  gap: 16px; /* ou moins */
+  gap: 36px;
   align-items: flex-start;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .dashboard-col-gauche {
-  flex: 2.5 1 700px;   /* Largeur plus grande */
-  min-width: 600px;    /* Largeur minimale plus grande */
+  flex: 2.5 1 700px;
+  min-width: 600px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -595,47 +950,39 @@
 }
 
 .dashboard-col-droite {
-  flex: 1.5 1 420px;
-  min-width: 350px;
-  max-width: 480px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  align-items: flex-start;
-  margin-left: 0 !important;
-  margin-right: auto !important; /* <-- Ajoute ceci pour coller à gauche */
-}
-
-.calendar-card-pro {
-  min-width: 380px;   /* élargit le bloc agenda */
-  max-width: 480px;
-  width: 100%;
-  border-radius: 18px;
-  box-shadow: 0 4px 24px #22336b22;
-  background: #fff;
-  padding: 24px 0;
-  display: flex;
-  flex-direction: column;
+  gap: 24px;
+  background: transparent;
+  box-shadow: none;
   align-items: center;
+  margin-left: 36px; /* espace à gauche pour alignement visuel */
+  max-width: 420px;
+  min-width: 320px;
 }
 
-.ferie-card-holiday-pro {
-  min-width: 280px;   /* élargit le bloc jours fériés */
-  max-width: 340px;
-  width: 100%;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px #e0e7ef44;
-  padding: 18px 0 22px 0;
+/* Centrage de la colonne RH (dashboard-col-droite) */
+.dashboard-main-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  gap: 36px;
+  position: relative;
+  justify-content: center; /* Ajouté pour centrer le contenu */
 }
 
-
-.dashboard-wrapper,
-.dashboard-wrapper-pro {
-  margin-top: 80px; /* Ajuste la valeur selon l'espace souhaité */
+/* Responsive: centrer aussi sur mobile */
+@media (max-width: 1200px) {
+  .dashboard-main-row {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+  }
+  .dashboard-col-droite {
+    margin: 0 auto;
+    align-items: center;
+  }
 }
 
 /* =====================
@@ -678,7 +1025,7 @@
   margin: 0;
   min-width: 120px;
   width: auto;
-}
+  /* suppression de l'accolade en trop */
 }
 
 .dashboard-circular-chart-container .legend-color,
@@ -707,6 +1054,336 @@
     font-size: 0.98rem;
     padding: 4px 10px 4px 8px;
     min-width: 90px;
+  }
+}
+
+/* Bouton 'Déposer une nouvelle demande de congé' */
+.dashboard-action-btn {
+  width: 100%;
+  font-size: 1.18em;
+  font-weight: 700;
+  padding: 18px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px #22336b22;
+  letter-spacing: 0.5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #22336b 60%, #3a4a8c 100%);
+  color: #fff;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.dashboard-action-btn:hover {
+  background: linear-gradient(90deg, #22336b 80%, #ffc300 100%);
+  box-shadow: 0 6px 24px #22336b33;
+}
+
+/* Styles déplacés depuis le HTML */
+.dashboard-piechart-legend-below {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.dashboard-piechart-legend-native-below {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+.dashboard-piechart-legend-native-below .legend-labels {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.dashboard-piechart-legend-native-below .legend-label {
+  margin-bottom: 0 !important;
+  font-size: 1em;
+  color: #22336b;
+  font-weight: 500;
+  background: transparent;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+.dashboard-float-right {
+  position: fixed;
+  top: 90px;
+  right: 48px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 420px;
+  gap: 28px;
+}
+.dashboard-action-btn {
+  width: 100%;
+  font-size: 1.18em;
+  font-weight: 700;
+  padding: 18px 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px #22336b22;
+  letter-spacing: 0.5px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #22336b 60%, #3a4a8c 100%);
+  color: #fff;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.dashboard-action-btn:hover {
+  background: linear-gradient(90deg, #22336b 80%, #ffc300 100%);
+  box-shadow: 0 6px 24px #22336b33;
+}
+.dashboard-stats-card {
+  margin-top: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #22336b11;
+  padding: 22px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard-stats-title {
+  font-weight: 700;
+  color: #22336b;
+  margin-bottom: 12px;
+  text-align: center;
+  font-size: 1.1em;
+}
+.dashboard-stats-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 1em;
+}
+.dashboard-stats-taux {
+  color: #34c759;
+  font-weight: bold;
+  margin-left: 6px;
+}
+.dashboard-main-row {
+  display: flex;
+  flex-direction: row;
+  gap: 36px;
+  position: relative;
+}
+.dashboard-col-gauche {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.dashboard-col-droite {
+  flex: 1;
+}
+.dashboard-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #22336b11;
+  padding: 28px 24px 22px 24px;
+  margin-bottom: 18px;
+}
+.absence-counter-card {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.absence-counter-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.08em;
+  margin-bottom: 18px;
+}
+.absence-counter-badge {
+  background: #ffc300;
+  color: #22336b;
+  border-radius: 8px;
+  padding: 2px 10px;
+  font-size: 0.95em;
+  margin-left: 10px;
+}
+.absence-counter-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+}
+.absence-counter-col {
+  flex: 1;
+  text-align: center;
+}
+.absence-counter-value {
+  font-size: 2.1em;
+  font-weight: 700;
+  color: #22336b;
+}
+.absence-counter-label {
+  font-size: 1em;
+  color: #888;
+  margin-top: 2px;
+}
+.notifications-section {
+  margin-top: 0;
+}
+.notifications-title {
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.08em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.notifications-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 1em;
+  transition: background 0.2s;
+}
+.notifications-list li:last-child {
+  border-bottom: none;
+}
+.notif-icon {
+  color: #ffc300;
+  font-size: 1.2em;
+}
+.notif-message {
+  flex: 1;
+  color: #22336b;
+}
+.notif-date {
+  color: #888;
+  font-size: 0.95em;
+}
+.notif-empty {
+  text-align: center;
+  color: #bbb;
+  font-style: italic;
+  padding: 12px 0;
+}
+.ferie-card-holiday-pro {
+  min-width: 260px;
+  max-width: 340px;
+  margin: 0 auto;
+  background: #f8f9ff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #22336b11;
+  padding: 18px 18px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ferie-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.05em;
+  margin-bottom: 10px;
+}
+.ferie-arrow {
+  cursor: pointer;
+  color: #22336b;
+  font-size: 1.3em;
+  padding: 0 8px;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.ferie-arrow:hover {
+  background: #e6eaff;
+}
+.ferie-label {
+  font-weight: 700;
+  color: #22336b;
+  font-size: 1.1em;
+  margin-bottom: 2px;
+}
+.ferie-date {
+  color: #888;
+  font-size: 1em;
+}
+.calendar-card-pro {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #22336b11;
+  padding: 18px 12px 12px 12px;
+}
+.calendar-title {
+  font-weight: 600;
+  color: #22336b;
+  font-size: 1.08em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.dashboard-title {
+  font-size: 1.5em;
+  font-weight: 800;
+  color: #22336b;
+  margin-bottom: 6px;
+  display: block;
+}
+.dashboard-subtitle {
+  font-size: 1.08em;
+  color: #888;
+}
+.legend-pro-dot-square,
+.legend-pro-dot-force-square {
+  border-radius: 0 !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  max-width: 18px !important;
+  max-height: 18px !important;
+  display: inline-block !important;
+  border: 2px solid #fff !important;
+  box-shadow: 0 1px 4px #22336b22 !important;
+  background-clip: padding-box !important;
+  vertical-align: middle !important;
+  margin-right: 8px;
+}
+.dashboard-subtitle {
+  margin-bottom: 18px;
+}
+@media (max-width: 1200px) {
+  .dashboard-float-right {
+    position: static;
+    width: 100%;
+    margin-bottom: 24px;
+    align-items: stretch;
+  }
+  .dashboard-main-row {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+@media (max-width: 900px) {
+  .dashboard-card, .dashboard-stats-card, .calendar-card-pro, .ferie-card-holiday-pro {
+    padding: 14px 8px 10px 8px;
+    border-radius: 10px;
+  }
+  .dashboard-float-right {
+    right: 0;
+    padding: 0 4vw;
   }
 }
 

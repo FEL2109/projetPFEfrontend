@@ -1,0 +1,207 @@
+.topbar-right mat-icon {
+  color: #222 !important;
+  font-size: 28px !important;
+  vertical-align: middle;
+  transition: color 0.2s;
+  filter: drop-shadow(0 1px 2px #bbb);
+}
+.main-header-nav mat-icon {
+  color: #222 !important;
+  font-size: 26px !important;
+  vertical-align: middle;
+  margin-right: 6px;
+  transition: color 0.2s;
+}
+/* Header NG-ZORRO/Material UI bonnes pratiques */
+.main-header {
+  background: #fff;
+  padding: 0 40px;
+  box-shadow: 0 2px 8px #f0f1f2;
+  position: relative;
+  z-index: 10;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  left: 50%;
+  right: 0;
+  transform: translateX(-50%);
+  min-width: 100vw;
+  max-width: 100vw;
+}
+
+.main-header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-start;
+  position: relative;
+}
+
+.main-header-left {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1 1 0;
+}
+
+.main-header-logo {
+  height: 70px;
+  max-height: 80px;
+  margin-right: 48px;
+  transition: height 0.2s;
+  filter: drop-shadow(0 2px 4px #bbb);
+}
+
+.main-header-nav {
+  display: flex;
+  gap: 40px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.main-header-nav a {
+  color: #222;
+  font-size: 19px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+  padding: 8px 0;
+}
+
+.main-header-nav a:hover,
+.main-header-nav a.active-link {
+  color: #29c536;
+  border-bottom: 2px solid #29c536;
+}
+
+.topbar-right {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  background: rgba(255,255,255,0.7);
+  border-radius: 24px;
+  padding: 4px 16px;
+  box-shadow: 0 2px 8px #f0f1f2;
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.topbar-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  box-shadow: 0 2px 8px #0001;
+  margin-left: 12px;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.topbar-btn:hover {
+  background: #e6f7e6 !important;
+  color: #29c536 !important;
+  box-shadow: 0 2px 8px #b7eb8f;
+}
+
+.topbar-btn mat-icon {
+  font-size: 28px !important;
+  width: 28px;
+  height: 28px;
+  line-height: 1;
+  color: #222 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header {
+  background-color: #29c536;
+  padding: 0;
+}
+
+.sider {
+  background-color: #7a3a6e;
+  height: 100vh;
+  width: 300px;
+}
+
+.logo-container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 10px;
+}
+
+.logo {
+  max-height: 70px;
+  max-width: 140px;
+}
+
+.menu {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+.menu li {
+  color: #ffffff;
+  background-color: #7a3a6e;
+}
+
+.menu li:hover {
+  background-color: #6b2952;
+}
+
+.menu li.ant-menu-item-selected {
+  background-color: #6b2952 !important;
+  color: #ffffff !important;
+}
+
+.content-container {
+  padding: 24px;
+  background: #ffffff;
+  min-height: 280px;
+  font-family: Helvetica, Arial, sans-serif;
+  margin-left: 300px;
+  max-width: 1200px;
+  margin-top: 56px;
+}
+
+h1 {
+  color: #6b2952;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 300px;
+  height: 56px;
+  width: calc(100% - 300px);
+  background: #fff;
+  box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 32px;
+  z-index: 100;
+}
+
+.topbar-right {
+  display: flex;
+  gap: 16px;
+}
+
+.topbar-btn {
+  font-size: 20px !important;
+  color: #22336b !important;
+}

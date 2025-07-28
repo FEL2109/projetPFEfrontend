@@ -16,4 +16,8 @@ constructor(private router: Router) {}
     // Rediriger vers la page de connexion
     this.router.navigate(['/login']);
   }
+
+  goToProfil(): void {
+    this.router.navigate(['/home-user/profil']);
+  }
 }

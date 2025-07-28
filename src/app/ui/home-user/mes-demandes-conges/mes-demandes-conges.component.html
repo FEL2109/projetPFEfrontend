@@ -1,29 +1,154 @@
-<div class="mes-demandes-wrapper">
-  <h2>Mes demandes de congés / absences</h2>
-  <nz-table #table [nzData]="demandes" nzBordered [nzSize]="'middle'" class="modern-table">
+
+<div style="display: flex; flex-direction: column; align-items: flex-start; margin: 0 0 0 12px; width: 100%; max-width: 1200px;">
+  <h2 style="margin: 0 0 8px 0 8px; text-align: left; font-size: 2.2rem; font-weight: 700; color: #22336b; letter-spacing: 0.5px;">Mes demandes de congés / absences</h2>
+  <div style="display: flex; align-items: center; gap: 12px;">
+    <div class="tab-buttons">
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'conges'"
+        (click)="setActiveTab('conges')">
+        <nz-icon nzType="calendar" nzTheme="outline"></nz-icon>
+        Demandes de congés
+      </button>
+      <button 
+        class="tab-btn" 
+        [class.active]="activeTab === 'absences'"
+        (click)="setActiveTab('absences')">
+        <nz-icon nzType="exclamation-circle" nzTheme="outline"></nz-icon>
+        Absences
+      </button>
+    </div>
+  
+</div>
+
+
+<!-- Résumé synthétique des demandes (congés ou absences) déplacé sous le titre -->
+<div *ngIf="activeTab === 'conges' || activeTab === 'absences'" class="table-container" style="margin: 18px 0 0 32px; max-width: 1200px; width: 1200px; border: none; box-shadow: none; background: none;">
+  <div style="display: flex; gap: 24px; margin-bottom: 18px; flex-wrap: nowrap; width: 100%; justify-content: space-between;">
+    <!-- Total demandes (bleu) -->
+    <div style="flex: 1 1 0; min-width: 180px; background: #eaf3fa; border-radius: 18px; padding: 24px 0 16px 0; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 12px #22336b11;">
+      <span style="font-size: 2.6rem; font-weight: 700; color: #22336b;">{{ activeTab === 'conges' ? resumeConges.total : resumeAbsences.total }}</span>
+      <span style="font-size: 1.2rem; color: #22336b; font-weight: 500; margin-top: 4px;">Total demandes</span>
+    </div>
+    <!-- En attente (jaune) -->
+    <div style="flex: 1 1 0; min-width: 180px; background: #f3faf4; border-radius: 18px; padding: 24px 0 16px 0; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 12px #22336b11;">
+      <span style="font-size: 2.6rem; font-weight: 700; color: #ffc300;">{{ activeTab === 'conges' ? resumeConges.enAttente : resumeAbsences.enAttente }}</span>
+      <span style="font-size: 1.2rem; color: #22336b; font-weight: 500; margin-top: 4px;">En attente</span>
+    </div>
+    <!-- Approuvées (vert) -->
+    <div style="flex: 1 1 0; min-width: 180px; background: #f3faf4; border-radius: 18px; padding: 24px 0 16px 0; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 12px #22336b11;">
+      <span style="font-size: 2.6rem; font-weight: 700; color: #34c759;">{{ activeTab === 'conges' ? resumeConges.approuvees : resumeAbsences.approuvees }}</span>
+      <span style="font-size: 1.2rem; color: #22336b; font-weight: 500; margin-top: 4px;">Approuvées</span>
+    </div>
+    <!-- Refusées (rouge) -->
+    <div style="flex: 1 1 0; min-width: 180px; background: #fff8f6; border-radius: 18px; padding: 24px 0 16px 0; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 12px #22336b11;">
+      <span style="font-size: 2.6rem; font-weight: 700; color: #e53935;">{{ activeTab === 'conges' ? resumeConges.refusees : resumeAbsences.refusees }}</span>
+      <span style="font-size: 1.2rem; color: #22336b; font-weight: 500; margin-top: 4px;">Refusées</span>
+    </div>
+  </div>
+</div>
+
+<!-- Tableau détaillé des demandes de congés placé juste sous les statistiques -->
+<div *ngIf="activeTab === 'conges'" class="table-container" style="max-width: 1200px; width: 1200px; margin: 24px 0 0 32px;">
+  <div id="table-demandes"></div>
+  <nz-table 
+    #tableConges 
+    [nzData]="demandesConges" 
+    nzBordered 
+    [nzSize]="'middle'" 
+    class="modern-table"
+    [nzLoading]="loading"
+    style="margin-top: 18px; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 24px #22336b11;">
     <thead>
-      <tr>
-        <th>Date de la demande</th>
-        <th>Période</th>
-        <th>Type de congé</th>
-        <th>Type d'absence</th>
-        <th>Nombre de jours</th>
-        <th>Statut</th>
+      <tr style="background: linear-gradient(90deg, #f8fafc 60%, #e3fcec 100%);">
+        <th style="font-weight: 700; color: #22336b;">Type de congé</th>
+        <th style="font-weight: 700; color: #22336b;">Période</th>
+        <th style="font-weight: 700; color: #22336b;">Jours</th>
+        <th style="font-weight: 700; color: #22336b;">Justificatif</th>
+        <th style="font-weight: 700; color: #22336b;">Statut</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let d of table.data">
-        <td>{{ d.dateDemande | date:'shortDate' }}</td>
-        <td>{{ d.dateDebut | date:'shortDate' }} - {{ d.dateFin | date:'shortDate' }}</td>
-        <td>{{ d.typeConge ? d.typeConge : '-' }}</td>
-        <td>{{ d.typeAbsence ? d.typeAbsence : '-' }}</td>
-        <td>{{ d.jours }}</td>
+      <tr *ngFor="let demande of tableConges.data" style="transition: background 0.2s;">
         <td>
-          <nz-tag [nzColor]="getStatusColor(d.statut)">
-            {{ d.statut }}
-          </nz-tag>
+          <span style="font-weight: 500; color: #2d7be6;">{{ demande.typeConge }}</span>
+        </td>
+        <td>
+          <span style="color: #22336b;">{{ demande.dateDebut | date:'dd/MM/yyyy' }} - {{ demande.dateFin | date:'dd/MM/yyyy' }}</span>
+        </td>
+        <td>
+          <span style="font-weight: 600; color: #34c759;">{{ demande.nombreJours }}</span>
+        </td>
+        <td>
+          <ng-container *ngIf="demande.justificatif; else noJustifConge">
+            <a [href]="demande.justificatif" download target="_blank" style="color: #2d7be6; font-weight: 500; text-decoration: underline;">
+              Télécharger
+            </a>
+          </ng-container>
+          <ng-template #noJustifConge>
+            <span style="color: #888; font-style: italic;">Aucun</span>
+          </ng-template>
+        </td>
+        <td>
+          <span *ngIf="demande.statut === 'APPROUVEE'" style="font-weight: 600; color: #34c759;">Approuvée</span>
+          <span *ngIf="demande.statut === 'EN_ATTENTE'" style="font-weight: 600; color: #ffc300;">En attente</span>
+          <span *ngIf="demande.statut === 'REFUSEE'" style="font-weight: 600; color: #e53935;">Refusée</span>
+          <span *ngIf="!demande.statut" style="color: #888; font-style: italic;">-</span>
         </td>
       </tr>
     </tbody>
   </nz-table>
+</div>
+
+  <!-- Tableau des absences -->
+  <div *ngIf="activeTab === 'absences'" class="table-container" style="max-width: 1200px; width: 1200px; margin: 24px 0 0 32px;">
+    <div id="table-absences"></div>
+    <nz-table 
+      #tableAbsences 
+      [nzData]="absences" 
+      nzBordered 
+      [nzSize]="'middle'" 
+      class="modern-table"
+      [nzLoading]="loading"
+      style="margin-top: 18px; border-radius: 14px; overflow: hidden; box-shadow: 0 4px 24px #22336b11;">
+      <thead>
+        <tr style="background: linear-gradient(90deg, #f8fafc 60%, #e3fcec 100%);">
+          <th style="font-weight: 700; color: #22336b;">Type d'absence</th>
+          <th style="font-weight: 700; color: #22336b;">Période</th>
+          <th style="font-weight: 700; color: #22336b;">Jours</th>
+          <th style="font-weight: 700; color: #22336b;">Justificatif</th>
+          <th style="font-weight: 700; color: #22336b;">Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let absence of tableAbsences.data" style="transition: background 0.2s;">
+          <td>
+            <span style="font-weight: 500; color: #2d7be6;">{{ absence.typeAbsence || absence.type || '-' }}</span>
+          </td>
+          <td>
+            <span style="color: #22336b;">{{ absence.dateDebut | date:'dd/MM/yyyy' }} - {{ absence.dateFin | date:'dd/MM/yyyy' }}</span>
+          </td>
+          <td>
+            <span style="font-weight: 600; color: #34c759;">{{ absence.nombreJours }}</span>
+          </td>
+          <td>
+            <ng-container *ngIf="absence.justificatif; else noJustifAbs">
+              <a [href]="absence.justificatif" download target="_blank" style="color: #2d7be6; font-weight: 500; text-decoration: underline;">
+                Télécharger
+              </a>
+            </ng-container>
+            <ng-template #noJustifAbs>
+              <span style="color: #888; font-style: italic;">Aucun</span>
+            </ng-template>
+          </td>
+          <td>
+            <span *ngIf="absence.statut === 'APPROUVEE'" style="font-weight: 600; color: #34c759;">Approuvée</span>
+            <span *ngIf="absence.statut === 'EN_ATTENTE'" style="font-weight: 600; color: #ffc300;">En attente</span>
+            <span *ngIf="absence.statut === 'REFUSEE'" style="font-weight: 600; color: #e53935;">Refusée</span>
+            <span *ngIf="!absence.statut" style="color: #888; font-style: italic;">-</span>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
 </div>

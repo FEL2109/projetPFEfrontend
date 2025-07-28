@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class HomeRhComponent {
 
+  logout() {
+    // Déconnexion basique : suppression du token et redirection
+    localStorage.removeItem('token');
+    window.location.href = '/login';
+  }
+
 }

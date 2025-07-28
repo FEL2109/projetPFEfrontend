@@ -64,6 +64,21 @@
   text-transform: uppercase;
 }
 
+
+/* Élargir le tableau d'historique des congés */
+:host ::ng-deep .ant-table-wrapper {
+  width: 90vw !important;
+  max-width: 1400px !important;
+  min-width: 900px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 24px #e0e0e0 !important;
+  padding: 0 24px 24px 24px !important;
+  overflow-x: auto !important;
+}
+
 /* Agrandir le tableau */
 :host ::ng-deep .ant-table {
   font-size: 1.18em !important;
