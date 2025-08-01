@@ -1,4 +1,3 @@
-
 <nz-layout>
   <!-- Topbar supprimée, tout est dans le nz-header -->
   <nz-header class="main-header">
@@ -7,16 +6,19 @@
         <img src="assets/images/logo.png" alt="Logo Ingecys" class="main-header-logo" />
         <nav class="main-header-nav">
           <a routerLink="/home-admin/tableau-de-bord" routerLinkActive="active-link" title="Tableau de bord">
+            <mat-icon class="nav-icon">dashboard</mat-icon>
             Tableau de bord
           </a>
-          <a routerLink="/home-admin/employes" routerLinkActive="active-link" title="Employés">
-            Employés
+          <a routerLink="/home-admin/employes" routerLinkActive="active-link" title="Gestion des employés">
+            <mat-icon class="nav-icon">manage_accounts</mat-icon> Employés
           </a>
-          <a routerLink="/home-admin/demandes-conges" routerLinkActive="active-link" title="Mes demandes">
-           Demandes de congés
+          <a routerLink="/home-admin/demandes-conges" routerLinkActive="active-link" title="Demandes de congés">
+            <mat-icon class="nav-icon">event_note</mat-icon>
+            Demandes de congés
           </a>
           <a routerLink="/home-admin/calendrier-jours-officiels" routerLinkActive="active-link" title="Calendrier">
-           Calendrier
+            <mat-icon class="nav-icon">calendar_today</mat-icon>
+            Calendrier
           </a>
         </nav>
       </div>

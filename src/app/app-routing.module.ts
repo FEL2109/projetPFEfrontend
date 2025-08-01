@@ -10,6 +10,7 @@ import { TableauDeBordUserComponent } from './ui/home-user/tableau-de-bord-user/
 import { TableauDeBordAdminComponent } from './ui/home-admin/tableau-de-bord-admin/tableau-de-bord-admin.component';
 import { ProfilAdminComponent } from './ui/home-admin/profil-admin/profil-admin.component';
 import { EmployesAdminComponent } from './ui/home-admin/employes-admin/employes-admin.component';
+import { AjouterEmployeComponent } from './ui/home-admin/ajouter-employe/ajouter-employe.component';
 import { CalendrierJoursOfficielsComponent } from './ui/home-user/calendrier-jours-officiels-user/calendrier-jours-officiels.component';
 import { CalendrierJoursOfficielsAdminComponent } from './ui/home-admin/calendrier-jours-officiels-admin/calendrier-jours-officiels-admin.component';
 import { MesDemandesCongesComponent } from './ui/home-user/mes-demandes-conges/mes-demandes-conges.component';
@@ -55,9 +56,9 @@ const routes: Routes = [
       { path: 'tableau-de-bord', component: TableauDeBordAdminComponent }, // Route pour Tableau de bord (Admin)
       { path: 'profil', component: ProfilAdminComponent },
       { path: 'employes', component: EmployesAdminComponent },
+      { path: 'ajouter-employe', component: AjouterEmployeComponent },
       { path: 'demandes-conges', component: DemandesCongesAdminComponent },
       { path: 'calendrier-jours-officiels', component: CalendrierJoursOfficielsAdminComponent },
-    
     ]
   }, // Route pour home-admin
   { path: '**', redirectTo: '' } // Redirection pour les routes non trouvées

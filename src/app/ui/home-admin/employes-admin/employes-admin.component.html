@@ -2,9 +2,14 @@
   <!-- Barre du haut -->
   <div class="employes-header">
     <h2 class="employes-title">Employés</h2>
-    <button nz-button nzType="default" nzShape="round" class="export-btn">
-      <i nz-icon nzType="export" nzTheme="outline"></i> Exporter
-    </button>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <button nz-button nzType="primary" nzShape="round" class="add-emp-btn" (click)="goToAddEmploye()">
+        <i nz-icon nzType="user-add" nzTheme="outline"></i> Ajouter un employé
+      </button>
+      <button nz-button nzType="default" nzShape="round" class="export-btn">
+        <i nz-icon nzType="export" nzTheme="outline"></i> Exporter
+      </button>
+    </div>
   </div>
   <!-- Barre de recherche moderne -->
   <div class="modern-search-bar">
@@ -19,9 +24,10 @@
           <th>Nom</th>
           <th>Prénom</th>
           <th>Email</th>
-          <th>Mot de passe</th>
+          <th>username</th>
           <th>Téléphone</th>
-          <th>Poste</th>
+          <th>Role</th>
+          <th>Telephone</th>
           <th style="text-align:center;">Action</th>
         </tr>
       </thead>
@@ -30,9 +36,10 @@
           <td>{{ emp.nom }}</td>
           <td>{{ emp.prenom }}</td>
           <td>{{ emp.email }}</td>
-          <td>{{ emp.motDePasse }}</td>
+          <td>{{ emp.username }}</td>
           <td>{{ emp.telephone }}</td>
-          <td>{{ emp.poste }}</td>
+          <td>{{ emp.role }}</td>
+          <td>{{ emp.telephone }}</td>
           <td class="action-btns">
             <button nz-button nzType="link" nzShape="circle"><i nz-icon nzType="edit"></i></button>
             <button nz-button nzType="link" nzShape="circle"><i nz-icon nzType="delete"></i></button>

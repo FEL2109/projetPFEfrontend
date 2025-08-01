@@ -1,0 +1,33 @@
+<div class="ajouter-employe-container" style="max-width: 480px; margin: 32px auto; background: #fff; border-radius: 16px; box-shadow: 0 2px 16px #b6f5c244; padding: 32px 28px;">
+  <h2 style="font-weight: 900; color: #22336b; font-size: 2em; margin-bottom: 24px; text-align: center;">Ajouter un employé</h2>
+  <form #addEmpForm="ngForm" style="display: flex; flex-direction: column; gap: 18px;">
+    <mat-form-field appearance="outline">
+      <mat-label>Nom</mat-label>
+      <input matInput name="nom" [(ngModel)]="newEmp.nom" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Prénom</mat-label>
+      <input matInput name="prenom" [(ngModel)]="newEmp.prenom" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" [(ngModel)]="newEmp.email" required type="email" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput name="motDePasse" [(ngModel)]="newEmp.motDePasse" required type="password" />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Téléphone</mat-label>
+      <input matInput name="telephone" [(ngModel)]="newEmp.telephone" required />
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Poste</mat-label>
+      <input matInput name="poste" [(ngModel)]="newEmp.poste" required />
+    </mat-form-field>
+    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px;">
+      <button mat-stroked-button color="warn" type="button" routerLink="../employes">Annuler</button>
+      <button mat-flat-button color="primary" [disabled]="!addEmpForm.form.valid" type="button" (click)="addEmploye()">Ajouter</button>
+    </div>
+  </form>
+</div>

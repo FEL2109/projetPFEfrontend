@@ -72,11 +72,11 @@
   min-height: 100vh;
   width: 100%;
   max-width: 1200px;
-  margin: 40px auto 0 auto;
+  margin: 0 auto 0 auto; /* Encore moins d'espace après le menu */
   margin-left: 40px;
   box-shadow: 0 4px 32px #00000010;
   border-radius: 18px;
-  padding: 32px 24px;
+  padding: 12px 8px; /* Padding encore plus réduit */
 }
 
 .calendar-grid {

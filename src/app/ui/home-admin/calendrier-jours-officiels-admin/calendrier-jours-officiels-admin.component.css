@@ -70,13 +70,13 @@
   align-items: flex-start;
   background: #f6f8fc;
   min-height: 100vh;
-  width: 900px;
-  max-width: 100vw;
-  margin: 40px auto 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto 0 auto; /* Encore moins d'espace après le menu */
+  margin-left: 40px;
   box-shadow: 0 4px 32px #00000010;
   border-radius: 18px;
-  padding: 32px 24px;
-  margin-left: 340px; /* ← augmente la valeur (ex : 340px ou 360px) */
+  padding: 12px 8px; /* Padding encore plus réduit */
 }
 
 .calendar-grid {

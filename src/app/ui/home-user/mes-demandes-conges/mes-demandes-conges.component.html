@@ -77,7 +77,7 @@
           <span style="color: #22336b;">{{ demande.dateDebut | date:'dd/MM/yyyy' }} - {{ demande.dateFin | date:'dd/MM/yyyy' }}</span>
         </td>
         <td>
-          <span style="font-weight: 600; color: #34c759;">{{ demande.nombreJours }}</span>
+          <span style="font-weight: 600; color: #34c759;">{{ demande.congepris }}</span>
         </td>
         <td>
           <ng-container *ngIf="demande.justificatif; else noJustifConge">
@@ -90,10 +90,7 @@
           </ng-template>
         </td>
         <td>
-          <span *ngIf="demande.statut === 'APPROUVEE'" style="font-weight: 600; color: #34c759;">Approuvée</span>
-          <span *ngIf="demande.statut === 'EN_ATTENTE'" style="font-weight: 600; color: #ffc300;">En attente</span>
-          <span *ngIf="demande.statut === 'REFUSEE'" style="font-weight: 600; color: #e53935;">Refusée</span>
-          <span *ngIf="!demande.statut" style="color: #888; font-style: italic;">-</span>
+<span style="font-weight: 500; color: #2d7be6;">{{ demande.statut }}</span>               
         </td>
       </tr>
     </tbody>
@@ -123,7 +120,7 @@
       <tbody>
         <tr *ngFor="let absence of tableAbsences.data" style="transition: background 0.2s;">
           <td>
-            <span style="font-weight: 500; color: #2d7be6;">{{ absence.typeAbsence || absence.type || '-' }}</span>
+            <span style="font-weight: 500; color: #2d7be6;">{{ absence.typeConge || absence.type || '-' }}</span>
           </td>
           <td>
             <span style="color: #22336b;">{{ absence.dateDebut | date:'dd/MM/yyyy' }} - {{ absence.dateFin | date:'dd/MM/yyyy' }}</span>
@@ -142,10 +139,7 @@
             </ng-template>
           </td>
           <td>
-            <span *ngIf="absence.statut === 'APPROUVEE'" style="font-weight: 600; color: #34c759;">Approuvée</span>
-            <span *ngIf="absence.statut === 'EN_ATTENTE'" style="font-weight: 600; color: #ffc300;">En attente</span>
-            <span *ngIf="absence.statut === 'REFUSEE'" style="font-weight: 600; color: #e53935;">Refusée</span>
-            <span *ngIf="!absence.statut" style="color: #888; font-style: italic;">-</span>
+          <span style="font-weight: 500; color: #2d7be6;">{{ absence.statutConge }}</span>
           </td>
         </tr>
       </tbody>

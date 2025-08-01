@@ -17,6 +17,8 @@ export class SoumettreDemandeCongeComponent {
   
   // Propriétés pour le formulaire de congé
   typeConge: string = '';
+   
+  congepris: number | null = null;
   nombreJours: number | null = null;
   dateDebut: Date | null = null;
   dateFin: Date | null = null;
@@ -56,7 +58,7 @@ export class SoumettreDemandeCongeComponent {
 
   private soumettreDemandeConge(): void {
     // Validation des champs obligatoires
-    if (!this.typeConge || !this.nombreJours || !this.dateDebut || !this.dateFin) {
+    if (!this.typeConge || !this.congepris || !this.dateDebut || !this.dateFin) {
       this.message.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
@@ -70,7 +72,7 @@ export class SoumettreDemandeCongeComponent {
     const demande = {
       dateDebut: this.formatDate(this.dateDebut),
       dateFin: this.formatDate(this.dateFin),
-      nombreJours: this.nombreJours,
+      congepris: this.congepris,
       typeConge: this.typeConge,
       statut: 'EnAttente',
       commentaire: this.comment || 'aucun',
@@ -132,6 +134,7 @@ export class SoumettreDemandeCongeComponent {
     this.typeAbsence = '';
     this.nombreJours = null;
     this.dateDebut = null;
+    this.congepris = null;
     this.dateFin = null;
     this.comment = '';
     this.selectedFile = null;

@@ -18,6 +18,6 @@ constructor(private router: Router) {}
   }
 
   goToProfil(): void {
-    this.router.navigate(['/home-user/profil']);
+    this.router.navigate(['/home-admin/profil']);
   }
 }

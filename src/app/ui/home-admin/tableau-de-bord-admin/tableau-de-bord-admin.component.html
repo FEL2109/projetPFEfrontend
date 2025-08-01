@@ -1,68 +1,413 @@
-<nz-layout>
-  <nz-content class="main-content">
-    <div class="dashboard-wrapper-pro">
-      <div class="dashboard-main-row">
-        <!-- Colonne gauche : Bienvenue + Statistiques -->
-        <div class="dashboard-col-gauche">
-          <div class="welcome-block-pro">
-            <span class="dashboard-title">Bienvenue dans votre espace personnel manager</span>
-            <div class="dashboard-subtitle">Gérez votre équipe et suivez les indicateurs RH</div>
-          </div>
-          <div class="dashboard-stats-row-pro">
-            <nz-card class="stat-card-pro green">
-              <i nz-icon nzType="wallet" nzTheme="outline" class="stat-icon"></i>
-              <div class="stat-value">{{ soldeConges }}</div>
-              <div class="stat-label">Solde de congé</div>
-            </nz-card>
-            <nz-card class="stat-card-pro yellow">
-              <i nz-icon nzType="calendar" nzTheme="outline" class="stat-icon"></i>
-              <div class="stat-value">{{ joursPris }}</div>
-              <div class="stat-label">Jours pris</div>
-            </nz-card>
-          </div>
-          <!-- Notifications -->
-          <div class="notifications-section">
-            <div class="notifications-title">
-              <i nz-icon nzType="bell" nzTheme="twotone" class="notif-icon"></i>
-              Notifications
-            </div>
-            <ul class="notifications-list">
-              <li *ngFor="let notif of notifications">
-                <span class="notif-icon"><i nz-icon nzType="exclamation-circle" nzTheme="outline"></i></span>
-                <span class="notif-message">{{ notif.text }}</span>
-                <span class="notif-date">{{ notif.time | date:'short' }}</span>
-              </li>
-              <li *ngIf="!notifications?.length" class="notif-empty">Aucune notification</li>
-            </ul>
-          </div>
+
+<!-- Modern Welcome Banner at the very top -->
+
+<div class="dashboard-welcome-banner">
+  <div class="dashboard-welcome-banner-left">
+    <div class="dashboard-welcome-title">Bienvenue dans votre espace manager</div>
+    <div class="dashboard-welcome-subtitle">Gérez votre équipe et suivez les indicateurs RH</div>
+    <!-- Statistiques manager/admin -->
+    <div class="dashboard-indicateurs-row" style="margin-top: 24px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; width: 100%;">
+      <div class="dashboard-indicateur-card" style="min-width: 240px; max-width: 240px; flex: 1 1 240px; padding: 18px 12px; margin: 0; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <span class="dashboard-indicateur-value green">{{ nombreEmployes }}</span>
+          <span class="dashboard-indicateur-label" style="margin-top: 6px;">Employés</span>
         </div>
-        <!-- Colonne droite : Fériés + Agenda -->
-        <div class="dashboard-col-droite">
-          <div class="ferie-card-holiday-pro">
-            <div class="ferie-header">
-              <span class="ferie-arrow" (click)="prevHoliday()">&lt;</span>
-              <span class="ferie-title">Prochains jours fériés</span>
-              <span class="ferie-arrow" (click)="nextHoliday()">&gt;</span>
+      </div>
+      <div class="dashboard-indicateur-card" style="min-width: 240px; max-width: 240px; flex: 1 1 240px; padding: 18px 12px; margin: 0; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <span class="dashboard-indicateur-value yellow">{{ demandesEnAttente }}</span>
+          <span class="dashboard-indicateur-label" style="margin-top: 6px;">Demandes en attente</span>
+        </div>
+      </div>
+      <div class="dashboard-indicateur-card" style="min-width: 240px; max-width: 240px; flex: 1 1 240px; padding: 18px 12px; margin: 0; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <span class="dashboard-indicateur-value pistache">{{ absencesMois }}</span>
+          <span class="dashboard-indicateur-label" style="margin-top: 6px;">Absences ce mois</span>
+        </div>
+      </div>
+      <div class="dashboard-indicateur-card" style="min-width: 240px; max-width: 240px; flex: 1 1 240px; padding: 18px 12px; margin: 0; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+          <span class="dashboard-indicateur-value blue">{{ congesMois }}</span>
+          <span class="dashboard-indicateur-label" style="margin-top: 6px;">Congés ce mois</span>
+        </div>
+      </div>
+</div> <!-- Fermeture correcte de dashboard-indicateurs-row -->
+<style>
+@media (max-width: 900px) {
+  .dashboard-indicateurs-row {
+    gap: 8px !important;
+  }
+  .dashboard-indicateur-card {
+    min-width: 110px !important;
+    max-width: 120px !important;
+    padding: 8px 2px !important;
+  }
+  .dashboard-indicateur-value {
+    font-size: 1.1em !important;
+  }
+  .dashboard-indicateur-label {
+    font-size: 0.95em !important;
+  }
+}
+@media (max-width: 600px) {
+  .dashboard-indicateurs-row {
+    gap: 4px !important;
+  }
+  .dashboard-indicateur-card {
+    min-width: 90px !important;
+    max-width: 100px !important;
+    padding: 6px 0 !important;
+  }
+  .dashboard-indicateur-value {
+    font-size: 1em !important;
+  }
+  .dashboard-indicateur-label {
+    font-size: 0.85em !important;
+  }
+}
+</style>
+        <!-- Rien à ajouter ici, suppression du bloc en trop -->
+      </div>
+    <!-- Fin des 4 cartes -->
+    </div>
+  <!-- <div class="dashboard-welcome-banner-right">
+    <img src="assets/images/welcome.png" alt="Bienvenue" class="dashboard-welcome-img" />
+  </div> -->
+<!-- Fin dashboard-welcome-banner -->
+
+<nz-layout style="background: #f8f9ff; min-height: 100vh; padding: 0 48px;">
+  <!-- Bloc Bienvenue + Bouton Soumettre demande -->
+  <div class="dashboard-welcome-row" style="display: flex; align-items: center; gap: 24px; margin-bottom: 32px;">
+    <div class="welcome-block-pro" style="background: transparent; box-shadow: none;"></div>
+    <button
+      nz-button
+      nzType="primary"
+      [routerLink]="['/home-admin/demandes-conges']"
+      class="dashboard-action-btn">
+      <i nz-icon nzType="file-search" style="margin-right: 10px;"></i>
+      Voir les demandes en attente
+    </button>
+    <button
+      nz-button
+      nzType="default"
+      [routerLink]="['/home-admin/employes']"
+      class="dashboard-action-btn"
+      style="background: linear-gradient(90deg, #34c759 60%, #b6e27b 100%) !important; color: #fff;">
+      <i nz-icon nzType="team" style="margin-right: 10px;"></i>
+      Gérer les employés
+    </button>
+<!-- Modal d'ajout d'employé supprimé -->
+  </div>
+
+  <nz-content class="main-content" style="background: transparent;">
+    <div class="dashboard-wrapper-pro" style="background: transparent; box-shadow: none; padding: 0 32px; max-width: 2400px; margin-left: 10px; margin-right: 10px;">
+      <div class="dashboard-main-row" style="background: transparent; box-shadow: none; display: flex; gap: 32px; justify-content: center; align-items: stretch; width: 100%; max-width: 1800px; margin: 0 auto;">
+        <!-- Colonne gauche : Statistiques -->
+        <div class="dashboard-col-gauche" style="min-width: 480px; max-width: 540px; flex: 1 1 0; display: flex; flex-direction: column; justify-content: stretch; height: 100%;">
+          <!-- Bloc Bienvenue + Bouton déplacé au-dessus -->
+          <!-- Compteur d'absences et statistiques graphiques supprimés -->
+
+          <!-- Prochaines absences supprimées -->
+
+          <!-- Résumé synthétique des demandes de congés (abstract de la section Mes demandes) -->
+          <!-- Bloc Synthèse RH Manager -->
+          <nz-card class="dashboard-card manager-synthese-widget" nzBordered="false" style="box-shadow: 0 4px 24px #22336b22; border-radius: 18px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div style="font-weight: 700; color: #22336b; margin-bottom: 14px; font-size: 1.35em; letter-spacing:1.1px; text-shadow:0 2px 8px #22336b22; display: flex; align-items: center; gap: 10px;">
+              <i nz-icon nzType="team" style="color: #22336b; font-size: 1.5em;"></i>
+              Synthèse RH équipe
             </div>
-            <div class="ferie-content" *ngIf="nextHolidays.length">
-              <div class="ferie-label">{{ nextHolidays[holidayIndex]?.label }}</div>
-              <div class="ferie-date">
-                {{ nextHolidays[holidayIndex]?.date | date:'EEEE d MMMM y' : 'fr' }}
+            <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; margin-bottom: 10px; gap: 18px; flex-wrap: wrap;">
+              <div style="text-align: center;">
+                <div style="font-size: 1.15em; color: #888;">Employés</div>
+                <div style="font-size: 2.1em; font-weight: 900; color: #00796b;">{{ nombreEmployes }}</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 1.15em; color: #888;">Absences ce mois</div>
+                <div style="font-size: 2.1em; font-weight: 900; color: #43b600;">{{ absencesMois }}</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 1.15em; color: #888;">Congés ce mois</div>
+                <div style="font-size: 2.1em; font-weight: 900; color: #0050ff;">{{ congesMois }}</div>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 1.15em; color: #888;">Taux d'absentéisme</div>
+                <div style="font-size: 2.1em; font-weight: 900; color: #e53935;">{{ (100 - tauxPresence) | number:'1.1-1' }}%</div>
+              </div>
+            </div>
+            <div style="font-size: 0.98em; color: #22336b; margin-bottom: 8px; text-align: center;">
+              <i nz-icon nzType="info-circle" style="color: #22336b; margin-right: 6px;"></i>
+              <span>
+                Suivi global RH : effectif, absences, congés et absentéisme de l’équipe ce mois.
+              </span>
+            </div>
+          </nz-card>
+
+
+
+          <!-- Bloc Prévision de solde de congés -->
+          <!-- Bloc Alertes RH Manager -->
+          <nz-card class="dashboard-card manager-alertes-widget" nzBordered="false" style="box-shadow: 0 4px 24px #8dc63f22; border-radius: 18px; margin-top: 18px;">
+            <div style="font-weight: 700; color: #e53935; margin-bottom: 10px; font-size: 1.25em; letter-spacing:1.1px; text-shadow:0 2px 8px #e5393522; display: flex; align-items: center; gap: 8px;">
+              <i nz-icon nzType="alert" style="color: #e53935; font-size: 1.3em;"></i>
+              Alertes RH
+            </div>
+            <ul style="margin: 0 0 0 18px; padding: 0; color: #22336b; font-size: 1em;">
+              <li *ngIf="absencesMois > 3" style="color: #e53935; font-weight: 700;">Attention : Absences élevées ce mois ({{ absencesMois }})</li>
+              <li *ngIf="demandesEnAttente > 0" style="color: #ffc300; font-weight: 700;">{{ demandesEnAttente }} demande(s) RH en attente de validation</li>
+              <li *ngIf="tauxPresence < 90" style="color: #e53935; font-weight: 700;">Taux de présence inférieur à 90% !</li>
+              <li *ngIf="absencesMois <= 3 && demandesEnAttente == 0 && tauxPresence >= 90" style="color: #34c759; font-weight: 700;">Aucune alerte RH ce mois-ci</li>
+            </ul>
+            <div style="margin-top: 8px; color: #888; font-size: 0.97em; text-align: center;">
+              <i nz-icon nzType="info-circle" style="color: #8dc63f; margin-right: 6px;"></i>
+              Suivi des points d’attention RH pour le manager.
+            </div>
+          </nz-card>
+
+          <!-- Bloc Comparaison avec l'équipe -->
+          <nz-card class="dashboard-card dashboard-compare-card" nzBordered="false" style="box-shadow: 0 4px 24px #ffc30022; border-radius: 18px; margin-top: 18px;">
+            <div style="font-weight: 700; color: #ffc300; margin-bottom: 10px; font-size: 1.25em; letter-spacing:1.1px; text-shadow:0 2px 8px #ffc30022; display: flex; align-items: center; gap: 8px;">
+              <i nz-icon nzType="line-chart" style="color: #ffc300; font-size: 1.3em;"></i>
+              Comparaison avec l'équipe
+            </div>
+            <div style="display: flex; flex-direction: row; gap: 32px; justify-content: center; align-items: center; flex-wrap: wrap;">
+              <div style="background: #f8f9ff; border-radius: 10px; padding: 10px 18px; min-width: 180px; text-align: center;">
+                <span style="font-weight: 600; color: #22336b;">Votre absentéisme :</span>
+                <span style="color: #e53935; font-weight: 700; font-size: 1.15em;">{{ (100 - tauxPresence) | number:'1.1-1' }}%</span>
+              </div>
+              <div style="background: #f8f9ff; border-radius: 10px; padding: 10px 18px; min-width: 180px; text-align: center;">
+                <span style="font-weight: 600; color: #22336b;">Équipe :</span>
+                <span style="color: #34c759; font-weight: 700; font-size: 1.15em;">{{ tauxAbsEquipe | number:'1.1-1' }}%</span>
+              </div>
+              <div style="background: #f8f9ff; border-radius: 10px; padding: 10px 18px; min-width: 180px; text-align: center;">
+                <span style="font-weight: 600; color: #22336b;">Entreprise :</span>
+                <span style="color: #ffc300; font-weight: 700; font-size: 1.15em;">3.2%</span>
+              </div>
+            </div>
+            <div style="margin-top: 8px; color: #888; font-size: 0.97em; text-align: center;">
+              <i nz-icon nzType="info-circle" style="color: #ffc300; margin-right: 6px;"></i>
+              Comparez votre taux d'absentéisme à celui de votre équipe et de l'entreprise.
+            </div>
+          </nz-card>
+
+          <!-- Bloc Statistiques & Analyse RH supprimé de la colonne gauche, déplacé sous l'agenda à droite -->
+          <!-- Bloc Recommandations personnalisées -->
+          <nz-card class="dashboard-card dashboard-reco-card" nzBordered="false" style="box-shadow: 0 4px 24px #ffc30022; border-radius: 18px; margin-top: 18px;">
+            <div style="font-weight: 700; color: #22336b; margin-bottom: 10px; font-size: 1.25em; letter-spacing:1.1px; text-shadow:0 2px 8px #22336b22; display: flex; align-items: center; gap: 8px;">
+              <i nz-icon nzType="bulb" style="color: #ffc300; font-size: 1.3em;"></i>
+              Recommandations RH
+            </div>
+            <ul style="margin: 0 0 0 18px; padding: 0; color: #22336b; font-size: 1em;">
+              <li>Posez vos congés idéalement entre <b>le 12 et 20 août</b> (faible activité équipe).</li>
+              <li>Attention : <b>2 jours de congé risquent d’être perdus</b> si non pris avant fin décembre.</li>
+              <li>Consultez le calendrier d’équipe pour éviter les chevauchements.</li>
+            </ul>
+          </nz-card>
+          <!-- Bloc Vue équipe (absences anonymisées) -->
+          <nz-card class="dashboard-card dashboard-team-card" nzBordered="false" style="box-shadow: 0 4px 24px #22336b22; border-radius: 18px; margin-top: 18px;">
+            <div style="font-weight: 700; color: #22336b; margin-bottom: 10px; font-size: 1.25em; letter-spacing:1.1px; text-shadow:0 2px 8px #22336b22; display: flex; align-items: center; gap: 8px;">
+              <i nz-icon nzType="team" style="color: #2d7be6; font-size: 1.3em;"></i>
+              Vue équipe (absences anonymisées)
+            </div>
+            <ul style="margin: 0 0 0 18px; padding: 0; color: #22336b; font-size: 1em;">
+              <li>L. (RH) : Congé du 5 au 12 août</li>
+              <li>M. (Dev) : Maladie du 2 au 3 juillet</li>
+              <li>Y. (Support) : Congé du 18 au 25 juillet</li>
+            </ul>
+            <div style="margin-top: 10px; text-align: right;">
+              <button nz-button nzType="default" nzSize="small" style="background: #f5f7fa; color: #22336b; font-weight: 600; border-radius: 8px; box-shadow: none; border: none;">
+                <i nz-icon nzType="export" style="margin-right: 4px;"></i>Exporter calendrier équipe
+              </button>
+            </div>
+          </nz-card>
+        </div>
+        <!-- Colonne droite : Fériés au-dessus, Agenda, puis Statistiques & Analyse RH -->
+        <div class="dashboard-col-droite" style="display: flex; flex-direction: column; gap: 32px; background: transparent; box-shadow: none; min-width: 480px; max-width: 540px; flex: 1 1 0; justify-content: stretch; height: 100%;">
+          <div style="width: 100%; display: flex; flex-direction: column; align-items: center; gap: 16px; background: transparent; box-shadow: none; height: 100%; justify-content: stretch;">
+            <!-- Bloc Prochains jours fériés -->
+            <div class="ferie-card-holiday-pro dashboard-card" style="box-shadow: 0 2px 12px #22336b11; max-width: 100%; margin: 0 auto; width: 100%; min-height: 110px; display: flex; flex-direction: column; justify-content: center;">
+              <div class="ferie-header" style="font-size:1.45rem; letter-spacing:1.2px; text-shadow:0 2px 8px #22336b22;">
+                <span class="ferie-arrow" (click)="prevHoliday()">&lt;</span>
+                <span class="ferie-title">Prochains jours fériés</span>
+                <span class="ferie-arrow" (click)="nextHoliday()">&gt;</span>
+              </div>
+              <div class="ferie-content" *ngIf="nextHolidays.length">
+                <div class="ferie-label">{{ nextHolidays[holidayIndex].label }}</div>
+                <div class="ferie-date">
+                  {{ nextHolidays[holidayIndex].date | date:'EEEE d MMMM y' : 'fr' }}
+                </div>
               </div>
             </div>
           </div>
-          <nz-card class="calendar-card-pro" nzBordered="false">
-            <div class="calendar-title">Mon Agenda</div>
+          <nz-card class="calendar-card-pro dashboard-card" nzBordered="false" style="box-shadow: 0 2px 12px #22336b11; max-width: 100%; margin: 0 auto; min-height: 320px; display: flex; flex-direction: column; justify-content: flex-start;">
+            <div class="calendar-title" style="font-size:1.55rem; letter-spacing:1.2px; text-shadow:0 2px 8px #22336b22;">Mon Agenda</div>
             <nz-calendar
               [nzFullscreen]="false"
               [(ngModel)]="date"
               [nzMode]="'month'">
             </nz-calendar>
           </nz-card>
+
+          <!-- Bloc Statistiques & Analyse RH (copié de la colonne gauche, déplacé ici) -->
+          <nz-card class="dashboard-card dashboard-stats-card" nzBordered="false" style="box-shadow: 0 4px 24px #34c75922; border-radius: 18px; margin-top: 0;">
+            <div style="font-weight: 700; color: #22336b; margin-bottom: 14px; font-size: 1.15em; display: flex; align-items: center; gap: 10px;">
+              <i nz-icon nzType="bar-chart" style="color: #34c759; font-size: 1.5em;"></i>
+              Statistiques & Analyse RH
+            </div>
+            <div style="display: flex; flex-direction: row; gap: 32px; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;">
+              <!-- Graphique d'évolution des absences (barres) -->
+              <div style="flex: 1 1 0; min-width: 320px; max-width: 420px;">
+                <div style="font-weight: 600; color: #22336b; margin-bottom: 6px; text-align: center;">Évolution mensuelle des absences</div>
+                <ngx-charts-bar-vertical
+                  [results]="absencesMoisData"
+                  [view]="[380, 220]"
+                  [scheme]="colorScheme"
+                  [xAxis]="true"
+                  [yAxis]="true"
+                  [legend]="false"
+                  [showXAxisLabel]="true"
+                  [showYAxisLabel]="true"
+                  xAxisLabel="Mois"
+                  yAxisLabel="Absences"
+                  style="margin-bottom: 12px;">
+                </ngx-charts-bar-vertical>
+              </div>
+              <!-- Graphique camembert des types d'absences -->
+              <div style="flex: 1 1 0; min-width: 320px; max-width: 420px; display: flex; flex-direction: column; align-items: center;">
+                <div style="font-weight: 600; color: #22336b; margin-bottom: 6px; text-align: center;">Répartition des types d'absences</div>
+                <ngx-charts-pie-chart
+                  [results]="congesPieData"
+                  [view]="[380, 220]"
+                  [scheme]="colorScheme"
+                  [legend]="false"
+                  [labels]="true"
+                  [doughnut]="true"
+                  style="margin-bottom: 12px;">
+                </ngx-charts-pie-chart>
+                <!-- Légende déplacée ici sous le camembert -->
+                <div class="custom-pie-legend" style="margin-top: 8px; width: 100%; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+                  <ng-container *ngFor="let item of congesPieData">
+                    <div style="display: flex; align-items: center; margin: 4px 10px;">
+                      <span
+                        [ngStyle]="{
+                          'display': 'inline-block',
+                          'width': '18px',
+                          'height': '18px',
+                          'border-radius': '4px',
+                          'margin-right': '7px',
+                          'background': getPieColor(congesPieData.indexOf(item))
+                        }"
+                      ></span>
+                      <span style="font-size: 1em; color: #22336b; font-weight: 500; white-space: nowrap;">{{ item.name }}</span>
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+            <!-- Statistiques personnalisées -->
+            <div style="display: flex; flex-direction: row; gap: 32px; justify-content: center; margin-top: 18px; flex-wrap: wrap;">
+              <div style="background: #f8f9ff; border-radius: 10px; padding: 10px 18px; min-width: 200px; text-align: center;">
+                <span style="font-weight: 600; color: #22336b;">Taux d'absentéisme :</span>
+                <span style="color: #e53935; font-weight: 700; font-size: 1.15em;">{{ (100 - tauxPresence) | number:'1.1-1' }}%</span>
+                <div style="font-size: 0.95em; color: #888; margin-top: 2px;">(Votre taux sur l'année)</div>
+              </div>
+              <div style="background: #f8f9ff; border-radius: 10px; padding: 10px 18px; min-width: 200px; text-align: center;">
+                <span style="font-weight: 600; color: #22336b;">Moyenne entreprise :</span>
+                <span style="color: #34c759; font-weight: 700; font-size: 1.15em;">3.2%</span>
+                <div style="font-size: 0.95em; color: #888; margin-top: 2px;">(Comparaison nationale)</div>
+              </div>
+            </div>
+            <!-- Légende explicative déplacée juste en dessous des statistiques -->
+            <div style="margin-top: 24px; color: #22336b; font-size: 1.08em; text-align: center; font-weight: 600;">
+              <i nz-icon nzType="info-circle" style="color: #34c759; margin-right: 6px;"></i>
+              <span>Survolez les graphiques pour voir le détail par mois ou par type d'absence.</span>
+            </div>
+          </nz-card>
         </div>
       </div>
     </div>
   </nz-content>
 </nz-layout>
+
+<!-- Espace latéral droit pour widgets additionnels -->
+<div class="dashboard-side-space" style="display: flex; flex-direction: column; align-items: center; gap: 22px; background: transparent; box-shadow: none; padding-top: 8px;">
+  <!-- Notifications importantes pour le manager -->
+  <nz-card nzBordered="false" style="box-shadow: 0 8px 32px #2d7be633; border-radius: 16px; padding: 0; overflow: visible; background: linear-gradient(180deg, #fafdff 80%, #eaf3ff 100%); width: 320px; min-width: 0; margin: 0;">
+    <div style="display: flex; align-items: center; gap: 14px; background: linear-gradient(90deg, #eaf3ff 60%, #fafdff 100%); padding: 22px 28px 12px 28px; border-radius: 22px 22px 0 0; border-bottom: 2px solid #e3eafc; box-shadow: 0 2px 8px #2d7be611;">
+      <i nz-icon nzType="bell" style="color: #2d7be6; font-size: 1.7em;"></i>
+      <span style="font-weight: 900; color: #2d7be6; font-size: 1.22em; letter-spacing: 0.7px;">Notifications manager</span>
+    </div>
+    <div style="padding: 20px 28px 22px 28px;">
+      <ul style="list-style: none; margin: 0; padding: 0;">
+        <li style="margin-bottom: 18px; display: flex; align-items: flex-start; gap: 14px;">
+          <span style="display: flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; background: #f5faff; border-radius: 10px; box-shadow: 0 2px 8px #2d7be611;">
+            <i nz-icon nzType="user" style="color: #34c759; font-size: 1.35em;"></i>
+          </span>
+          <div style="flex: 1; min-width: 0;">
+            <span style="font-weight: 700; color: #22336b; font-size: 1.08em; line-height: 1.3;">3 nouveaux employés à valider ce mois-ci</span><br>
+            <span style="color: #7a8bb7; font-size: 0.99em; font-weight: 600; letter-spacing: 0.1px;">30/07/2025</span>
+          </div>
+        </li>
+        <li style="margin-bottom: 18px; display: flex; align-items: flex-start; gap: 14px;">
+          <span style="display: flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; background: #f5faff; border-radius: 10px; box-shadow: 0 2px 8px #2d7be611;">
+            <i nz-icon nzType="file-search" style="color: #ffc300; font-size: 1.35em;"></i>
+          </span>
+          <div style="flex: 1; min-width: 0;">
+            <span style="font-weight: 700; color: #22336b; font-size: 1.08em; line-height: 1.3;">5 demandes de congés RH en attente de validation</span><br>
+            <span style="color: #7a8bb7; font-size: 0.99em; font-weight: 600; letter-spacing: 0.1px;">29/07/2025</span>
+          </div>
+        </li>
+        <li style="margin-bottom: 18px; display: flex; align-items: flex-start; gap: 14px;">
+          <span style="display: flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; background: #f5faff; border-radius: 10px; box-shadow: 0 2px 8px #2d7be611;">
+            <i nz-icon nzType="alert" style="color: #e53935; font-size: 1.35em;"></i>
+          </span>
+          <div style="flex: 1; min-width: 0;">
+            <span style="font-weight: 700; color: #22336b; font-size: 1.08em; line-height: 1.3;">Taux d’absentéisme élevé dans l’équipe</span><br>
+            <span style="color: #7a8bb7; font-size: 0.99em; font-weight: 600; letter-spacing: 0.1px;">28/07/2025</span>
+          </div>
+        </li>
+        <!-- Notification "Aucune alerte critique ce jour" supprimée -->
+      </ul>
+    </div>
+  </nz-card>
+  <!-- Widget Météo Material UI -->
+  <mat-card style="width: 320px; min-width: 0; margin: 0; border-radius: 16px; box-shadow: 0 4px 18px #34c75922; background: #f8fff3; padding: 0;">
+  <mat-card-header style="background: #eaffea; border-radius: 16px 16px 0 0; padding: 16px 20px 10px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1.5px solid #e3f5e3; box-shadow: none;">
+      <mat-icon style="color: #34c759; font-size: 1.7em;">cloud</mat-icon>
+      <span style="font-weight: 800; color: #34c759; font-size: 1.13em; letter-spacing: 0.5px;">Météo</span>
+    </mat-card-header>
+  <mat-card-content style="padding: 18px 20px 16px 20px; display: flex; align-items: center; gap: 16px; background: transparent;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <span style="font-size: 2em; font-weight: 900; color: #22336b; line-height: 1;">23°C</span>
+        <span style="color: #34c759; font-size: 1.08em; font-weight: 700; margin-top: 2px;">Nuageux</span>
+      </div>
+      <span style="margin-left: auto; display: flex; align-items: center; gap: 6px; background: #eaffea; border-radius: 8px; padding: 6px 12px; font-size: 1em; color: #34c759; font-weight: 700; box-shadow: 0 2px 8px #34c75911;">
+        <mat-icon style="color: #34c759; font-size: 1.1em;">arrow_upward</mat-icon> 25°C
+        <mat-icon style="color: #34c759; font-size: 1.1em; margin-left: 10px;">arrow_downward</mat-icon> 18°C
+      </span>
+    </mat-card-content>
+  </mat-card>
+  <!-- Widget Bien-être Material UI -->
+  <mat-card style="width: 320px; min-width: 0; margin: 0; border-radius: 16px; box-shadow: 0 4px 18px #ffc30022; background: #fffbe8; padding: 0;">
+  <mat-card-header style="background: #fff7d6; border-radius: 16px 16px 0 0; padding: 16px 20px 10px 20px; display: flex; align-items: center; gap: 10px; border-bottom: 1.5px solid #fff2c2; box-shadow: none;">
+      <mat-icon style="color: #ffc300; font-size: 1.7em;">sentiment_satisfied_alt</mat-icon>
+      <span style="font-weight: 800; color: #ffc300; font-size: 1.13em; letter-spacing: 0.5px;">Bien-être</span>
+    </mat-card-header>
+  <mat-card-content style="padding: 18px 20px 16px 20px; display: flex; align-items: center; gap: 14px; background: transparent;">
+      <span style="display: flex; align-items: center; justify-content: center; min-width: 34px; height: 34px; background: #fffbe8; border-radius: 10px; box-shadow: 0 2px 8px #ffc30011;">
+        <mat-icon style="color: #ffc300; font-size: 1.3em;">local_cafe</mat-icon>
+      </span>
+      <span style="font-size: 1.08em; color: #22336b; font-weight: 600;">Pensez à faire une pause et à vous hydrater&nbsp;!</span>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+
+<script>
+  notifications = [
+  { text: "Votre demande de congé a été approuvée.", time: '2025-06-02' },
+  { text: "Nouveau jour férié ajouté au calendrier.", time: '2025-06-01' }
+];
+</script>
 
 

@@ -60,6 +60,7 @@ import { GestionEmployesComponent } from './ui/home-rh/gestion-employes/gestion-
 import { RetardsAbsencesComponent } from './ui/home-rh/retards-absences/retards-absences.component';
 import { MessagerieRhComponent } from './ui/home-rh/messagerie-rh/messagerie-rh.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { AjouterEmployeComponent } from './ui/home-admin/ajouter-employe/ajouter-employe.component';
 
 registerLocaleData(fr);
 
@@ -86,8 +87,8 @@ registerLocaleData(fr);
     ProfilRhComponent,
     GestionEmployesComponent,
     RetardsAbsencesComponent,
-    MessagerieRhComponent
-    
+    MessagerieRhComponent,
+    AjouterEmployeComponent
   ],
   imports: [
     BrowserModule,

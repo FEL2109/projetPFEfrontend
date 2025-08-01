@@ -27,7 +27,7 @@
     <!-- Jours -->
     <div class="form-group">
       <label for="jours">Jours :</label>
-      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours" [(ngModel)]="nombreJours">
+      <nz-select id="jours" name="jours" class="form-control" nzPlaceHolder="Sélectionnez le nombre de jours" [(ngModel)]="congepris">
         <nz-option *ngFor="let jour of jours" [nzValue]="jour" [nzLabel]="jour"></nz-option>
       </nz-select>
     </div>

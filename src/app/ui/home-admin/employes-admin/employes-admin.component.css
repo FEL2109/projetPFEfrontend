@@ -1,8 +1,14 @@
 .employes-container {
   margin-left: 48px; /* Décalage du menu */
-  padding-top: 32px;
+  padding-top: 0;
   max-width: none;
   width: 100%;
+}
+
+.employes-title {
+  margin-top: 0;
+  margin-bottom: 18px;
+  padding-top: 32px;
 }
 
 /* Tableau élargi et moderne */
